@@ -1,0 +1,32 @@
+.container {
+	margin: 0 auto;
+	height: 100%;
+	max-width: 1440px;
+	padding: var(--nav-padding) 8rem 8rem;
+	color: whitesmoke;
+	font-family: var(--body-font);
+}
+
+.starsImageBg {
+	position: fixed;
+	top: 0;
+	left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+	background-color: black;
+	z-index: -1;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+	.container {
+		padding: 2rem 1rem 1rem;
+	}
+}

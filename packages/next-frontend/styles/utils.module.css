@@ -1,0 +1,31 @@
+.titleXl {
+	font-size: 6rem;
+	text-shadow: 3px 3px 6px grey;
+	text-align: center;
+	font-family: var(--heading-font);
+}
+
+.title {
+	font-size: 4rem;
+	text-shadow: 2px 2px 2px grey;
+	text-align: center;
+	font-family: var(--heading-font);
+}
+
+.titleSm {
+	font-size: 2rem;
+	text-shadow: 1px 1px 1px grey;
+	font-family: var(--heading-font);
+}
+
+@media only screen and (max-width: 480px) {
+	.titleXl {
+		font-size: 3rem;
+	}
+	.title {
+		font-size: 2rem;
+	}
+	.titleSm {
+		font-size: 1.5rem;
+	}
+}

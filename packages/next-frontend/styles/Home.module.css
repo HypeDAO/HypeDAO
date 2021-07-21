@@ -1,0 +1,8 @@
+.gridImageBg {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+  height: 20vw;
+  width: 100vw;
+  overflow: hidden;
+}

@@ -1,0 +1,16 @@
+{
+ "name": "HypeDAO-monorepo",
+ "version": "1.0.0",
+ "description": "Hype machine by artists for artists",
+ "main": "packages",
+ "repository": "https://github.com/HypeDAO/HypeDAO.git",
+ "author": "EV3RETH",
+ "license": "MIT",
+ "private": true,
+ "workspaces": [
+  "packages/*"
+ ],
+ "scripts": {
+  "next:dev": "yarn workspace next-frontend dev"
+ }
+}
