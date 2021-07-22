@@ -11,6 +11,7 @@
   "packages/*"
  ],
  "scripts": {
-  "next:dev": "yarn workspace next-frontend dev"
+  "next:dev": "yarn workspace next-frontend dev",
+	"next:build": "yarn workspace next-frontend build"
  }
 }
