@@ -17,6 +17,16 @@
 	background-color: black;
 	z-index: -1;
 }
+.starsImageBg img {
+	opacity: 0;
+	filter: blur(4px);
+	transition: 1.7s ease-in-out;
+}
+
+.imageLoaded img {
+	opacity: 1;
+	filter: blur(0px);
+}
 
 .footer {
 	position: fixed;
