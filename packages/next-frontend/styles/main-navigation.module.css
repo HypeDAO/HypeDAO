@@ -22,7 +22,7 @@
 	justify-content: space-between;
 	align-items: center;
 	z-index: 9;
-	background: linear-gradient(180deg, rgba(63, 76, 80, 1),rgba(60, 45, 63, 1), rgba(47, 36, 39, 1));
+	background: linear-gradient(90deg, rgba(63, 76, 80, 1),rgba(60, 45, 63, 1), rgba(47, 36, 39, 1));
 	border-bottom-right-radius: 3rem;
 	box-shadow: 0 -5px 5px 5px rgba(0, 0, 0, 1);
 	transition: 0.7s ease-in-out
