@@ -3,7 +3,7 @@
 	height: 100%;
 	max-width: 1440px;
 	padding: var(--nav-padding) 8rem 8rem;
-	color: whitesmoke;
+	color: var(--body-text-color);
 	font-family: var(--body-font);
 }
 
@@ -20,7 +20,7 @@
 .starsImageBg img {
 	opacity: 0;
 	filter: blur(4px);
-	transition: 1.7s ease-in-out;
+	transition: 1.5s ease-in-out;
 }
 
 .imageLoaded img {

@@ -2,7 +2,7 @@ import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import toggleIcon from '../public/images/menu-icon.png'
+import toggleIcon from '../public/images/menu-icon.webp'
 import styles from '../styles/main-navigation.module.css'
 import utilStyles from '../styles/utils.module.css'
 import classNames from "classnames";
@@ -36,7 +36,7 @@ export default function MainNavigation() {
 				<Image src={toggleIcon} alt="" />
 			</button>
 			<nav className={classNames(styles.container, { [styles.navActive]: isVisible })}>
-				<h3 className={utilStyles.titleSm}>HypeDAO</h3>
+				<h3 className={classNames(utilStyles.titleSm, styles.navTitle)}>HypeDAO</h3>
 				<div className={styles.linksContainer}>
 					<Link href={PATHNAMES.HOME}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.HOME })}>Home</a>

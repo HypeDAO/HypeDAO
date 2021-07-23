@@ -1,0 +1,34 @@
+.gridCell {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 2rem;
+	border-bottom: 2px solid rgba(128, 128, 128, 0.8);
+	list-style: none;
+	font-size: 1.3rem;
+}
+.gridCell p {
+	margin-bottom: 1rem;
+}
+.gridHeader {
+	font-size: 1.5rem;
+	font-weight: bold;
+	border-bottom: 6px double var(--accent-color);
+}
+
+.gridHeader p {
+	margin-top: 0;
+}
+
+.infoText {
+	text-align: center;
+	font-style: italic;
+}
+
+@media only screen and (max-width: 480px) {
+	.gridCell {
+		font-size: 1rem;
+	}
+	.gridHeader {
+		font-size: 1.2rem;
+	}
+}

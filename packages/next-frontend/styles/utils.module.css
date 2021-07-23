@@ -18,6 +18,13 @@
 	font-family: var(--heading-font);
 }
 
+.scrim {
+	background: linear-gradient(rgba(49, 49, 49, 0.8), rgba(17, 17, 17, 0.8));
+	padding: 3rem;
+	border-radius: 1rem;
+	box-shadow: inset 0 0 4rem 0.5rem rgba(0, 0, 0, 0.8);
+}
+
 @media only screen and (max-width: 480px) {
 	.titleXl {
 		font-size: 3rem;
@@ -27,5 +34,8 @@
 	}
 	.titleSm {
 		font-size: 1.5rem;
+	}
+	.scrim {
+		padding: 1.2rem;
 	}
 }

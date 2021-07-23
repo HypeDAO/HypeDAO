@@ -1,9 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import classNames from "classnames";
-import starsImage from "../public/images/stars.png"
 import styles from '../styles/layout.module.css'
 import MainNavigation from "./main-navigation";
 
@@ -21,7 +17,7 @@ export default function Layout({
 	noNav = false,
 	noFooter = false,
 }: LayoutProps) {
-	const [isLoaded, setIsLoaded] = useState(false)
+
 	return (
 		<div className={styles.container}>
 
@@ -35,25 +31,14 @@ export default function Layout({
 
 			{children}
 
-			{!noFooter && (
+			{/* {!noFooter && (
 				<footer className={styles.footer}>
 					<p>footer stuff</p>
 					<Link href="/">
 						<a>HypeDAO</a>
 					</Link>
 				</footer>
-			)}
-
-			<div className={classNames(styles.starsImageBg, { [styles.imageLoaded]: isLoaded })}>
-				<Image
-					src={starsImage}
-					alt=""
-					layout="fill"
-					objectFit="cover"
-					quality={100}
-					onLoad={() => setIsLoaded(true)}
-				/>
-			</div>
+			)} */}
 		</div>
 	)
 }
