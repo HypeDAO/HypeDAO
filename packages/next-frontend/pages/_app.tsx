@@ -1,16 +1,22 @@
 import '../styles/globals.css'
-import styles from '../styles/layout.module.css'
+import styles from '../styles/components/layout.module.css'
 import type { AppProps } from 'next/app'
 import { useState } from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
 import starsImage from "../public/images/stars.webp"
+import MainNavigation from '../components/main-navigation'
+import Footer from '../components/footer'
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const [isLoaded, setIsLoaded] = useState(false)
+	const [isLoaded, setIsLoaded] = useState(false);
 	return (
 		<>
-			<Component {...pageProps} bgIsLoaded={isLoaded} />
+			<MainNavigation />
+			<Component
+				{...pageProps}
+				bgIsLoaded={isLoaded}
+			/>
 			<div className={classNames(styles.starsImageBg, { [styles.imageLoaded]: isLoaded })}>
 				<Image
 					src={starsImage}
@@ -21,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 					onLoad={() => setIsLoaded(true)}
 				/>
 			</div>
+			<Footer />
 		</>
 	)
 }

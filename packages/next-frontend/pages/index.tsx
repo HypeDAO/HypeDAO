@@ -1,18 +1,31 @@
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import utilStyles from '../styles/utils.module.css'
+import styles from '../styles/pages/Home.module.css'
 import gridImage from "../public/images/swirly-hazy-grid.webp"
 import Layout from '../components/layout'
 import classNames from 'classnames'
+import { useState } from 'react'
+import Waves from '../components/waves'
 
 interface HomeProps {
-	bgIsLoaded: boolean
+	bgIsLoaded: boolean;
 }
 export default function Home({ bgIsLoaded }: HomeProps) {
+	const [wavesOn, setWavesOn] = useState(false)
+
+	const toggleWaves = () => setWavesOn(prev => !prev)
+	const wavesBgColor = "rgba(0, 0, 0, 0.05)"
 	return (
-		<Layout>
-			<main>
-				<h1 className={utilStyles.titleXl} style={{ marginTop: "20rem" }}>HypeDAO</h1>
+		<Layout >
+			<main className={styles.homeContainer}>
+				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl)} onClick={toggleWaves}>
+					HypeDAO
+				</button>
+				{/* Placeholder/example */}
+				{/* <button className={utilStyles.primaryButton}>
+					Register Here
+				</button> */}
+				{/* <h1 className={classNames(utilStyles.titleXl, styles.homepageTitle)} onClick={toggleWaves}>HypeDAO</h1> */}
 				<div className={classNames(styles.gridImageBg, { [styles.imageLoaded]: bgIsLoaded })}>
 					<Image
 						src={gridImage}
@@ -23,6 +36,7 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 					/>
 				</div>
 			</main>
+			{wavesOn ? <Waves color={wavesBgColor} /> : null}
 		</Layout>
 	)
 }

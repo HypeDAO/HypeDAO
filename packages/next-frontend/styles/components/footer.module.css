@@ -1,0 +1,25 @@
+.footerContainer {
+	padding: 0.5rem 4rem;
+	
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background:linear-gradient(180deg, rgba(63, 76, 80, 1), rgba(47, 36, 39, 1));
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.8);
+	
+	color:var(--body-text-color);
+}
+.copyright {
+	font-size: 0.8rem;
+}
+
+.socials {
+	display: flex;
+	align-items: center;
+}
+.socials a {
+	margin-right: 1rem;
+}
+.socials svg path {
+	fill: var(--accent-color)
+}

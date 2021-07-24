@@ -1,14 +1,14 @@
 import classNames from "classnames";
 import Layout from "../../components/layout";
 import utilStyles from '../../styles/utils.module.css'
-import styles from '../../styles/bounties.module.css'
+import styles from '../../styles/pages/Bounties.module.css'
 
 export default function FoundationalBounties() {
 	return (
 		<Layout>
 			<main>
 				<h1 className={utilStyles.title}>Foundational Bounties</h1>
-				<h3 className={styles.infoText}>Wanna claim a bounty? Lets get in touch via <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!</h3>
+				<h3 className={utilStyles.infoText}>Wanna claim a bounty? Lets get in touch via <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!</h3>
 				<ul className={utilStyles.scrim}>
 					<GridCell
 						title="Bounty Title"

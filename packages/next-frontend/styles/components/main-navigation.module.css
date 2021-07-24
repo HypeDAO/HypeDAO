@@ -8,6 +8,10 @@
 	height: var(--nav-padding);
 	cursor: pointer;
 	z-index: 10;
+	transition: 0.5s;
+}
+.toggleIcon:hover {
+	transform: scale(1.1);
 }
 
 .container {
