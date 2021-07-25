@@ -32,7 +32,9 @@
 	top: calc(var(--color-width-dif) / -2);
 	left: calc(var(--color-width-dif) / -2);
 	width: calc(var(--title-width) + var(--color-width-dif));
-	animation: wiggle 15s ease-in-out 1s infinite alternate;
+}
+.titleColor.imageLoaded {
+	animation: wiggle 15s ease-in-out 0s infinite alternate;
 }
 .titleColor.isActive {
 	filter: brightness(0);
@@ -54,7 +56,7 @@
 	transition: 0.9s ease-in-out;
 }
 
-.imageLoaded img {
+.gridImageBg.imageLoaded img {
 	opacity: 1;
 	filter: blur(0px);
 }

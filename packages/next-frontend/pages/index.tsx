@@ -24,7 +24,7 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 					<div className={classNames(styles.titleColor, { [styles.isActive]: wavesOn })} >
 						<Image src={titleColor} alt="" />
 					</div>
-					<div className={classNames(styles.titlePlain, { [styles.isActive]: wavesOn })}>
+					<div className={classNames(styles.titlePlain, { [styles.isActive]: wavesOn, [styles.imageLoaded]: bgIsLoaded })}>
 						<Image src={titlePlain} alt="HypeDAO" />
 					</div>
 				</button>
