@@ -1,13 +1,16 @@
 .gridCell {
 	display: grid;
-	grid-template-columns: 2fr 1fr;
-	gap: 2rem;
+	grid-template-columns: 6rem 2fr 0.8fr;
+	gap: 1rem;
 	border-bottom: 2px solid rgba(128, 128, 128, 0.8);
 	list-style: none;
 	font-size: 1.3rem;
 }
 .gridCell p {
 	margin-bottom: 1rem;
+}
+.gridCell svg path {
+	fill: var(--accent-color)
 }
 .gridHeader {
 	font-size: 1.5rem;
@@ -19,14 +22,10 @@
 	margin-top: 0;
 }
 
-.infoText {
-	text-align: center;
-	font-style: italic;
-}
-
 @media only screen and (max-width: 480px) {
 	.gridCell {
 		font-size: 1rem;
+		grid-template-columns: 4rem 2fr 1fr;
 	}
 	.gridHeader {
 		font-size: 1.2rem;

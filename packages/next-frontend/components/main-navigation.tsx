@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toggleIcon from '../public/images/menu-icon.webp'
-import styles from '../styles/main-navigation.module.css'
+import styles from '../styles/components/main-navigation.module.css'
 import utilStyles from '../styles/utils.module.css'
 import classNames from "classnames";
 
@@ -24,7 +24,7 @@ export default function MainNavigation() {
 		if (window.screen?.width <= 480) {
 			setIsVisible(false)
 		}
-	}, [])
+	}, [pathname])
 
 	function handleToggle() {
 		setIsVisible(prev => !prev)

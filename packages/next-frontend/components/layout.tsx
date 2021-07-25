@@ -1,21 +1,14 @@
 import Head from "next/head";
-import Link from "next/link";
-import styles from '../styles/layout.module.css'
-import MainNavigation from "./main-navigation";
+import styles from '../styles/components/layout.module.css'
 
 interface LayoutProps {
 	children: React.ReactNode;
 	metaDataTitle?: string
-	//Pass these props in to Layout component <Layout noFooter>...</Layout> if you want customized versions on a specific page.
-	noNav?: boolean;
-	noFooter?: boolean;
 }
 
 export default function Layout({
 	children,
 	metaDataTitle = "HypeDAO",
-	noNav = false,
-	noFooter = false,
 }: LayoutProps) {
 
 	return (
@@ -26,8 +19,6 @@ export default function Layout({
 				<meta name="description" content="Made by artists for artists" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
-			{!noNav && <MainNavigation />}
 
 			{children}
 

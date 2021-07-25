@@ -1,0 +1,139 @@
+.homeContainer {
+	/* Calc with padding is needed to fit within layout, cant use 100% because layout uses min-height */
+	height: calc(100vh - (var(--nav-padding) * 2));
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.homeTitle {
+	position: relative;
+	margin-bottom: 5rem;
+	cursor: pointer;
+	transition: 0.5s;
+	--title-width: 50rem;
+	--color-width-dif: calc(var(--title-width) / 10);
+	--move-amount: 0.8;
+}
+.homeTitle:hover {
+	transform: scale(1.08);
+}
+.titlePlain {
+	width: var(--title-width);
+	--drop-shadow: drop-shadow( 1px 1px 3px rgba(49, 49, 49, 0.4));
+	filter: var(--drop-shadow)
+}
+.titlePlain.isActive {
+	filter:invert(1) var(--drop-shadow)
+}
+
+.titleColor {
+	position: absolute;
+	top: calc(var(--color-width-dif) / -2);
+	left: calc(var(--color-width-dif) / -2);
+	width: calc(var(--title-width) + var(--color-width-dif));
+}
+.titleColor.imageLoaded {
+	animation: wiggle 15s ease-in-out 0s infinite alternate;
+}
+.titleColor.isActive {
+	filter: brightness(0);
+	animation: none;
+}
+
+.gridImageBg {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+  height: 20vw;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.gridImageBg img {
+	opacity: 0;
+	filter: blur(4px);
+	transition: 0.9s ease-in-out;
+}
+
+.gridImageBg.imageLoaded img {
+	opacity: 1;
+	filter: blur(0px);
+}
+
+.waves {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	filter: blur(0.5px) brightness(0.8);
+}
+
+@keyframes wiggle {
+	0% {
+		margin-top: 0;
+		margin-left: 0;
+	}
+	10% {
+		margin-top: 0;
+		margin-left: 0;
+	}
+	20% {
+		margin-top: calc(var(--move-amount) * 1.5rem);
+		margin-left: calc(var(--move-amount) * 1.5rem);
+	}
+	30% {
+		margin-top: calc(var(--move-amount) * 1.5rem);
+		margin-left: calc(var(--move-amount) * -1.5rem);
+	}
+	40% {
+		margin-top: calc(var(--move-amount) * -1.5rem);
+		margin-left: calc(var(--move-amount) * 1.5rem);
+	}
+	50%{
+		margin-top: calc(var(--move-amount) * -1.5rem);
+		margin-left: calc(var(--move-amount) * -1.5rem);
+	}
+	60% {
+		margin-top: calc(var(--move-amount) * 1.5rem);
+		margin-left: calc(var(--move-amount) * -1.5rem);
+	}
+	70% {
+		margin-top: calc(var(--move-amount) * 2rem);
+		margin-left: calc(var(--move-amount) * 2rem);
+	}
+	80% {
+		margin-top: calc(var(--move-amount) * 2rem);
+		margin-left: calc(var(--move-amount) * -2rem);
+	}
+	90% {
+		margin-top: calc(var(--move-amount) * -2rem);
+		margin-left: calc(var(--move-amount) * 2rem);
+	}
+	100% {
+		margin-top: 0;
+		margin-left: 0
+	} 
+}
+
+@media only screen and (max-width: 1024px) {
+	.homeTitle {
+		--title-width: 35rem;
+		--move-amount: 0.6;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.homeTitle {
+		--title-width: 28rem;
+		--move-amount: 0.4;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.homeTitle {
+		--title-width: 18rem;
+		--move-amount: 0.2;
+	}
+}
+

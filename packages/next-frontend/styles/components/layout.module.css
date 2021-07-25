@@ -1,8 +1,8 @@
 .container {
 	margin: 0 auto;
-	height: 100%;
+	min-height: 100%;
 	max-width: 1440px;
-	padding: var(--nav-padding) 8rem 8rem;
+	padding: var(--nav-padding) 8rem 6rem;
 	color: var(--body-text-color);
 	font-family: var(--body-font);
 }
@@ -15,7 +15,7 @@
   width: 100vw;
   overflow: hidden;
 	background-color: black;
-	z-index: -1;
+	z-index: -2;
 }
 .starsImageBg img {
 	opacity: 0;
@@ -35,8 +35,20 @@
 	align-items: center;
 }
 
+
+@media only screen and (max-width: 1024px) {
+	.container {
+		padding: var(--nav-padding) 4rem 4rem;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.container {
+		padding: var(--nav-padding) 2rem 2rem;
+	}
+}
 @media only screen and (max-width: 480px) {
 	.container {
-		padding: 2rem 1rem 1rem;
+		padding: var(--nav-padding) 1rem 1rem;
 	}
 }

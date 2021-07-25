@@ -1,8 +1,10 @@
+/* Global elements */
 .titleXl {
 	font-size: 6rem;
 	text-shadow: 3px 3px 6px grey;
 	text-align: center;
 	font-family: var(--heading-font);
+	color: var(--heading-text-color);
 }
 
 .title {
@@ -10,12 +12,14 @@
 	text-shadow: 2px 2px 2px grey;
 	text-align: center;
 	font-family: var(--heading-font);
+	color: var(--heading-text-color);
 }
 
 .titleSm {
 	font-size: 2rem;
 	text-shadow: 1px 1px 1px grey;
 	font-family: var(--heading-font);
+	color: var(--heading-text-color);
 }
 
 .scrim {
@@ -24,6 +28,51 @@
 	border-radius: 1rem;
 	box-shadow: inset 0 0 4rem 0.5rem rgba(0, 0, 0, 0.8);
 }
+
+.primaryButton {
+	padding: 1rem 1.5rem;
+
+	color: var(--body-text-color);
+	font-family: var(--body-font);
+	font-size: 1.2rem;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+	border: none;
+	border-radius: 3rem;
+	background: linear-gradient(315deg, var(--main-gradient));
+	box-shadow: inset 2px 1px 5px 1px rgba(255, 255, 255, 0.5);
+
+	cursor: pointer;
+	transition: 0.3s;
+}
+.primaryButton:hover {
+	transform: scale(1.05);
+}
+.primaryButton:active {
+	box-shadow: inset 2px 1px 5px 1px rgba(73, 73, 73, 0.5);
+}
+
+
+/* Helpers */
+.noStyle {
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	color: inherit;
+}
+.centerContent {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+
+.infoText {
+	text-align: center;
+	font-style: italic;
+}
+
 
 @media only screen and (max-width: 480px) {
 	.titleXl {
@@ -37,5 +86,8 @@
 	}
 	.scrim {
 		padding: 1.2rem;
+	}
+	.primaryButton {
+		font-size: 1rem;
 	}
 }

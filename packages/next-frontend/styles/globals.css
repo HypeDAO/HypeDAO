@@ -8,10 +8,18 @@ body {
 
 	--nav-padding: 6rem;
 	--main-gradient: rgb(0, 200, 255), rgb(222, 0, 255), rgb(255, 0, 62);
-	--heading-font: 'Zen Dots', sans-serif;
 	--body-font: 'Roboto', sans-serif;
 	--body-text-color: whitesmoke;
+	--heading-font: 'Zen Dots', sans-serif;
+	--heading-text-color: whitesmoke;
 	--accent-color: skyblue
+}
+html {
+	background-color: black;
+}
+
+#__next {
+	height: 100%;
 }
 
 a {
@@ -21,4 +29,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+@media only screen and (max-width: 480px) {
+	body {
+		--nav-padding: 2rem
+	}
 }
