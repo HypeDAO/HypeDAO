@@ -23,3 +23,12 @@
 .socials svg path {
 	fill: var(--accent-color)
 }
+
+@media only screen and (max-width: 480px) {
+	.footerContainer {
+		padding: 0.5rem 1rem;
+	}
+	.copyright {
+		font-size: 0.5rem;
+	}
+}

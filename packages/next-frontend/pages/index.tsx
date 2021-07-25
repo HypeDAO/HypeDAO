@@ -6,6 +6,8 @@ import Layout from '../components/layout'
 import classNames from 'classnames'
 import { useState } from 'react'
 import Waves from '../components/waves'
+import titleColor from '../public/images/HypeDAO-color.png'
+import titlePlain from '../public/images/HypeDAO-plain.png'
 
 interface HomeProps {
 	bgIsLoaded: boolean;
@@ -19,7 +21,12 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 		<Layout >
 			<main className={styles.homeContainer}>
 				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl)} onClick={toggleWaves}>
-					HypeDAO
+					<div className={styles.titleColor} >
+						<Image src={titleColor} alt="" />
+					</div>
+					<div className={styles.titlePlain}>
+						<Image src={titlePlain} alt="HypeDAO" />
+					</div>
 				</button>
 				{/* Placeholder/example */}
 				{/* <button className={utilStyles.primaryButton}>
