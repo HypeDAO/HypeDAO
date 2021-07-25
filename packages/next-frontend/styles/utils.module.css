@@ -61,11 +61,13 @@
 	border: none;
 	color: inherit;
 }
-.center {
-	text-align: center;
+.centerContent {
+	display: flex;
 	justify-content: center;
+	text-align: center;
 	align-items: center;
 }
+
 .infoText {
 	text-align: center;
 	font-style: italic;

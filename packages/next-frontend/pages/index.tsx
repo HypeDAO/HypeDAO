@@ -21,10 +21,10 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 		<Layout >
 			<main className={styles.homeContainer}>
 				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl)} onClick={toggleWaves}>
-					<div className={styles.titleColor} >
+					<div className={classNames(styles.titleColor, { [styles.isActive]: wavesOn })} >
 						<Image src={titleColor} alt="" />
 					</div>
-					<div className={styles.titlePlain}>
+					<div className={classNames(styles.titlePlain, { [styles.isActive]: wavesOn })}>
 						<Image src={titlePlain} alt="HypeDAO" />
 					</div>
 				</button>
