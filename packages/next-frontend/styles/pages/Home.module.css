@@ -11,12 +11,17 @@
 	margin-bottom: 5rem;
 	cursor: pointer;
 	transition: 0.5s;
+	filter: blur(0px);
 	--title-width: 50rem;
 	--color-width-dif: calc(var(--title-width) / 10);
 	--move-amount: 0.8;
 }
 .homeTitle:hover {
 	transform: scale(1.08);
+}
+.homeTitle:not(.imageLoaded) {
+	filter: blur(2px);
+	animation: blur-pulse 3s infinite ease-in-out;
 }
 .titlePlain {
 	width: var(--title-width);
@@ -69,6 +74,17 @@
 	filter: blur(0.5px) brightness(0.8);
 }
 
+@keyframes blur-pulse {
+	0% {
+		filter: blur(2px);
+	}
+	50% {
+		filter: blur(14px);
+	}
+	100% {
+		filter: blur(2px);
+	}
+}
 @keyframes wiggle {
 	0% {
 		margin-top: 0;
