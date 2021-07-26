@@ -6,6 +6,7 @@ import toggleIcon from '../public/images/menu-icon.webp'
 import styles from '../styles/components/main-navigation.module.css'
 import utilStyles from '../styles/utils.module.css'
 import classNames from "classnames";
+import HypeRegistrationButton from "./hype-registration-button";
 
 export const PATHNAMES = {
 	HOME: "/",
@@ -36,7 +37,8 @@ export default function MainNavigation() {
 				<Image src={toggleIcon} alt="" />
 			</button>
 			<nav className={classNames(styles.container, { [styles.navActive]: isVisible })}>
-				<h3 className={classNames(utilStyles.titleSm, styles.navTitle)}>HypeDAO</h3>
+				{/* <h3 className={classNames(utilStyles.titleSm, styles.navTitle)}>HypeDAO</h3> */}
+				<HypeRegistrationButton />
 				<div className={styles.linksContainer}>
 					<Link href={PATHNAMES.HOME}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.HOME })}>Home</a>

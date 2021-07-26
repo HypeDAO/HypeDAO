@@ -26,6 +26,9 @@ a {
   color: var(--accent-color);
   text-decoration: none;
 }
+button {
+	cursor: pointer;
+}
 
 * {
   box-sizing: border-box;

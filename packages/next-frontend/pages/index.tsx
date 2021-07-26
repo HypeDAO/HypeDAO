@@ -28,11 +28,7 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 						<Image src={titlePlain} alt="HypeDAO" />
 					</div>
 				</button>
-				{/* Placeholder/example */}
-				{/* <button className={utilStyles.primaryButton}>
-					Register Here
-				</button> */}
-				{/* <h1 className={classNames(utilStyles.titleXl, styles.homepageTitle)} onClick={toggleWaves}>HypeDAO</h1> */}
+
 				<div className={classNames(styles.gridImageBg, { [styles.imageLoaded]: bgIsLoaded })}>
 					<Image
 						src={gridImage}
