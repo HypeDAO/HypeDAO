@@ -20,7 +20,7 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 	return (
 		<Layout >
 			<main className={styles.homeContainer}>
-				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl)} onClick={toggleWaves}>
+				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl, { [styles.imageLoaded]: bgIsLoaded })} onClick={toggleWaves}>
 					<div className={classNames(styles.titleColor, { [styles.isActive]: wavesOn })} >
 						<Image src={titleColor} alt="" />
 					</div>
