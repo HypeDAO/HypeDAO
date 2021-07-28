@@ -33,7 +33,7 @@ export default function HypeRegistrationButton() {
 					className={utilStyles.secondaryButton}
 					onClick={handleWalletConnection}
 				>
-					Connect Wallet
+					Connect NEAR Wallet
 				</button>
 			)}
 			{isConnected && !isRegistered && (
