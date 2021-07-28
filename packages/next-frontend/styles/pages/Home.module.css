@@ -48,7 +48,8 @@
 
 .gridImageBg {
 	position: absolute;
-	bottom: 0;
+	/* bottom: 0; */
+	top: calc(100vh - 20vw);
 	left: 0;
   height: 20vw;
   width: 100vw;
