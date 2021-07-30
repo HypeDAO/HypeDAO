@@ -51,6 +51,7 @@ export async function getHypeBalance(wallet: nearAPI.WalletConnection) {
 			viewMethods: ["confirm", "ft_balance_of"], // view methods do not change state but usually return a value
 		}
 	);
+	// @ts-ignore: ft_balance_of doesn't exist on generic contract but does on the one we just called
 	const bigBalance = await tokenContract.ft_balance_of({ account_id: id })
 
 
@@ -69,6 +70,7 @@ export async function registerToken(wallet: nearAPI.WalletConnection) {
 		}
 	);
 	try {
+		// @ts-ignore: storage_deposit doesn't exist on generic contract but does on the one we just called
 		await tokenContract.storage_deposit({
 			registration_only: true,
 		}, BoatOfGas.toFixed(0), StorageDeposit.toFixed(0));
