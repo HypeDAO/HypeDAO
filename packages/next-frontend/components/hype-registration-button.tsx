@@ -15,7 +15,7 @@ export default function HypeRegistrationButton() {
 	const [isConnected, setIsConnected] = useState(false)
 	const [isRegistered, setIsRegistered] = useState(false)
 	const [wallet, setWallet] = useState<WalletConnection | null>(null)
-	const [hypeBalance, setHypeBalance] = useState<number | null>(null)
+	const [hypeBalance, setHypeBalance] = useState<string | null>(null)
 
 	const router = useRouter()
 
@@ -60,8 +60,7 @@ export default function HypeRegistrationButton() {
 			if (!wallet) return
 			const balance = await getHypeBalance(wallet)
 			if (!balance) return;
-			console.log(balance)
-			// setHypeBalance(balance)
+			setHypeBalance(balance)
 			setIsRegistered(true)
 		}
 		if (wallet?.isSignedIn()) {

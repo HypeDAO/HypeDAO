@@ -3,6 +3,7 @@ import * as nearAPI from 'near-api-js';
 
 export const ContractName = "hype.tkn.near"
 export const TokenSymbol = "HYPE"
+const tokenSupplyDecimals = 18
 const StorageDeposit = Big(125).mul(Big(10).pow(19));
 const TGas = Big(10).pow(12);
 const BoatOfGas = Big(200).mul(TGas);
@@ -41,18 +42,19 @@ export function walletSignOut(wallet: nearAPI.WalletConnection) {
 }
 
 export async function getHypeBalance(wallet: nearAPI.WalletConnection) {
+	const id = wallet.account().accountId
 	const tokenContract = new nearAPI.Contract(
 		wallet.account(),
 		ContractName,
 		{
 			changeMethods: ['storage_deposit'],
-			viewMethods: ["get_number_of_tokens", 'get_tokens', 'get_token'], // view methods do not change state but usually return a value
+			viewMethods: ["confirm", "ft_balance_of"], // view methods do not change state but usually return a value
 		}
 	);
-	// console.log(await tokenContract.get_token())
-	console.log(await tokenContract.get_number_of_tokens())
-	// console.log(tokenContract.get_tokens())
-	// return await tokenContract.get_number_of_tokens()
+	const bigBalance = await tokenContract.ft_balance_of({ account_id: id })
+
+
+	return Big(bigBalance).div(Big(10).pow(tokenSupplyDecimals)).toFixed(0)
 }
 
 
