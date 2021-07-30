@@ -1,15 +1,23 @@
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import utilStyles from '../styles/utils.module.css'
 import styles from '../styles/components/hype-registration-button.module.css'
 import titlePlain from '../public/images/HypeDAO-plain.png'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import classNames from "classnames"
+import { getHypeBalance, getWalletConnection, registerToken, walletSignIn, walletSignOut } from "../hooks/near"
+import { WalletConnection } from "near-api-js"
+import { useRouter } from "next/dist/client/router"
 
 export default function HypeRegistrationButton() {
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isConnected, setIsConnected] = useState(false)
 	const [isRegistered, setIsRegistered] = useState(false)
+	const [wallet, setWallet] = useState<WalletConnection | null>(null)
+	const [hypeBalance, setHypeBalance] = useState<number | null>(null)
+
+	const router = useRouter()
 
 	function openModal() {
 		setModalOpen(true)
@@ -18,14 +26,49 @@ export default function HypeRegistrationButton() {
 	function closeModal() {
 		setModalOpen(false)
 	}
-	function handleWalletConnection() {
-		//logic for connecting the wallet
-		setIsConnected(true)
+	async function handleWalletConnection() {
+		if (!wallet) return
+		walletSignIn(wallet)
 	}
+
 	function handleHypeRegistration() {
-		//logic for registration
+		if (!wallet?.isSignedIn()) return;
+		registerToken(wallet)
 		setIsRegistered(true)
 	}
+
+	function signOut() {
+		if (!wallet?.isSignedIn()) return;
+		router.replace(router.pathname)
+		setIsConnected(false)
+		walletSignOut(wallet)
+	}
+
+	useEffect(() => {
+		const connectWallet = async () => {
+			const _wallet = await getWalletConnection()
+			if (!_wallet) return;
+			setWallet(_wallet)
+		}
+		if (!wallet) {
+			connectWallet()
+		}
+		//Sets isConnected true if wallet is signed in, false if not
+		setIsConnected(!!wallet?.isSignedIn())
+
+		const getBalance = async () => {
+			if (!wallet) return
+			const balance = await getHypeBalance(wallet)
+			if (!balance) return;
+			console.log(balance)
+			// setHypeBalance(balance)
+			setIsRegistered(true)
+		}
+		if (wallet?.isSignedIn()) {
+			getBalance()
+		}
+	}, [wallet])
+
 	return (
 		<div className={styles.registerButtonContainer}>
 			{!isConnected && (
@@ -45,14 +88,19 @@ export default function HypeRegistrationButton() {
 				</button>
 			)}
 			{isConnected && isRegistered && (
-				//I'm thinking this will eventual be a logo or some text that says like "Congrats"
-				//possibly you would pass in the final state as a prop depending on where this component is used
-				<Image src={titlePlain} alt="HypeDAO" width={200} height={40} />
+				//I'm thinking there will be our logo here 
+				<h3>$HYPE: {hypeBalance}</h3>
 			)}
 
 			{(!isConnected || !isRegistered) && (
-				<button className={classNames(utilStyles.noStyle, styles.infoIcon)} onClick={openModal}>
+				<button className={classNames(utilStyles.noStyle, utilStyles.infoIcon, styles.moreInfoIcon)} onClick={openModal}>
 					<InfoOutlinedIcon fontSize="small" />
+				</button>
+			)}
+
+			{isConnected && (
+				<button className={classNames(utilStyles.noStyle, utilStyles.infoIcon, styles.signOutIcon,)} onClick={signOut}>
+					<HighlightOffOutlinedIcon fontSize="small" />
 				</button>
 			)}
 

@@ -2,21 +2,15 @@
 	position: relative;
 	margin: 1rem 0;
 }
-.infoIcon {
-	position: absolute;
-	top: -0.5rem;
-	right: -1.5rem
+
+.moreInfoIcon:hover::after {
+	content: "Problems Connecting? Click to learn more.";
 }
-.infoIcon:hover::after {
-	content: "Click this icon to learn more";
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	width: 8rem;
-	background-color: rgba(78, 78, 78, 0.5);
-	padding: 0.5rem 0;
-	border-radius: 0.5rem;
-	color: var(--body-text-color)
+.signOutIcon {
+	top: 1rem
+}
+.signOutIcon:hover::after {
+	content: "Click to log out your NEAR wallet."
 }
 
 

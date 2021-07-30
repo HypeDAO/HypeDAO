@@ -59,6 +59,22 @@
 	box-shadow: inset 2px 1px 5px 1px rgba(167, 167, 167, 0.2);
 }
 
+.infoIcon {
+	position: absolute;
+	top: -0.5rem;
+	right: -1.5rem
+}
+.infoIcon:hover::after {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	width: 8rem;
+	background-color: rgba(78, 78, 78, 0.8);
+	padding: 0.5rem 0;
+	border-radius: 0.5rem;
+	color: var(--body-text-color)
+}
+
 /* Helpers */
 .noStyle {
 	padding: 0;

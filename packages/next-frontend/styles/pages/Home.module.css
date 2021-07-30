@@ -85,6 +85,7 @@
 		filter: blur(2px);
 	}
 }
+
 @keyframes wiggle {
 	0% {
 		margin-top: 0;
