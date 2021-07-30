@@ -13,6 +13,19 @@
 	content: "Click to log out your NEAR wallet."
 }
 
+.balance {
+	/* border-radius: 0px; */
+	cursor: default;
+	font-family: var(--heading-font);
+	margin: 0;
+}
+.balance:hover {
+	transform: none;
+}
+.balance:active {
+	box-shadow: inset 2px 1px 5px 1px rgba(255, 255, 255, 0.5);
+}
+
 
 @media only screen and (max-width: 480px) {
 	.infoIcon:hover::after {

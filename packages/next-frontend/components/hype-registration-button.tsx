@@ -34,7 +34,6 @@ export default function HypeRegistrationButton() {
 	function handleHypeRegistration() {
 		if (!wallet?.isSignedIn()) return;
 		registerToken(wallet)
-		setIsRegistered(true)
 	}
 
 	function signOut() {
@@ -88,7 +87,7 @@ export default function HypeRegistrationButton() {
 			)}
 			{isConnected && isRegistered && (
 				//I'm thinking there will be our logo here 
-				<h3>$HYPE: {hypeBalance}</h3>
+				<h3 className={classNames(styles.balance, utilStyles.primaryButton)}>$HYPE: {hypeBalance}</h3>
 			)}
 
 			{(!isConnected || !isRegistered) && (
