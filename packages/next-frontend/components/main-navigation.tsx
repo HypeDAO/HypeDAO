@@ -21,11 +21,26 @@ export default function MainNavigation() {
 
 	const { pathname } = useRouter()
 
+
 	useEffect(() => {
 		if (window.screen?.width <= 480) {
 			setIsVisible(false)
 		}
 	}, [pathname])
+
+	useEffect(() => {
+		// if touch scrolling and not at the top of the window remove menu
+		const handleMove = () => {
+			const top = window.screen?.availHeight ? window.screen.height - window.screen.availHeight : 0
+			const isAtTop = window.pageYOffset === top
+			setIsVisible(isAtTop)
+		}
+		window.addEventListener("touchmove", handleMove)
+
+		return () => {
+			window.removeEventListener("touchmove", handleMove)
+		}
+	}, [])
 
 	function handleToggle() {
 		setIsVisible(prev => !prev)
@@ -33,12 +48,13 @@ export default function MainNavigation() {
 
 	return (
 		<>
-			<button className={styles.toggleIcon} onClick={handleToggle}>
+			<button className={classNames(styles.toggleIcon, { [styles.pulse]: !isVisible })} onClick={handleToggle}>
 				<Image src={toggleIcon} alt="" />
 			</button>
 			<nav className={classNames(styles.container, { [styles.navActive]: isVisible })}>
-				{/* <h3 className={classNames(utilStyles.titleSm, styles.navTitle)}>HypeDAO</h3> */}
+
 				<HypeRegistrationButton />
+
 				<div className={styles.linksContainer}>
 					<Link href={PATHNAMES.HOME}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.HOME })}>Home</a>

@@ -8,6 +8,7 @@ body {
 
 	--nav-padding: 6rem;
 	--main-gradient: rgb(0, 200, 255), rgb(222, 0, 255), rgb(255, 0, 62);
+	--grey-gradient: rgba(63, 76, 80, 1), rgba(47, 36, 39, 1);
 	--body-font: 'Roboto', sans-serif;
 	--body-text-color: whitesmoke;
 	--heading-font: 'Zen Dots', sans-serif;

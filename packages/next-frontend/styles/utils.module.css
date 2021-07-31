@@ -65,12 +65,13 @@
 	right: -1.5rem
 }
 .infoIcon:hover::after {
+	z-index: 5;
 	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	width: 8rem;
+	top: 1.5rem;
+	left: 0.5rem;
+	width: 9rem;
 	background-color: rgba(78, 78, 78, 0.8);
-	padding: 0.5rem 0;
+	padding: 0.7rem 0.5rem;
 	border-radius: 0.5rem;
 	color: var(--body-text-color)
 }
@@ -110,5 +111,8 @@
 	}
 	.primaryButton, .secondaryButton {
 		font-size: 1rem;
+	}
+	.infoIcon:hover::after {
+		display: none;
 	}
 }

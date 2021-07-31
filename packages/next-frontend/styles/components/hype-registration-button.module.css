@@ -4,13 +4,16 @@
 }
 
 .moreInfoIcon:hover::after {
-	content: "Problems Connecting? Click to learn more.";
+	content: "Problems Connecting?";
 }
 .signOutIcon {
-	top: 1rem
+	right: -3rem
+}
+.signOutIcon.single {
+	right: -1.5rem
 }
 .signOutIcon:hover::after {
-	content: "Click to log out your NEAR wallet."
+	content: "Log out your NEAR wallet."
 }
 
 .balance {
@@ -24,11 +27,4 @@
 }
 .balance:active {
 	box-shadow: inset 2px 1px 5px 1px rgba(255, 255, 255, 0.5);
-}
-
-
-@media only screen and (max-width: 480px) {
-	.infoIcon:hover::after {
-		display: none;
-	}
 }

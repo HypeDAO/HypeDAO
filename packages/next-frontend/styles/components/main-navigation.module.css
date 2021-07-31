@@ -13,6 +13,9 @@
 .toggleIcon:hover {
 	transform: scale(1.1);
 }
+.toggleIcon.pulse {
+	animation: pulse 2.5s ease-in-out 5s 5;
+}
 
 .container {
 	position: fixed;
@@ -98,5 +101,26 @@
 		bottom: -0.4rem;
 		height: 0.15rem;
 		border-radius: 0.2rem;
+	}
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	60% {
+		transform: scale(1);
+	}
+	70% {
+		transform: scale(1.05);
+	}
+	80% {
+		transform: scale(1);
+	}
+	90% {
+		transform: scale(1.1);
+	}
+	100%{
+		transform: scale(1);
 	}
 }

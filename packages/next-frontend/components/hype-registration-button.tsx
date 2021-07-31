@@ -1,14 +1,13 @@
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import utilStyles from '../styles/utils.module.css'
 import styles from '../styles/components/hype-registration-button.module.css'
-import titlePlain from '../public/images/HypeDAO-plain.png'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import classNames from "classnames"
 import { getHypeBalance, getWalletConnection, registerToken, walletSignIn, walletSignOut } from "../hooks/near"
 import { WalletConnection } from "near-api-js"
 import { useRouter } from "next/dist/client/router"
+import Modal from "./modal";
 
 export default function HypeRegistrationButton() {
 	const [modalOpen, setModalOpen] = useState(false)
@@ -21,7 +20,6 @@ export default function HypeRegistrationButton() {
 
 	function openModal() {
 		setModalOpen(true)
-		alert("this is a placeholder for a modal")
 	}
 	function closeModal() {
 		setModalOpen(false)
@@ -97,15 +95,24 @@ export default function HypeRegistrationButton() {
 			)}
 
 			{isConnected && (
-				<button className={classNames(utilStyles.noStyle, utilStyles.infoIcon, styles.signOutIcon,)} onClick={signOut}>
+				<button className={classNames(utilStyles.noStyle, utilStyles.infoIcon, styles.signOutIcon, { [styles.single]: isRegistered })} onClick={signOut}>
 					<HighlightOffOutlinedIcon fontSize="small" />
 				</button>
 			)}
 
 
-			{/* <div>
-				explination of process in modal
-			</div> */}
+			<Modal
+				isOpen={modalOpen}
+				onClose={closeModal}
+			>
+				<h2>This FAQ section is still a work in progress...</h2>
+				<h3>
+					If you are experiencing issues please contact <a href="https://twitter.com/EV3RETH" target="_blank" rel="noopener noreferrer">EV3RETH</a> via twitter or join our <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>.
+				</h3>
+				<p>
+					These reports are always welcome as we want to help provide the best experience possible for you and all those that follow! The more details about the issue the better and screenshots are greatly appreciated, especially if they are of a specific error message.
+				</p>
+			</Modal>
 		</div>
 	)
 }
