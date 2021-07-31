@@ -2,19 +2,24 @@
 	z-index: 100;
 	position: fixed;
 	left: 0;
-	top: 0;
+	top: 100vh;
 	width: 100vw;
 	height: 100vh;
 	
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(61, 61, 61, 0.8);
-	display: none;
+	opacity: 0;
+	transition: opacity 0.3s;
 }
 .wrapper.isOpen {
-	display: flex;
+	top: 0;
+	opacity: 1;
 }
 .body {
+	margin-top: 7rem;
+	opacity: 0;
 	position: relative;
 	background: rgb(90, 90, 90);
 	border-radius: 1rem;
@@ -27,6 +32,11 @@
 	word-wrap: break-word;
 	overflow-x: hidden;
 	overflow-y: scroll;
+	transition: 0.5s;
+}
+.wrapper.isOpen .body {
+	margin-top: 0;
+	opacity: 1;
 }
 
 .body p {
