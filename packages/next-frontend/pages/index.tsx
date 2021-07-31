@@ -21,18 +21,14 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 		<Layout >
 			<main className={styles.homeContainer}>
 				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl, { [styles.imageLoaded]: bgIsLoaded })} onClick={toggleWaves}>
-					<div className={classNames(styles.titleColor, { [styles.isActive]: wavesOn })} >
+					<div className={classNames(styles.titleColor, { [styles.isActive]: wavesOn, [styles.imageLoaded]: bgIsLoaded })} >
 						<Image src={titleColor} alt="" />
 					</div>
-					<div className={classNames(styles.titlePlain, { [styles.isActive]: wavesOn, [styles.imageLoaded]: bgIsLoaded })}>
+					<div className={classNames(styles.titlePlain, { [styles.isActive]: wavesOn })}>
 						<Image src={titlePlain} alt="HypeDAO" />
 					</div>
 				</button>
-				{/* Placeholder/example */}
-				{/* <button className={utilStyles.primaryButton}>
-					Register Here
-				</button> */}
-				{/* <h1 className={classNames(utilStyles.titleXl, styles.homepageTitle)} onClick={toggleWaves}>HypeDAO</h1> */}
+
 				<div className={classNames(styles.gridImageBg, { [styles.imageLoaded]: bgIsLoaded })}>
 					<Image
 						src={gridImage}

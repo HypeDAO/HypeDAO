@@ -25,11 +25,10 @@
 }
 .titlePlain {
 	width: var(--title-width);
-	--drop-shadow: drop-shadow( 1px 1px 3px rgba(49, 49, 49, 0.4));
-	filter: var(--drop-shadow)
+	filter: drop-shadow(1px 1px 4px rgba(128, 128, 128, 0.4))
 }
 .titlePlain.isActive {
-	filter:invert(1) var(--drop-shadow)
+	filter:invert(1) drop-shadow( 1px 1px 3px rgba(49, 49, 49, 0.4));
 }
 
 .titleColor {
@@ -85,6 +84,7 @@
 		filter: blur(2px);
 	}
 }
+
 @keyframes wiggle {
 	0% {
 		margin-top: 0;

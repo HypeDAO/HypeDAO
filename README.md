@@ -62,3 +62,10 @@ If you wanna take on another task please branch back to main `git branch main` a
 
 ### Lastly pat yourself on the back! 
 You've contributed to a revolutionary concept, pushed the boundaries of creative tech and helped many artists get the recognition and compensation they deserve. **Thank you!**
+
+
+#### Known hurdles connecting people to NEAR
+* Chrome (and potentially other browsers) has trouble using NEAR wallets, especially with Ledger devices.
+Solution: Use Firefox
+
+* Signing in with a wallet requires 2FA being set up, this requires at least 4 NEAR in your wallet
