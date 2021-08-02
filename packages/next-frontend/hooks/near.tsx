@@ -42,6 +42,7 @@ export function walletSignOut(wallet: nearAPI.WalletConnection) {
 }
 
 export async function getHypeBalance(wallet: nearAPI.WalletConnection) {
+	console.log(wallet)
 	const id = wallet.account().accountId
 	const tokenContract = new nearAPI.Contract(
 		wallet.account(),
@@ -56,6 +57,10 @@ export async function getHypeBalance(wallet: nearAPI.WalletConnection) {
 
 
 	return Big(bigBalance).div(Big(10).pow(tokenSupplyDecimals)).toFixed(0)
+}
+
+export function getIsRegistered(wallet: nearAPI.WalletConnection) {
+	return wallet._authDataKey === "hype.tkn.near_wallet_auth_key"
 }
 
 
