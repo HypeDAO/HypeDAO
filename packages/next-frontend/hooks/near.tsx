@@ -24,6 +24,7 @@ export async function getWalletConnection() {
 		const near = await nearAPI.connect(nearConfig)
 		// const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
 		// const near = await nearAPI.connect(Object.assign({ deps: { keyStore } }, nearConfig));
+
 		return new nearAPI.WalletConnection(near, ContractName);
 	} catch (error) {
 		console.log(error)
@@ -42,24 +43,23 @@ export function walletSignOut(wallet: nearAPI.WalletConnection) {
 }
 
 export async function getHypeBalance(wallet: nearAPI.WalletConnection) {
-	console.log(wallet)
 	const id = wallet.account().accountId
 	const tokenContract = new nearAPI.Contract(
 		wallet.account(),
 		ContractName,
 		{
 			changeMethods: ['storage_deposit'],
-			viewMethods: ["confirm", "ft_balance_of"], // view methods do not change state but usually return a value
+			viewMethods: ["ft_balance_of", "contains_key", "users"], // view methods do not change state but usually return a value
 		}
 	);
 	// @ts-ignore: ft_balance_of doesn't exist on generic contract but does on the one we just called
 	const bigBalance = await tokenContract.ft_balance_of({ account_id: id })
 
-
 	return Big(bigBalance).div(Big(10).pow(tokenSupplyDecimals)).toFixed(0)
 }
 
 export function getIsRegistered(wallet: nearAPI.WalletConnection) {
+	//This may be redundant, more research into registering/whitelisting accounts needs to be done
 	return wallet._authDataKey === "hype.tkn.near_wallet_auth_key"
 }
 
