@@ -3,21 +3,42 @@ import Layout from "../../components/layout";
 import utilStyles from '../../styles/utils.module.css'
 import styles from '../../styles/pages/Bounties.module.css'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import { getTaigaTasks, taskInterface } from "../../connections/taiga";
+import { useEffect, useState } from "react";
 
-export default function FoundationalBounties() {
+export default function MonthlyBounties() {
+	const [tasks, setTasks] = useState<taskInterface[]>([])
+
+	useEffect(() => {
+		const getTasks = async () => {
+			const tasks = await getTaigaTasks()
+			setTasks(tasks)
+		}
+		getTasks()
+	}, [])
+
 	return (
 		<Layout>
 			<main>
-				<h1 className={utilStyles.title}>Foundational Bounties</h1>
+				<h1 className={utilStyles.title}>Monthly Bounties</h1>
 				<h3 className={utilStyles.infoText}>Wanna claim a bounty? Lets get in touch via <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!</h3>
 				<ul className={utilStyles.scrim}>
 					<GridCell
 						title="Bounty Title"
 						amount="Bounty Amount"
 						isHeader
-						claimedText="Claimed"
+						claimedText="Status"
 					/>
-					<GridCell
+					{tasks.map((task, i) => (
+						<GridCell
+							key={task.title + i}
+							title={task.title}
+							amount={task.bounty}
+							status={task.status}
+							claimedText={task.status?.name}
+						/>)
+					)}
+					{/*<GridCell
 						title="Start work on a $HYPE tipbot for telegram"
 						amount="100N"
 					/>
@@ -50,7 +71,7 @@ export default function FoundationalBounties() {
 					<GridCell
 						title="Hype Campaign participation"
 						amount="1-5 N, 100N total"
-					/>
+					/> */}
 				</ul>
 			</main>
 		</Layout>
@@ -62,13 +83,14 @@ interface GridCellProps {
 	amount: string;
 	isHeader?: boolean;
 	isClaimed?: boolean;
-	claimedText?: string
+	claimedText?: string;
+	status?: taskInterface["status"]
 }
-function GridCell({ title, amount, isHeader, isClaimed, claimedText }: GridCellProps) {
+function GridCell({ title, amount, isHeader, isClaimed, claimedText, status }: GridCellProps) {
 	return (
 		<li className={classNames(styles.gridCell, { [styles.gridHeader]: isHeader })}>
 			{claimedText
-				? <p>{claimedText}</p>
+				? <p style={{ color: status?.color }}>{claimedText}</p>
 				: <div className={utilStyles.centerContent}>
 					{isClaimed ? <DoneOutlineIcon /> : null}
 				</div>
