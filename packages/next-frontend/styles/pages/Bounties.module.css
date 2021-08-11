@@ -9,6 +9,9 @@
 .gridCell p {
 	margin-bottom: 1rem;
 }
+.gridCell a {
+	color: inherit;
+}
 .gridCell svg path {
 	fill: var(--accent-color)
 }

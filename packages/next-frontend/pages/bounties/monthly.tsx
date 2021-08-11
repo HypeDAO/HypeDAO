@@ -36,6 +36,7 @@ export default function MonthlyBounties() {
 							amount={task.bounty}
 							status={task.status}
 							claimedText={task.status?.name}
+							link={task.link}
 						/>)
 					)}
 					{/*<GridCell
@@ -84,9 +85,10 @@ interface GridCellProps {
 	isHeader?: boolean;
 	isClaimed?: boolean;
 	claimedText?: string;
-	status?: taskInterface["status"]
+	status?: taskInterface["status"];
+	link?: string
 }
-function GridCell({ title, amount, isHeader, isClaimed, claimedText, status }: GridCellProps) {
+function GridCell({ title, amount, isHeader, isClaimed, claimedText, status, link }: GridCellProps) {
 	return (
 		<li className={classNames(styles.gridCell, { [styles.gridHeader]: isHeader })}>
 			{claimedText
@@ -95,7 +97,7 @@ function GridCell({ title, amount, isHeader, isClaimed, claimedText, status }: G
 					{isClaimed ? <DoneOutlineIcon /> : null}
 				</div>
 			}
-			<p>{title}</p>
+			<a href={link} target="_blank" rel="noopener noreferrer"><p>{title}</p></a>
 			<p>{amount}</p>
 		</li>
 	)
