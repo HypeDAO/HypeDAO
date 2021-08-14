@@ -10,11 +10,13 @@ import titleColor from '../public/images/HypeDAO-color.png'
 import titlePlain from '../public/images/HypeDAO-plain.png'
 import logo from '../public/images/HYPEDAO-logo-image.png'
 import { useEffect } from 'react'
+import dynamic from "next/dynamic"
 import useWindowDimensions from '../hooks/windowDimensions'
 
 
 interface HomeProps {
 	bgIsLoaded: boolean;
+	// height: number;
 }
 export default function Home({ bgIsLoaded }: HomeProps) {
 	const [wavesOn, setWavesOn] = useState(false)
