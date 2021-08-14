@@ -16,7 +16,6 @@ import useWindowDimensions from '../hooks/windowDimensions'
 
 interface HomeProps {
 	bgIsLoaded: boolean;
-	// height: number;
 }
 export default function Home({ bgIsLoaded }: HomeProps) {
 	const [wavesOn, setWavesOn] = useState(false)
