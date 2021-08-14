@@ -8,7 +8,7 @@ export interface TaskInterface {
 		full_name: string;
 	};
 	status: null | {
-		name: "New" | "Ready" | "Done";
+		name: "New" | "Ready" | "In progress" | "Ready for test" | "Done";
 		color: string;
 		is_closed: boolean;
 	}
