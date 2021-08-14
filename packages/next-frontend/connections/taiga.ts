@@ -21,7 +21,6 @@ export function getTaigaTasks() {
 
 	const getTaskLink = (ref: string) => "https://tree.taiga.io/project/starpause-hype-dao/us/" + ref
 	const getTaskTitleAndBounty = (taskSubject: string) => {
-		console.log(taskSubject)
 		let bounty = ""
 		let title = ""
 		//split up the string into chunks based on "("

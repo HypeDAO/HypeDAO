@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import toggleIcon from '../public/images/menu-icon.webp'
 import styles from '../styles/components/main-navigation.module.css'
-import utilStyles from '../styles/utils.module.css'
 import classNames from "classnames";
 import HypeRegistrationButton from "./hype-registration-button";
 
