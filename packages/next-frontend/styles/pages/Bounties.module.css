@@ -6,14 +6,15 @@
 	list-style: none;
 	font-size: 1.3rem;
 }
+
 .gridCell p {
 	margin-bottom: 1rem;
 }
 .gridCell a {
 	color: inherit;
 }
-.gridCell svg path {
-	fill: var(--accent-color)
+.gridCell svg {
+	filter: hue-rotate(180deg);
 }
 .gridHeader {
 	font-size: 1.5rem;

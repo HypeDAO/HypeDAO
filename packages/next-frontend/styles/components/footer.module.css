@@ -14,6 +14,7 @@
 }
 .logo {
 	position: relative;
+	opacity: 0.8;
 }
 .logo:hover::after {
 	content: "Logo by Holikao";

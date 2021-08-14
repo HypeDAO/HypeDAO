@@ -1,5 +1,5 @@
 
-export interface taskInterface {
+export interface TaskInterface {
 	title: string;
 	bounty: string;
 	link: string;
@@ -8,12 +8,12 @@ export interface taskInterface {
 		full_name: string;
 	};
 	status: null | {
-		name: string;
+		name: "New" | "Ready" | "Done";
 		color: string;
 		is_closed: boolean;
 	}
 }
-export function getTaigaTasks() {
+export function getTaigaTasks(): Promise<TaskInterface[]> | null {
 	const url = "https://api.taiga.io/api/v1/userstories?project=416197&status__is_archived=false"
 	const params = {
 		method: "GET",
@@ -63,7 +63,7 @@ export function getTaigaTasks() {
 						color: task.status_extra_info.color,
 						is_closed: task.status_extra_info.is_closed,
 					}
-				} as taskInterface
+				} as TaskInterface
 			}))
 	} catch (err) {
 		console.log(err)
