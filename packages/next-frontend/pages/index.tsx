@@ -9,6 +9,9 @@ import Waves from '../components/waves'
 import titleColor from '../public/images/HypeDAO-color.png'
 import titlePlain from '../public/images/HypeDAO-plain.png'
 import logo from '../public/images/HYPEDAO-logo-image.png'
+import { useEffect } from 'react'
+import dynamic from "next/dynamic"
+import useWindowDimensions from '../hooks/windowDimensions'
 
 
 interface HomeProps {
@@ -17,8 +20,18 @@ interface HomeProps {
 export default function Home({ bgIsLoaded }: HomeProps) {
 	const [wavesOn, setWavesOn] = useState(false)
 
+	const { height } = useWindowDimensions()
+
+	useEffect(() => {
+		//setting the inner height to determine mobiles true height inside all the controls
+		const vh = height * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+	}, [height])
+
 	const toggleWaves = () => setWavesOn(prev => !prev)
+
 	const wavesBgColor = "rgba(0, 0, 0, 0.05)"
+
 	return (
 		<Layout >
 			<main className={styles.homeContainer}>

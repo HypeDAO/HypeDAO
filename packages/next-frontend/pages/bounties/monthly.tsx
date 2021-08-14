@@ -14,10 +14,31 @@ export default function MonthlyBounties() {
 	const [error, setError] = useState("")
 
 	const sortTasks = useCallback((tasks: TaskInterface[]) => {
-		const newTasks = tasks.filter(task => task.status?.name === "New")
-		const readyTasks = tasks.filter(task => task.status?.name === "Ready")
-		const doneTasks = tasks.filter(task => task.status?.name === "Done")
-		return [...newTasks, ...readyTasks, ...doneTasks]
+		const newTasks: TaskInterface[] = []
+		const readyTasks: TaskInterface[] = []
+		const progressTasks: TaskInterface[] = [];
+		const testTasks: TaskInterface[] = []
+		const doneTasks: TaskInterface[] = []
+		tasks.forEach(task => {
+			switch (task.status?.name) {
+				case "New":
+					newTasks.push(task)
+					break;
+				case "Ready":
+					readyTasks.push(task)
+					break;
+				case "In progress":
+					progressTasks.push(task)
+					break;
+				case "Ready for test":
+					testTasks.push(task)
+					break;
+				case "Done":
+					doneTasks.push(task)
+					break;
+			}
+		})
+		return [...newTasks, ...readyTasks, ...progressTasks, ...testTasks, ...doneTasks]
 	}, [])
 
 	useEffect(() => {
@@ -79,7 +100,9 @@ function GridCell({ title, amount, isHeader, isClaimed, claimedText, status, lin
 	const getIcon = () => {
 		switch (status?.name) {
 			case "New": return <RadioButtonUncheckedIcon style={{ color: status?.color }} />;
-			case "Ready": return <MoreHorizIcon style={{ color: status?.color }} />;
+			case "Ready":
+			case "In progress":
+			case "Ready for test": return <MoreHorizIcon style={{ color: status?.color }} />;
 			case "Done": return <DoneOutlineIcon style={{ color: status?.color }} />
 		}
 	}

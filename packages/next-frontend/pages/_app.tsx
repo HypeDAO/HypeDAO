@@ -7,6 +7,7 @@ import Image from 'next/image'
 import starsImage from "../public/images/stars.webp"
 import MainNavigation from '../components/main-navigation'
 import Footer from '../components/footer'
+import useWindowDimensions from '../hooks/windowDimensions'
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [isLoaded, setIsLoaded] = useState(false);
