@@ -8,6 +8,8 @@ import { useState } from 'react'
 import Waves from '../components/waves'
 import titleColor from '../public/images/HypeDAO-color.png'
 import titlePlain from '../public/images/HypeDAO-plain.png'
+import logo from '../public/images/HYPEDAO-logo-image.png'
+
 
 interface HomeProps {
 	bgIsLoaded: boolean;
@@ -20,6 +22,7 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 	return (
 		<Layout >
 			<main className={styles.homeContainer}>
+
 				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl, { [styles.imageLoaded]: bgIsLoaded })} onClick={toggleWaves}>
 					<div className={classNames(styles.titleColor, { [styles.isActive]: wavesOn, [styles.imageLoaded]: bgIsLoaded })} >
 						<Image src={titleColor} alt="" />
@@ -27,6 +30,13 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 					<div className={classNames(styles.titlePlain, { [styles.isActive]: wavesOn })}>
 						<Image src={titlePlain} alt="HypeDAO" />
 					</div>
+					<div className={classNames(styles.logo, { [styles.isActive]: wavesOn })}>
+						<Image
+							src={logo}
+							alt=""
+						/>
+					</div>
+
 				</button>
 
 				<div className={classNames(styles.gridImageBg, { [styles.imageLoaded]: bgIsLoaded })}>

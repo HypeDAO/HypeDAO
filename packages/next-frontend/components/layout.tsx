@@ -22,14 +22,6 @@ export default function Layout({
 
 			{children}
 
-			{/* {!noFooter && (
-				<footer className={styles.footer}>
-					<p>footer stuff</p>
-					<Link href="/">
-						<a>HypeDAO</a>
-					</Link>
-				</footer>
-			)} */}
 		</div>
 	)
 }

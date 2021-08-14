@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import toggleIcon from '../public/images/menu-icon.webp'
 import styles from '../styles/components/main-navigation.module.css'
-import utilStyles from '../styles/utils.module.css'
 import classNames from "classnames";
 import HypeRegistrationButton from "./hype-registration-button";
 
@@ -12,7 +11,7 @@ export const PATHNAMES = {
 	HOME: "/",
 	ABOUT: "/about",
 	BOUNTIES: {
-		FOUNDATIONAL: "/bounties/foundation"
+		MONTHLY: "/bounties/monthly"
 	}
 }
 
@@ -62,8 +61,8 @@ export default function MainNavigation() {
 					<Link href={PATHNAMES.ABOUT}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.ABOUT })}>About</a>
 					</Link>
-					<Link href={PATHNAMES.BOUNTIES.FOUNDATIONAL}>
-						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.BOUNTIES.FOUNDATIONAL })}>Bounties</a>
+					<Link href={PATHNAMES.BOUNTIES.MONTHLY}>
+						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.BOUNTIES.MONTHLY })}>Bounties</a>
 					</Link>
 				</div>
 			</nav>

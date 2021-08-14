@@ -4,7 +4,7 @@ import styles from '../styles/components/hype-registration-button.module.css'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import classNames from "classnames"
-import { getHypeBalance, getWalletConnection, registerToken, walletSignIn, walletSignOut } from "../hooks/near"
+import { getHypeBalance, getIsRegistered, getWalletConnection, registerToken, walletSignIn, walletSignOut } from "../hooks/near"
 import { WalletConnection } from "near-api-js"
 import { useRouter } from "next/dist/client/router"
 import Modal from "./modal";
@@ -56,7 +56,8 @@ export default function HypeRegistrationButton() {
 		const getBalance = async () => {
 			if (!wallet) return
 			const balance = await getHypeBalance(wallet)
-			if (!balance) return;
+
+			if (!balance || !getIsRegistered(wallet)) return;
 			setHypeBalance(balance)
 			setIsRegistered(true)
 		}

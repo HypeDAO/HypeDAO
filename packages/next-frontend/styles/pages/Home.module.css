@@ -44,6 +44,23 @@
 	filter: brightness(0);
 	animation: none;
 }
+.logo {
+	position: absolute;
+	top: -3rem;
+	right: -6rem;
+	width: 12rem;
+	transform: rotateZ(25deg);
+	z-index: -1;
+	opacity: 0.6;
+	transition: 1.5s ease-in-out;
+}
+.logo.isActive {
+	opacity: 0.7;
+	margin-top: -8%;
+	margin-right: -6%;
+	transform: rotateZ(6deg);
+	/* animation: fly 10s ease-in-out 0s infinite alternate; */
+}
 
 .gridImageBg {
 	position: absolute;
@@ -84,6 +101,21 @@
 		filter: blur(2px);
 	}
 }
+
+/* @keyframes fly {
+	0% {
+		transform: rotateZ(25deg) translate(0rem, 0rem);
+	}
+	20% {
+		transform: rotateZ(25deg) translate(calc(var(--move-amount) * 5rem), calc(var(--move-amount) *-5rem)) rotateX(30deg);
+	}
+	70% {
+		transform: rotateZ(-30deg) translate(calc(var(--move-amount) * -50rem), calc(var(--move-amount) * -30rem));
+	}
+	100% {
+		transform:rotateZ(30deg) translate(calc(var(--move-amount) * -40rem), 0rem) rotateY(360deg);
+	}
+} */
 
 @keyframes wiggle {
 	0% {
@@ -144,12 +176,23 @@
 		--title-width: 28rem;
 		--move-amount: 0.4;
 	}
+	.logo {
+		top: -3.5rem;
+		right: -3rem;
+		width: 7rem;
+	}
 }
 
 @media only screen and (max-width: 480px) {
 	.homeTitle {
 		--title-width: 18rem;
 		--move-amount: 0.2;
+	}
+	.logo {
+		transform: rotateZ(0deg);
+		top: -2rem;
+		right: calc(50% - 3rem);
+		width: 6rem;
 	}
 }
 
