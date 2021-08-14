@@ -25,7 +25,7 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 	useEffect(() => {
 		//setting the inner height to determine mobiles true height inside all the controls
 		const vh = height * 0.01;
-		document.documentElement.style.setProperty('--vh', `${vh}px`);
+		// document.documentElement.style.setProperty('--vh', `${vh}px`);
 	}, [height])
 
 	const toggleWaves = () => setWavesOn(prev => !prev)
@@ -34,7 +34,7 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 
 	return (
 		<Layout >
-			<main className={styles.homeContainer}>
+			<main className={styles.homeContainer} style={{ height: `${height}px` }}>
 
 				<button className={classNames(styles.homeTitle, utilStyles.noStyle, utilStyles.titleXl, { [styles.imageLoaded]: bgIsLoaded })} onClick={toggleWaves}>
 					<div className={classNames(styles.titleColor, { [styles.isActive]: wavesOn, [styles.imageLoaded]: bgIsLoaded })} >
