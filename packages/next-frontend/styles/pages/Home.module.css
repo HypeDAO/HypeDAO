@@ -1,8 +1,8 @@
 .homeContainer {
 	/* Calc with padding is needed to fit within layout, cant use 100% because layout uses min-height */
-	height: calc(100vh - 12rem); /* fallback */
+	/* height: calc(100vh - 12rem); fallback */
 	/* setting the height with JS var --vh to determine true mobile window heights */
-	height: calc((var(--vh, 1vh) * 100) - (var(--nav-padding) * 2));
+	/* height: calc((var(--vh, 1vh) * 100) - (var(--nav-padding) * 2)); */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
