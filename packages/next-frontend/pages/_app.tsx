@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import styles from '../styles/components/layout.module.css'
 import type { AppProps } from 'next/app'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
 import starsImage from "../public/images/stars.webp"
@@ -11,6 +11,15 @@ import useWindowDimensions from '../hooks/windowDimensions'
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [isLoaded, setIsLoaded] = useState(false);
+
+	const { height } = useWindowDimensions()
+
+	useEffect(() => {
+		//using the inner height as "vh" in order to determine mobiles true height inside all the controls
+		const vh = height * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+	}, [height])
+
 	return (
 		<>
 			<MainNavigation />
