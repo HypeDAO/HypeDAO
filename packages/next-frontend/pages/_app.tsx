@@ -8,9 +8,11 @@ import starsImage from "../public/images/stars.webp"
 import MainNavigation from '../components/main-navigation'
 import Footer from '../components/footer'
 import useWindowDimensions from '../hooks/windowDimensions'
+import { AppContext, useAppState } from '../context/state';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [isLoaded, setIsLoaded] = useState(false);
+	const { state, stateModifier } = useAppState()
 
 	const { height } = useWindowDimensions()
 
@@ -20,8 +22,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 		document.documentElement.style.setProperty('--vh', `${vh}px`);
 	}, [height])
 
+	// Wrap components in a AppContext.Provider. This makes it possible to use the useAppContext() hook in child components.
 	return (
 		<>
+		<AppContext.Provider value={{ state, stateModifier }}>
 			<MainNavigation />
 			<Component
 				{...pageProps}
@@ -38,6 +42,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 				/>
 			</div>
 			<Footer />
+		</AppContext.Provider>
+			
 		</>
 	)
 }
