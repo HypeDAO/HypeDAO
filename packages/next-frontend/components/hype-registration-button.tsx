@@ -8,6 +8,7 @@ import { getHypeBalance, getIsRegistered, getWalletConnection, registerToken, wa
 import { WalletConnection } from "near-api-js"
 import { useRouter } from "next/dist/client/router"
 import Modal from "./modal";
+import { AppContext, useAppContext } from '../context/state';
 
 export default function HypeRegistrationButton() {
 	const [modalOpen, setModalOpen] = useState(false)
@@ -15,6 +16,7 @@ export default function HypeRegistrationButton() {
 	const [isRegistered, setIsRegistered] = useState(false)
 	const [wallet, setWallet] = useState<WalletConnection | null>(null)
 	const [hypeBalance, setHypeBalance] = useState<string | null>(null)
+	const { state, stateModifier } = useAppContext()
 
 	const router = useRouter()
 
@@ -46,6 +48,9 @@ export default function HypeRegistrationButton() {
 			const _wallet = await getWalletConnection()
 			if (!_wallet) return;
 			setWallet(_wallet)
+			// Set wallet on global state object, such that it can be
+			// used in other components.
+			stateModifier.setWallet(_wallet)
 		}
 		if (!wallet) {
 			connectWallet()
@@ -64,7 +69,7 @@ export default function HypeRegistrationButton() {
 		if (wallet?.isSignedIn()) {
 			getBalance()
 		}
-	}, [wallet])
+	}, [])
 
 	return (
 		<div className={styles.registerButtonContainer}>
