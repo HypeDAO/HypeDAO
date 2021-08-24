@@ -21,10 +21,26 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout account-cache branch
+        uses: actions/checkout@v2
+        with:
+          ref: account-cache
+          path: account-cache
+        
 
       - name: Updates and pushes account cache file.
-        run: ./scripts/update_account_cache.sh
+        run: |
+          cd $GITHUB_WORKSPACE
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          chmod u+x scripts/update_account_cache.sh
+          ./scripts/update_account_cache.sh
+
+      # cp -Rf $GITHUB_WORKSPACE /tmp/AHnxasD
+      # cp -Rf /tmp/AHnxasD $GITHUB_WORKSPACE/account-cache
 
       # Runs a set of commands using the runners shell
       # - name: Run a multi-line script
