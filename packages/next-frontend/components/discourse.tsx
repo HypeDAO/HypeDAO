@@ -13,27 +13,19 @@ export default function DiscoursePost({ postId }: DiscoursePostProps) {
   return (
     <GetPost
       id={postId}
-      base={"http://localhost:9000"}
-      requestOptions={(url, method, requestBody) => ({
-        headers: new Headers({'Origin': 'http://localhost:3000'}),
-      })}
+      base={"https://gov.near.org"}
     >
       {(data, states, actions, meta) => (
         <Card key={data?.topic_id}>
           <Box
-            position={"relative"}
-            display={"flex"}
-            flexDirection={"column"}
-            alignItems={"top"}
-            justifyContent={"center"}
-            minHeight={250}
+            style={{overflowWrap: "anywhere"}}
             color={"common.black"}
             textAlign={"center"}
             border={5}
           >
             <CardHeader avatar={<Avatar>{""}</Avatar>} title={data?.name} />
             <div>
-              <Typography variant={"h2"}>{data?.raw}</Typography>
+              <Typography>{data?.raw}</Typography>
             </div>
           </Box>
         </Card>

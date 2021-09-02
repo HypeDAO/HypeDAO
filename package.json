@@ -15,8 +15,5 @@
   "next:build": "yarn workspace next-frontend build"
  },
  "dependencies": {
-  "command-line-args": "^5.2.0",
-  "create-next-app": "^11.1.0",
-  "http-proxy": "^1.18.1"
  }
 }

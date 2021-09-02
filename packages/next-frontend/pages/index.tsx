@@ -9,8 +9,6 @@ import Waves from '../components/waves'
 import titleColor from '../public/images/HypeDAO-color.png'
 import titlePlain from '../public/images/HypeDAO-plain.png'
 import logo from '../public/images/HYPEDAO-logo-image.png'
-import DiscoursePost from '../components/discourse'
-import { Table } from '@material-ui/core'
 
 
 interface HomeProps {
@@ -52,20 +50,6 @@ export default function Home({ bgIsLoaded }: HomeProps) {
 						quality={100}
 					/>
 				</div>
-				<Table>
-					<tr>
-						<td><DiscoursePost postId="14215"/></td>
-					</tr>
-					<tr>
-						<td><DiscoursePost postId="14212"/></td>
-					</tr>
-					<tr>
-						<td><DiscoursePost postId="1999"/></td>
-					</tr>
-					<tr>
-						<td><DiscoursePost postId="2001"/></td>
-					</tr>
-				</Table>
 			</main>
 			{wavesOn ? <Waves color={wavesBgColor} /> : null}
 		</Layout>
