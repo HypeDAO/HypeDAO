@@ -3,29 +3,39 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
-import { GetPost } from "./discourse-client"; // this component is auto-generated from Discourse Open API spec
+import ReactMarkdown from 'react-markdown/react-markdown.min';
+import { GetPost, GetPostResponse } from "./discourse-client"; // this component is auto-generated from Discourse Open API spec
+
+const discourseServer = 'https://gov.near.org'
 
 interface DiscoursePostProps {
   postId: string;
 }
 
 export default function DiscoursePost({ postId }: DiscoursePostProps) {
-  return (
+    
+    const getAvatarUrl = (data: GetPostResponse | null): string => (
+        discourseServer + data?.avatar_template?.replace('{size}', '90')
+    )
+
+    return (
     <GetPost
       id={postId}
-      base={"https://gov.near.org"}
+      base={discourseServer}
     >
       {(data, states, actions, meta) => (
         <Card key={data?.topic_id}>
           <Box
             style={{overflowWrap: "anywhere"}}
             color={"common.black"}
-            textAlign={"center"}
             border={5}
+            padding={"20px"}
           >
-            <CardHeader avatar={<Avatar>{""}</Avatar>} title={data?.name} />
+            <CardHeader avatar={<Avatar src={getAvatarUrl(data)}/>} title={data?.name} />
             <div>
-              <Typography>{data?.raw}</Typography>
+              <Typography>
+                  <ReactMarkdown>{data?.raw || ''}</ReactMarkdown>
+              </Typography>
             </div>
           </Box>
         </Card>
