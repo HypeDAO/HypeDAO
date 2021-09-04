@@ -5,18 +5,35 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import classNames from "classnames"
 import { getHypeBalance, getIsRegistered, getWalletConnection, registerToken, walletSignIn, walletSignOut } from "../hooks/near"
-import { WalletConnection } from "near-api-js"
 import { useRouter } from "next/dist/client/router"
 import Modal from "./modal";
+import { ApplicationContext } from '../context/state';
+import { WalletConnection } from "near-api-js";
 
 export default function HypeRegistrationButton() {
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isConnected, setIsConnected] = useState(false)
 	const [isRegistered, setIsRegistered] = useState(false)
-	const [wallet, setWallet] = useState<WalletConnection | null>(null)
 	const [hypeBalance, setHypeBalance] = useState<string | null>(null)
+	const {state, dispatch} = React.useContext(ApplicationContext)
 
 	const router = useRouter()
+	async function handleWalletConnection() {
+		if (!state.wallet) return
+		walletSignIn(state.wallet) 
+	}
+
+	function handleHypeRegistration() {
+		if (!state.wallet?.isSignedIn()) return;
+		registerToken(state.wallet)
+	}
+
+	function signOut() {
+		if (!state.wallet?.isSignedIn()) return;
+		router.replace(router.pathname)
+		setIsConnected(false)
+		walletSignOut(state.wallet)
+	}
 
 	function openModal() {
 		setModalOpen(true)
@@ -24,36 +41,19 @@ export default function HypeRegistrationButton() {
 	function closeModal() {
 		setModalOpen(false)
 	}
-	async function handleWalletConnection() {
-		if (!wallet) return
-		walletSignIn(wallet)
 	}
 
-	function handleHypeRegistration() {
-		if (!wallet?.isSignedIn()) return;
-		registerToken(wallet)
 	}
 
-	function signOut() {
-		if (!wallet?.isSignedIn()) return;
-		router.replace(router.pathname)
-		setIsConnected(false)
-		walletSignOut(wallet)
 	}
 
 	useEffect(() => {
-		const connectWallet = async () => {
-			const _wallet = await getWalletConnection()
-			if (!_wallet) return;
-			setWallet(_wallet)
-		}
-		if (!wallet) {
-			connectWallet()
 		}
 		//Sets isConnected true if wallet is signed in, false if not
-		setIsConnected(!!wallet?.isSignedIn())
+		setIsConnected(!!state.wallet?.isSignedIn())
 
 		const getBalance = async () => {
+			const wallet = state.wallet
 			if (!wallet) return
 			const balance = await getHypeBalance(wallet)
 
@@ -61,10 +61,23 @@ export default function HypeRegistrationButton() {
 			setHypeBalance(balance)
 			setIsRegistered(true)
 		}
-		if (wallet?.isSignedIn()) {
+		if (state.wallet?.isSignedIn()) {
 			getBalance()
 		}
-	}, [wallet])
+	}, [state.wallet])
+
+	useEffect(() => {
+		const connectWallet = async (dispatch: any) => {
+			const _wallet = await getWalletConnection()
+			if (!_wallet) return;
+			// Set wallet on global state object, such that it can be
+			// used in other components.
+			dispatch({ type: "WALLET_CONNECTED", payload: _wallet })
+		}
+		if (!state.wallet) {
+			connectWallet(dispatch)
+		}
+	})
 
 	return (
 		<div className={styles.registerButtonContainer}>

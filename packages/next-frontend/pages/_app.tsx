@@ -1,13 +1,16 @@
 import '../styles/globals.css'
 import styles from '../styles/components/layout.module.css'
 import type { AppProps } from 'next/app'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
 import starsImage from "../public/images/stars.webp"
 import MainNavigation from '../components/main-navigation'
 import Footer from '../components/footer'
 import useWindowDimensions from '../hooks/windowDimensions'
+import { WalletConnection } from "near-api-js"
+import { getWalletConnection } from '../hooks/near'
+import { StateProvider } from '../context/state';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -22,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<>
+		<StateProvider>
 			<MainNavigation />
 			<Component
 				{...pageProps}
@@ -38,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				/>
 			</div>
 			<Footer />
+		</StateProvider>
 		</>
 	)
 }
