@@ -1,0 +1,37 @@
+# This workflow fetches, aggregates and stores on-chain data in a
+# JSON file cache.
+name: Cache
+
+# Run workflow every 30 minutes. The definition of `workflow_dispatch` allows 
+# to run this workflow manually from the Actions tab.
+on:
+  schedule:
+    - cron:  '1/30 * * * *'
+
+  workflow_dispatch:
+
+# Checkout the `main` as well as the `cache` branch from repository,
+# build and `dao-stats`, updates aggregated data and stores it in JSON
+# file cache on the `cache` branch.
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout cache branch
+        uses: actions/checkout@v2
+        with:
+          ref: cache
+          path: cache
+
+      - name: Install dao-stats
+        run: |
+          cd $GITHUB_WORKSPACE
+          ./scripts/tools/dao-stats/install.sh
+      
+      - name: Updates and pushes cache file.
+        run: |
+          cd $GITHUB_WORKSPACE
+          ./scripts/cache/update.sh

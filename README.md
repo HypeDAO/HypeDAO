@@ -1,8 +1,12 @@
 # HypeDAO
 
 ## Welcome to the HypeDAO monorepo! 
+This repository contains the infrastructure needed to run HypeDAO and is meant to become a template project that others can use to spin up their own DAOs! Its' organized in yarn workspaces and currently consists of the following packages:
 
-For right now we only have our Next.js Frontend running, but eventually this yarn workspaces repo will contain other packages like smart contracts and a server.
+- [`next-frontend`](#getting-started-with-the-nextjs-frontend)
+- [`dao-stats`](#how-data-caching-with-dao-stats-works)
+
+Eventually, this repository will contain other packages in the future like smart contracts and a server.
 
 If you have any questions the best way to reach us is our [Telegram](https://t.me/hypedao).
 
@@ -20,6 +24,7 @@ yarn install
 ```
 
 ## Getting Started With the Next.js Frontend
+[Next.js](https://nextjs.org) frontend, running our website at [hypedao.xyz](www.hypedao.xyz). 
 
 Run this command from the root folder:
 ```bash
@@ -33,6 +38,25 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ```
 yarn add <name>
 ```
+
+## How data caching with `dao-stats` works
+The frontend contains components which rely on on-chain data that cannot be queried in realtime, yet. Therefor we built `dao-stats`, a tool available via CLI that acts as a pseudo-indexer, fetching, indexing / aggregating and storing cached data in human-readable format.
+
+The mechanism we set up contains the following components:
+
+- a JSON file stored on a separate branch called [`cache`](https://github.com/HypeDAO/HypeDAO/tree/cache)
+- a set of scripts (`scripts/dao-stats/` and `scripts/cache/`) that build `dao-stats` and call it to initialize and update that JSON file
+- a Github action that makes use of those scripts to automate everything (configured in `.github/workflows/cache.yml`)
+
+### Steps to set up a file cache
+In case you want reproduce and or customize the cache update, please make sure to run these steps:
+
+1. Create empty branch, e.g. `cache`
+2. Checkout that branch into a subdirectory
+3. Build `dao-stats` by calling `scripts/tools/dao-stats/init.sh`
+4. Customize arguments passed to `dao-stats` in `scripts/cache/init.sh` and run `/scripts/cache/init.sh`
+5. Copy the newly created JSON file cache `dao-stats-*` to the folder containing the `cache` branch, commit and push changes
+6. Customize arguments passed to `dao-stats` in `scripts/cache/update.sh`
 
 ## General Contribution Steps
 After getting your environment all set up make sure to branch off of main. 
