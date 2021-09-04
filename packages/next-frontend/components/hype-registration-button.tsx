@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import utilStyles from '../styles/utils.module.css'
 import styles from '../styles/components/hype-registration-button.module.css'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import classNames from "classnames"
-import { getHypeBalance, getIsRegistered, getWalletConnection, registerToken, walletSignIn, walletSignOut } from "../hooks/near"
+import { requestHypeBalance, getIsRegistered, getWalletConnection, registerToken, walletSignIn, walletSignOut } from "../hooks/near"
 import { useRouter } from "next/dist/client/router"
 import Modal from "./modal";
+import Menu from "./hype-menu";
 import { ApplicationContext } from '../context/state';
-import { WalletConnection } from "near-api-js";
 
 export default function HypeRegistrationButton() {
 	const [modalOpen, setModalOpen] = useState(false)
+	const [hypeMenuOpen, setHypeMenuOpen] = useState(false)
 	const [isConnected, setIsConnected] = useState(false)
 	const [isRegistered, setIsRegistered] = useState(false)
-	const [hypeBalance, setHypeBalance] = useState<string | null>(null)
+	const [hypeBalance, setHypeBalance] = useState(0)
 	const {state, dispatch} = React.useContext(ApplicationContext)
 
 	const router = useRouter()
+	const menuRef = useRef(null)
+
+
 	async function handleWalletConnection() {
 		if (!state.wallet) return
 		walletSignIn(state.wallet) 
@@ -38,27 +42,44 @@ export default function HypeRegistrationButton() {
 	function openModal() {
 		setModalOpen(true)
 	}
+
 	function closeModal() {
 		setModalOpen(false)
 	}
+
+	function toggleHypeMenu() {
+		setHypeMenuOpen(!hypeMenuOpen)
 	}
 
+	function closeHypeMenu() {
+		setHypeMenuOpen(false)
 	}
 
+	const handleClose = (event: any) => {
+		for (let element of event.path) {
+			if (menuRef.current === element) return;
+		}
+		closeHypeMenu()
 	}
 
 	useEffect(() => {
+		if (hypeMenuOpen) {
+			window.addEventListener('click', handleClose);
 		}
+		return () => window.removeEventListener('click', handleClose);
+	}, [hypeMenuOpen])
+
+	useEffect(() => {
 		//Sets isConnected true if wallet is signed in, false if not
 		setIsConnected(!!state.wallet?.isSignedIn())
 
 		const getBalance = async () => {
 			const wallet = state.wallet
 			if (!wallet) return
-			const balance = await getHypeBalance(wallet)
-
-			if (!balance || !getIsRegistered(wallet)) return;
-			setHypeBalance(balance)
+			const account = wallet.account();
+			const accountInfo = await requestHypeBalance(wallet, account.accountId)
+			if (!accountInfo || !getIsRegistered(wallet)) return;
+			setHypeBalance(accountInfo.balance)
 			setIsRegistered(true)
 		}
 		if (state.wallet?.isSignedIn()) {
@@ -97,9 +118,12 @@ export default function HypeRegistrationButton() {
 					Register for $HYPE
 				</button>
 			)}
-			{isConnected && isRegistered && (
-				//I'm thinking there will be our logo here 
-				<h3 className={classNames(styles.balance, utilStyles.primaryButton)}>$HYPE: {hypeBalance}</h3>
+			{isConnected && isRegistered && ( 
+				<button className={classNames(utilStyles.primaryButton, styles.accountButton)}
+					onClick={toggleHypeMenu}
+				>
+					{state.wallet?.account().accountId}
+				</button>
 			)}
 
 			{(!isConnected || !isRegistered) && (
@@ -114,6 +138,10 @@ export default function HypeRegistrationButton() {
 				</button>
 			)}
 
+			<Menu 
+				balance={hypeBalance}
+				isOpen={hypeMenuOpen}
+			/>
 
 			<Modal
 				isOpen={modalOpen}
