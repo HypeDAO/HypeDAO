@@ -13,5 +13,11 @@
  "scripts": {
   "next:dev": "yarn workspace next-frontend dev",
   "next:build": "yarn workspace next-frontend build"
+ },
+ "dependencies": {
+  "next": "^11.1.0",
+  "node-fetch": "^2.6.1",
+  "react": "^17.0.2",
+  "react-dom": "^17.0.2"
  }
 }
