@@ -12,6 +12,8 @@
  ],
  "scripts": {
   "next:dev": "yarn workspace next-frontend dev",
-  "next:build": "yarn workspace next-frontend build"
+  "next:build": "yarn workspace next-frontend build",
+	"api:dev": "yarn workspace ts-api dev",
+	"api:build": "yarn workspace ts-api build"
  }
 }
