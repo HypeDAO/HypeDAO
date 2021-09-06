@@ -10,7 +10,7 @@ import HypeRegistrationButton from "./hype-registration-button";
 export const PATHNAMES = {
 	HOME: "/",
 	ABOUT: "/about",
-	POSTS_DEMO: "/posts",
+	POSTS: "/posts",
 	BOUNTIES: {
 		MONTHLY: "/bounties/monthly"
 	}
@@ -65,8 +65,8 @@ export default function MainNavigation() {
 					<Link href={PATHNAMES.BOUNTIES.MONTHLY}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.BOUNTIES.MONTHLY })}>Bounties</a>
 					</Link>
-					<Link href={PATHNAMES.POSTS_DEMO}>
-						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.POSTS_DEMO })}>Posts Demo</a>
+					<Link href={PATHNAMES.POSTS}>
+						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.POSTS })}>Posts</a>
 					</Link>
 				</div>
 			</nav>
