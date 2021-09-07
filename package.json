@@ -12,7 +12,10 @@
  ],
  "scripts": {
   "next:dev": "yarn workspace next-frontend dev",
-  "next:build": "yarn workspace next-frontend build"
+  "next:build": "yarn workspace next-frontend build",
+  "next:test": "yarn workspace next-frontend jest",
+  "sandbox:build": "./scripts/tools/sandbox/build.sh",
+  "sandbox:run": "./scripts/tools/sandbox/run.sh"
  },
  "dependencies": {
   "next": "^11.1.0",

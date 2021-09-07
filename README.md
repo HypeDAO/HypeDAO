@@ -15,12 +15,18 @@ Required: [Node](https://nodejs.org/dist/latest-v12.x/) plus [Yarn](https://clas
 
 Clone the repo:
 ```
-git clone https://github.com/HypeDAO/HypeDAO.git
+git clone --recursive https://github.com/HypeDAO/HypeDAO.git
 ```
 
 Install dependencies:
 ```
 yarn install
+```
+
+### Testing
+In order to run end-to-end tests in a local sandbox, you'll need to build nearcore:
+```
+yarn sandbox:build
 ```
 
 ## Getting Started With the Next.js Frontend
@@ -37,6 +43,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 **Note:** To add libraries/dependencies you must cd into the next-frontend directory and then use the command:
 ```
 yarn add <name>
+```
+
+### Testing
+In order to spin up a nearcore sandbox using `near-sandbox`, run
+```
+yarn sandbox:run
+```
+
+In another terminal, run the actual tests
+```
+yarn next:test
 ```
 
 ## How data caching with `dao-stats` works
