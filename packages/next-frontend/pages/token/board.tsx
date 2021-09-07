@@ -41,7 +41,10 @@ export default function HypeBoard() {
 									balance: value.balance
 								}
 							})
-							let sortedBalances = balances.sort(compare)
+							let nonZeroBalances = balances.filter(hypeBalance => {
+								return hypeBalance.balance > 0
+							})
+							let sortedBalances = nonZeroBalances.sort(compare)
 							setBalances(sortedBalances)
 						});
 					}
