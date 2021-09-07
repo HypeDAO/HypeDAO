@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
@@ -25,10 +26,14 @@
     "victor": "^1.1.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
     "@types/big.js": "^6.1.1",
     "@types/react": "17.0.14",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
+    "jest": "^27.1.0",
+    "ts-jest": "^27.0.5",
     "typescript": "4.3.5"
   }
 }
