@@ -1,0 +1,30 @@
+export default interface GetPostResponse {
+    id?: number;
+    name?: any;
+    username?: string;
+    avatar_template?: string;
+    created_at?: string;
+    cooked?: string;
+    post_number?: number;
+    post_type?: number;
+    updated_at?: string;
+    reply_count?: number;
+    reply_to_post_number?: any;
+    quote_count?: number;
+    incoming_link_count?: number;
+    reads?: number;
+    readers_count?: number;
+    score?: number;
+    topic_id?: number;
+    topic_slug?: string;
+    display_username?: any;
+    primary_group_name?: any;
+    flair_name?: any;
+    flair_url?: any;
+    flair_bg_color?: any;
+    flair_color?: any;
+    version?: number;
+    user_title?: any;
+    raw?: string;
+    user_id?: number;
+}
