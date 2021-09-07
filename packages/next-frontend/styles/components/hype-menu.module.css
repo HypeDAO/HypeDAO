@@ -1,0 +1,41 @@
+.hypeMenu {
+	opacity: 0;
+	position: absolute;
+	top: -70px;
+	padding: 0;
+	justify-content: space-between;
+	align-items: center;
+	z-index: -1;
+	background: linear-gradient(315deg, var(--main-gradient));
+	border-radius: 1rem;
+	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+	transition: 0.3s ease-in-out;
+	list-style-type: none;
+}
+.hypeMenu.isOpen {
+	z-index: 9;
+	opacity: 1;
+	top: 50px
+}
+.hypeMenu li {
+	margin: 1rem 0 1rem 0;
+}
+.hypeMenu li.divider {
+	padding-bottom: 0.8rem;
+	border-bottom: 1px solid white;
+}
+.hypeMenu li div.link {
+	text-align: left;
+}
+.link {
+	position: relative;
+	margin-left: 1.5rem;
+	margin-right: 1.5rem;
+	font-size: 1rem;
+	font-family: var(--heading-font);
+	color: var(--body-text-color);
+	text-align: center;
+}
+.linkSmall {
+	font-size: 1.0rem;
+}

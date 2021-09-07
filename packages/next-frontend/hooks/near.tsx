@@ -8,6 +8,10 @@ const StorageDeposit = Big(125).mul(Big(10).pow(19));
 const TGas = Big(10).pow(12);
 const BoatOfGas = Big(200).mul(TGas);
 
+export interface HypeBalanceInterface {
+	account: string;
+	balance: number;
+}
 
 export async function getWalletConnection() {
 	const nearConfig = {
@@ -39,20 +43,45 @@ export function walletSignOut(wallet: nearAPI.WalletConnection) {
 	wallet.signOut()
 }
 
-export async function getHypeBalance(wallet: nearAPI.WalletConnection) {
-	const id = wallet.account().accountId
+export function requestHypeBalance(wallet: nearAPI.WalletConnection, account: string): Promise<HypeBalanceInterface> | null {
 	const tokenContract = new nearAPI.Contract(
 		wallet.account(),
 		ContractName,
 		{
 			changeMethods: ['storage_deposit'],
-			viewMethods: ["ft_balance_of"], // view methods do not change state but usually return a value
+			viewMethods: ["ft_balance_of"],
 		}
 	);
-	// @ts-ignore: ft_balance_of doesn't exist on generic contract but does on the one we just called
-	const bigBalance = await tokenContract.ft_balance_of({ account_id: id })
+	
+	return new Promise(resolve => {
+		// @ts-ignore: ft_balance_of doesn't exist on generic contract but does on the one we just called
+		tokenContract.ft_balance_of({ account_id: account })
+			.then((balance: any) => {
+				resolve({
+					account: account,
+					balance: Big(balance).div(Big(10).pow(tokenSupplyDecimals)).toNumber()
+				})
+			})
+	})
+}
 
-	return Big(bigBalance).div(Big(10).pow(tokenSupplyDecimals)).toFixed(0)
+export function getActiveAccounts(): Promise<string[]> | null {
+	const url = "https://raw.githubusercontent.com/erak/HypeDAO/cache/dao-stats-hype.tkn.near.json"
+	const params = {
+		method: "GET",
+	}
+
+	try {
+		let accounts = fetch(url, params)
+			.then(response => response.json())
+			.then(data => data.token.activeAccounts.map((account: any) => {
+				return account
+			}))
+		return accounts
+	} catch (err) {
+		console.log(err)
+		return null
+	}
 }
 
 export function getIsRegistered(wallet: nearAPI.WalletConnection) {
@@ -80,3 +109,4 @@ export async function registerToken(wallet: nearAPI.WalletConnection) {
 		console.log(error)
 	}
 }
+
