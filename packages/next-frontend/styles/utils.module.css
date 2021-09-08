@@ -29,6 +29,13 @@
 	box-shadow: inset 0 0 4rem 0.5rem rgba(0, 0, 0, 0.8);
 }
 
+.scrimLight {
+	background: linear-gradient(rgba(49, 49, 49, 0.2), rgba(17, 17, 17, 0.2));
+	padding: 3rem;
+	border-radius: 1rem;
+	box-shadow: inset 0 0 4rem 0.5rem rgba(0, 0, 0, 0.8);
+}
+
 .primaryButton, .secondaryButton {
 	padding: 1rem 1.5rem;
 
@@ -50,6 +57,9 @@
 .primaryButton:active, .secondaryButton:active {
 	box-shadow: inset 2px 1px 5px 1px rgba(73, 73, 73, 0.5);
 }
+.primaryButton:disabled, .secondaryButton:disabled {
+	filter: grayscale(1.0);
+}
 .primaryButton {
 	background: linear-gradient(315deg, var(--main-gradient));
 	box-shadow: inset 2px 1px 5px 1px rgba(255, 255, 255, 0.5);
@@ -58,7 +68,6 @@
 	background: linear-gradient(315deg, rgb(60, 60, 60), rgb(80, 80, 80));
 	box-shadow: inset 2px 1px 5px 1px rgba(167, 167, 167, 0.2);
 }
-
 .infoIcon {
 	position: absolute;
 	top: -0.5rem;
@@ -83,13 +92,19 @@
 	border: none;
 	color: inherit;
 }
+.titleLabel {
+	margin-top: 1.6rem;
+	margin-bottom: 0rem;
+}
+.formLink {
+	margin-top: 1rem;
+}
 .centerContent {
 	display: flex;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
 }
-
 .infoText {
 	text-align: center;
 	font-style: italic;
@@ -99,6 +114,29 @@
 	color: rgb(255, 74, 113);
 }
 
+.textinput {
+	width: 100%;
+	font-size: 2rem;
+	padding: 1rem;
+    background-color: transparent;
+    border: 2px solid white;
+	border-radius: 1rem;
+    color: white;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.textinput::-webkit-inner-spin-button, 
+.textinput::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+	-moz-appearance: textfield;
+    margin: 0; 
+}
+.textinput:focus {
+	outline: none;
+}
+.inputInfo {
+	margin: 0;
+}
 
 @media only screen and (max-width: 480px) {
 	.titleXl {
