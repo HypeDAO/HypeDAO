@@ -4,9 +4,11 @@ import * as nearAPI from 'near-api-js';
 export const ContractName = "hype.tkn.near"
 export const TokenSymbol = "HYPE"
 const tokenSupplyDecimals = 18
+const nearSupplyDecimals = 24
 const StorageDeposit = Big(125).mul(Big(10).pow(19));
 const TGas = Big(10).pow(12);
 const BoatOfGas = Big(200).mul(TGas);
+const AccountValidator = /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/;
 
 export interface HypeBalanceInterface {
 	account: string;
@@ -43,7 +45,16 @@ export function walletSignOut(wallet: nearAPI.WalletConnection) {
 	wallet.signOut()
 }
 
-export function requestHypeBalance(wallet: nearAPI.WalletConnection, account: string): Promise<HypeBalanceInterface> | null {
+export function requestBalance(wallet: nearAPI.WalletConnection): Promise<number> {
+	return new Promise(resolve => {
+		wallet.account().getAccountBalance()
+			.then(accountBalance => {
+				resolve(Big(accountBalance.available).div(Big(10).pow(nearSupplyDecimals)).toNumber())
+			})
+	})
+}
+
+export function requestHypeBalance(wallet: nearAPI.WalletConnection, account: string): Promise<HypeBalanceInterface | null> {
 	const tokenContract = new nearAPI.Contract(
 		wallet.account(),
 		ContractName,
@@ -81,6 +92,25 @@ export function getActiveAccounts(): Promise<string[]> | null {
 	} catch (err) {
 		console.log(err)
 		return null
+	}
+}
+
+function getAccount(wallet: nearAPI.WalletConnection, accountId: string) {
+	return new nearAPI.Account(wallet.account().connection, accountId);
+}
+
+function isLegitAccountId(accountId: string) {
+	return AccountValidator.test(accountId);
+}
+
+export async function checkAccountAvailable(wallet: nearAPI.WalletConnection, accountId: string) {
+	if (!isLegitAccountId(accountId)) {
+		throw new Error('Invalid username.');
+	}
+	if (accountId !== wallet.account().accountId) {
+		return await (await getAccount(wallet, accountId)).state();
+	} else {
+		throw new Error('You are logged into account ' + accountId + ' .');
 	}
 }
 
