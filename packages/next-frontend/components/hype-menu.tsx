@@ -12,7 +12,7 @@ export default function HypeMenu({ balance, isOpen }: HypeMenuProps) {
 		<ul className={classNames({ [styles.isOpen]: isOpen }, styles.hypeMenu)}>
 			<li className={styles.divider}> 
 				<div className={styles.link}>
-					$HYPE: {balance}
+					$HYPE: {balance.toFixed(2)}
 				</div>
 			</li>
 			<li> 
@@ -20,11 +20,11 @@ export default function HypeMenu({ balance, isOpen }: HypeMenuProps) {
 					<a className={styles.link}>Leaderboard</a>
 				</Link>
 			</li>
-			{/* <li>
+			<li>
 				<Link href={'/token/send'}> 
 					<a className={styles.link}>Send</a>
 				</Link>
-			</li> */}
+			</li>
 			
 		</ul>
 	)

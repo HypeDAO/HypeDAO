@@ -6,6 +6,7 @@ export const TokenSymbol = "HYPE"
 const tokenSupplyDecimals = 18
 const nearSupplyDecimals = 24
 const StorageDeposit = Big(125).mul(Big(10).pow(19));
+const TokenTransfer = Big(1);
 const TGas = Big(10).pow(12);
 const BoatOfGas = Big(200).mul(TGas);
 const AccountValidator = /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/;
@@ -34,6 +35,12 @@ export async function getWalletConnection() {
 	}
 }
 
+export function getProvider(network: string): nearAPI.providers.JsonRpcProvider {
+	return new nearAPI.providers.JsonRpcProvider(
+		"https://rpc." + network + ".near.org"
+	);
+}
+
 export function walletSignIn(wallet: nearAPI.WalletConnection) {
 	wallet.requestSignIn(
 		ContractName,
@@ -43,6 +50,30 @@ export function walletSignIn(wallet: nearAPI.WalletConnection) {
 
 export function walletSignOut(wallet: nearAPI.WalletConnection) {
 	wallet.signOut()
+}
+
+export function sendHype(wallet: nearAPI.WalletConnection,
+	receiver: string, amount: number): Promise<void> {
+
+	const tokenContract = new nearAPI.Contract(
+		wallet.account(),
+		getContractName(wallet._networkId),
+		{
+			changeMethods: ['ft_transfer'],
+			viewMethods: ["ft_balance_of"],
+		}
+	);
+
+	return new Promise(resolve => {
+		// @ts-ignore: ft_balance_of doesn't exist on generic contract but does on the one we just called
+		tokenContract.ft_transfer({
+			receiver_id: receiver,
+			amount: Big(amount).mul(Big(10).pow(tokenSupplyDecimals)).toNumber().toString()
+		}, BoatOfGas.toFixed(0), TokenTransfer.toFixed(0))
+			.then(() => {
+				resolve()
+			})
+	})
 }
 
 export function requestBalance(wallet: nearAPI.WalletConnection): Promise<number> {
@@ -74,6 +105,11 @@ export function requestHypeBalance(wallet: nearAPI.WalletConnection, account: st
 				})
 			})
 	})
+}
+
+export async function getTransactionState(wallet: nearAPI.WalletConnection, txHash: string) {
+	const provider = getProvider(wallet._networkId)
+	return await provider.txStatus(txHash, wallet.account().accountId);
 }
 
 export function getActiveAccounts(): Promise<string[]> | null {

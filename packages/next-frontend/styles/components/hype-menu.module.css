@@ -11,6 +11,7 @@
 	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
 	transition: 0.3s ease-in-out;
 	list-style-type: none;
+	width: 120%;
 }
 .hypeMenu.isOpen {
 	z-index: 9;
