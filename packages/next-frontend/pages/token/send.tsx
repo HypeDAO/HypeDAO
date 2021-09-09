@@ -3,7 +3,7 @@ import Layout from "../../components/layout";
 import utilStyles from '../../styles/utils.module.css'
 import formStyles from '../../styles/components/form.module.css'
 import styles from '../../styles/components/token-send.module.css'
-import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -11,7 +11,6 @@ import { FormInput, Label, FormattedLabel, ActiveButton } from "../../components
 
 import { getTransactionState, sendHype, requestBalance, requestHypeBalance, checkAccountAvailable } from '../../hooks/near'
 import { ApplicationContext } from '../../context/state';
-import { AccountBalance } from "@material-ui/icons";
 
 export default function SendToken() {
     const [step, setStep] = useState(0)
@@ -31,7 +30,7 @@ export default function SendToken() {
     const handleAmountChange = (e: any) => {
         setAmount(e.target.value);
 
-        if (!state.wallet) return
+        if (!state.wallet || !state.wallet?.isSignedIn()) return
         requestHypeBalance(state.wallet, state.wallet.account().accountId)
             .then(hypeBalance => {
                 if (hypeBalance) {
@@ -141,10 +140,10 @@ export default function SendToken() {
         }
     }, [state.wallet])
 
-	return (
-		<Layout>
-			<main>
-            <h1 className={utilStyles.title}>Send</h1>
+    return (
+        <Layout>
+            <main>
+                <h1 className={utilStyles.title}>Send</h1>
                 {step == 0 && (
                     <div className={classNames(styles.form)}>
                         <ul>
@@ -184,11 +183,11 @@ export default function SendToken() {
                         <ul>
                             <li>
                                 <button
-                                    className={classNames(utilStyles.noStyle, utilStyles.title)}
+                                    className={classNames(utilStyles.noStyle, utilStyles.title, styles.back)}
                                     onClick={back}>
                                     &#x2190;
                                 </button>
-                                <p className={classNames(styles.right, utilStyles.titleSm, utilStyles.titleLabel)}>
+                                <p className={classNames(utilStyles.centerContent, utilStyles.titleSm, utilStyles.titleLabel)}>
                                     {amount} HYPE
                                 </p>
                             </li>
@@ -212,8 +211,6 @@ export default function SendToken() {
                 )}
                 {step == 2 && (
                     <div className={classNames(styles.form)}>
-                        {/* <h1 className={classNames(utilStyles.titleSm, utilStyles.centerContent)}>{amount} Hype</h1> */}
-                        <h1 className={classNames(utilStyles.titleSm, utilStyles.centerContent)}>{amount} Hype</h1>
                         <ul>
                             <li>
                                 <button
