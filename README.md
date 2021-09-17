@@ -4,6 +4,7 @@
 This repository contains the infrastructure needed to run HypeDAO and is meant to become a template project that others can use to spin up their own DAOs! Its' organized in yarn workspaces and currently consists of the following packages:
 
 - [`next-frontend`](#getting-started-with-the-nextjs-frontend)
+- [`ft-contract`](#running-on-testnet)
 - [`dao-stats`](#how-data-caching-with-dao-stats-works)
 
 Eventually, this repository will contain other packages in the future like smart contracts and a server.
@@ -37,6 +38,45 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 **Note:** To add libraries/dependencies you must cd into the next-frontend directory and then use the command:
 ```
 yarn add <name>
+```
+
+### Testing
+
+The frontend is setup such that it can use either Mainnet or Testnet. Please follow the instructions on [how to run on Testnet](#running-on-testnet) and replace the dev account the token contract was deployed at in `next.config.js`:
+```
+const testnetConfig = {
+	reactStrictMode: true,
+	webpack,
+	env: {
+		network: 'testnet',
+		tokenContract: '<your-dev-account-here>'
+	}
+}
+```
+
+## Running on Testnet
+A lot of the websites features are centered around a social token. In order to test the website on Testnet, the social token needs to be deployed on a dev account. This tokens specification follows NEP-141 and is implemented in the package `ft-contract`.
+
+### Deploy contracts
+The token contract can be deployed and initialized using a convenience script, which defines a basic setup:
+```
+./scripts/tools/testnet/deploy.sh
+```
+
+### Fund user's testnet account
+To be able to test features connected to the social token, you might to fund your account:
+```
+./scripts/tools/testnet/fund_account.sh user-account.testnet
+```
+You can check your account's balance after by calling
+```
+./scripts/tools/testnet/check.sh user-account.testnet
+```
+
+### Cleanup
+You can delete your account and the deployed contract with it, by calling:
+```
+./scripts/tools/testnet/clean.sh
 ```
 
 ## How data caching with `dao-stats` works
