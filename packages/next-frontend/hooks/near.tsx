@@ -1,7 +1,6 @@
 import Big from 'big.js';
 import * as nearAPI from 'near-api-js';
 
-export const ContractName = "hype.tkn.near"
 export const TokenSymbol = "HYPE"
 const tokenSupplyDecimals = 18
 const nearSupplyDecimals = 24
@@ -16,20 +15,20 @@ export interface HypeBalanceInterface {
 	balance: number;
 }
 
-export async function getWalletConnection() {
+export async function getWalletConnection(network: string) {
 	const nearConfig = {
-		networkId: "mainnet",
-		nodeUrl: "https://rpc.mainnet.near.org",
-		walletUrl: "https://wallet.mainnet.near.org",
-		helperUrl: "https://helper.mainnet.near.org",
-		explorerUrl: "https://explorer.mainnet.near.org",
+		networkId: network,
+		nodeUrl: "https://rpc." + network + ".near.org",
+		walletUrl: "https://wallet." + network + ".near.org",
+		helperUrl: "https://helper." + network + ".near.org",
+		explorerUrl: "https://explorer." + network + ".near.org",
 		keyStore: new nearAPI.keyStores.BrowserLocalStorageKeyStore(),
-		contractName: ContractName,
+		contractName: getContractName(network),
 	};
 
 	try {
 		const near = await nearAPI.connect(nearConfig)
-		return new nearAPI.WalletConnection(near, ContractName);
+		return new nearAPI.WalletConnection(near, getContractName(network));
 	} catch (error) {
 		console.log(error)
 	}
@@ -43,7 +42,7 @@ export function getProvider(network: string): nearAPI.providers.JsonRpcProvider 
 
 export function walletSignIn(wallet: nearAPI.WalletConnection) {
 	wallet.requestSignIn(
-		ContractName,
+		getContractName(wallet._networkId),
 		"HypeDAO",
 	);
 };
@@ -88,7 +87,7 @@ export function requestBalance(wallet: nearAPI.WalletConnection): Promise<number
 export function requestHypeBalance(wallet: nearAPI.WalletConnection, account: string): Promise<HypeBalanceInterface | null> {
 	const tokenContract = new nearAPI.Contract(
 		wallet.account(),
-		ContractName,
+		getContractName(wallet._networkId),
 		{
 			changeMethods: ['storage_deposit'],
 			viewMethods: ["ft_balance_of"],
@@ -126,9 +125,14 @@ export function getActiveAccounts(): Promise<string[]> | null {
 			}))
 		return accounts
 	} catch (err) {
-		console.log(err)
 		return null
 	}
+}
+
+function getContractName(network: string): string {
+	if (process.env.tokenContract)
+		return process.env.tokenContract
+	return 'Undefined'
 }
 
 function getAccount(wallet: nearAPI.WalletConnection, accountId: string) {
@@ -152,7 +156,8 @@ export async function checkAccountAvailable(wallet: nearAPI.WalletConnection, ac
 
 export function getIsRegistered(wallet: nearAPI.WalletConnection) {
 	//This may be redundant, more research into registering/whitelisting accounts needs to be done
-	return wallet._authDataKey === "hype.tkn.near_wallet_auth_key"
+	const key = getContractName(wallet._networkId) + "_wallet_auth_key"
+	return wallet._authDataKey === key
 }
 
 
@@ -160,7 +165,7 @@ export function getIsRegistered(wallet: nearAPI.WalletConnection) {
 export async function registerToken(wallet: nearAPI.WalletConnection) {
 	const tokenContract = new nearAPI.Contract(
 		wallet.account(),
-		ContractName,
+		getContractName(wallet._networkId),
 		{
 			changeMethods: ['storage_deposit'],
 			viewMethods: ["getMessages"],
