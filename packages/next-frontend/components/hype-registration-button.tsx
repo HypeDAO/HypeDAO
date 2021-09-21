@@ -132,15 +132,10 @@ export default function HypeRegistrationButton() {
 				</button>
 			)}
 
-			{isConnected && (
-				<button className={classNames(utilStyles.noStyle, utilStyles.infoIcon, styles.signOutIcon, { [styles.single]: isRegistered })} onClick={signOut}>
-					<HighlightOffOutlinedIcon fontSize="small" />
-				</button>
-			)}
-
 			<Menu 
 				balance={hypeBalance}
 				isOpen={hypeMenuOpen}
+				onSignOut={signOut}
 			/>
 
 			<Modal
