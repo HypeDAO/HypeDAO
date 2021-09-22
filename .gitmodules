@@ -1,0 +1,3 @@
+[submodule "packages/ft-contract"]
+	path = packages/ft-contract
+	url = git@github.com:near-examples/FT.git

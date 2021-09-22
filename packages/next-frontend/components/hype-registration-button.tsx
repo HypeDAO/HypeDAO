@@ -89,7 +89,8 @@ export default function HypeRegistrationButton() {
 
 	useEffect(() => {
 		const connectWallet = async (dispatch: any) => {
-			const _wallet = await getWalletConnection()
+			if (!process.env.network) return
+			const _wallet = await getWalletConnection(process.env.network)
 			if (!_wallet) return;
 			// Set wallet on global state object, such that it can be
 			// used in other components.
