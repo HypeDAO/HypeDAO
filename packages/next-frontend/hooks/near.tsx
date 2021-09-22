@@ -112,7 +112,7 @@ export async function getTransactionState(wallet: nearAPI.WalletConnection, txHa
 }
 
 export function getActiveAccounts(): Promise<string[]> | null {
-	const url = "https://raw.githubusercontent.com/erak/HypeDAO/cache/dao-stats-hype.tkn.near.json"
+	const url = "https://raw.githubusercontent.com/HypeDAO/HypeDAO/cache/dao-stats-hype.tkn.near.json"
 	const params = {
 		method: "GET",
 	}
