@@ -48,7 +48,9 @@ export default function About() {
 
 					<br />
 
-					<h3>Curious? Join us on <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!!!</h3>
+					<h3>
+						Curious? Join us on <a href="https://discord.gg/PcRVndBU" target="_blank" rel="noopener noreferrer">Discord</a> or <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!!!
+					</h3>
 				</div>
 			</main>
 		</Layout>
