@@ -160,7 +160,6 @@ export function getIsRegistered(wallet: nearAPI.WalletConnection) {
 	return wallet._authDataKey === key
 }
 
-
 //was requestWhitelist() from (https://github.com/near-examples/token-factory/blob/master/frontend/src/App.js#L273)
 export async function registerToken(wallet: nearAPI.WalletConnection) {
 	const tokenContract = new nearAPI.Contract(
