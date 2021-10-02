@@ -143,14 +143,20 @@ function isLegitAccountId(accountId: string) {
 	return AccountValidator.test(accountId);
 }
 
-export async function checkAccountAvailable(wallet: nearAPI.WalletConnection, accountId: string) {
+export async function isAccountAvailable(wallet: nearAPI.WalletConnection, accountId: string, allowSelf: boolean) {
 	if (!isLegitAccountId(accountId)) {
-		throw new Error('Invalid username.');
+		throw new Error('The account ID must include a Top Level Account such as .near or contain exactly 64 characters.')
 	}
 	if (accountId !== wallet.account().accountId) {
-		return await (await getAccount(wallet, accountId)).state();
+		try {
+			return await getAccount(wallet, accountId).state();
+		} catch (error) {
+			throw new Error('An account with this account ID does not exists.')
+		}
 	} else {
-		throw new Error('You are logged into account ' + accountId + ' .');
+		if (allowSelf)
+			return await getAccount(wallet, accountId).state();
+		throw new Error('You are logged into account with ID ' + accountId + ' .');
 	}
 }
 

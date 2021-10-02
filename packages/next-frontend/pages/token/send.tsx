@@ -6,64 +6,47 @@ import styles from '../../styles/components/token-send.module.css'
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import { FormInput, Label, FormattedLabel, ActiveButton } from "../../components/form"
 
-import { getTransactionState, sendHype, requestBalance, requestHypeBalance, checkAccountAvailable } from '../../hooks/near'
+import { HypeTransfer } from '../../context/types';
 import { ApplicationContext } from '../../context/state';
+import { sendHype, requestBalance, requestHypeBalance } from '../../hooks/near'
+
+import { checkAccountAvailable, checkUrl } from '../../components/form/validate'
+import { TransactionDetails } from '../../components/form/TransactionDetails'
+import { FormWizard } from '../../components/form/FormWizard'
+import { Fields, InputType } from '../../components/form/Fields'
+import { Label, FormattedLabel } from '../../components/form/Label'
+import { LabeledField, Options } from '../../components/form/LabeledField'
+import { FormStyle } from "../../components/form/utils";
+
 
 export default function SendToken() {
-    const [step, setStep] = useState(0)
-    const [balance, setBalance] = useState(0)
-    const [tokenBalance, setTokenBalance] = useState(0)
-    const [amount, setAmount] = useState<number | null>(null)
-    const [amountValid, setAmountValid] = useState(false)
-    const [receiver, setReceiver] = useState<string | null>(null)
-    const [receiverValid, setReceiverValid] = useState(false)
-    const [estimatedFees] = useState(0.00125)
-    const [estimatedFeesCovered, setEstimatedFeesCovered] = useState(false)
-    const [statusMessage, setStatusMessage] = useState("")
-    const { state, dispatch } = React.useContext(ApplicationContext)
-
     const { query } = useRouter();
 
-    const handleAmountChange = (e: any) => {
-        setAmount(e.target.value);
+    const { state, dispatch } = React.useContext(ApplicationContext)
+    const [receiver, setReceiver] = React.useState('')
+    const [description, setDescription] = React.useState('')
+    const [url, setUrl] = React.useState('')
+    const [amount, setAmount] = React.useState(0)
 
-        if (!state.wallet || !state.wallet?.isSignedIn()) return
-        requestHypeBalance(state.wallet, state.wallet.account().accountId)
-            .then(hypeBalance => {
-                if (hypeBalance) {
-                    setTokenBalance(hypeBalance.balance)
-                    setAmountValid(
-                        e.target.value > 0 &&
-                        e.target.value <= hypeBalance.balance)
-                }
-            })
-        setEstimatedFeesCovered(balance > estimatedFees)
+    const [balance, setBalance] = useState(0)
+    const [tokenBalance, setTokenBalance] = useState(0)
+
+    const [estimatedFees] = useState(0.00125)
+    const [estimatedFeesCovered, setEstimatedFeesCovered] = useState(false)
+
+    const validateAccount = (value: any) => {
+        setReceiver(value)
+        if (state.wallet)
+            return checkAccountAvailable(state.wallet, value, false)
     }
 
-    const handleAccountChange = (e: any) => {
-        setReceiver(e.target.value);
-
-        if (!state.wallet || !receiver) return
-        checkAccountAvailable(state.wallet, e.target.value)
-            .then(available => {
-                setReceiverValid(true)
-            })
-            .catch(error => {
-                setReceiverValid(false)
-            })
-    }
-
-    const next = () => {
-        const nextStep = (step == 3) ? 0 : (step + 1)
-        setStep(nextStep)
-    }
-
-    const back = () => {
-        const nextStep = (step == 0) ? 0 : (step - 1)
-        setStep(nextStep)
+    const validateAmount = (value: any) => {
+        let error = value <= 0 ? 'Please enter a non-zero or negative amount.' : ''
+        setAmount(value)
+        if (tokenBalance < value)
+            error = "Insufficient funds: " + tokenBalance + " HYPE"
+        return error;
     }
 
     const accountId = (): string => {
@@ -71,57 +54,18 @@ export default function SendToken() {
         return accountId ? accountId : ''
     }
 
-    const _handleKeyDown = (e: any) => {
-        if (e.key === 'Enter') {
-            switch(step) {
-                case 0: {
-                    if (amountValid)
-                        next()
-                    break
-                }
-                case 1: {
-                    if (receiverValid)
-                        next()
-                    break
-                }
-                case 2: {
-                    if (estimatedFeesCovered)
-                        next()
-                    break
-                }
-                default:
-                    break
-            }
-        }
-    }
-
-    const send = () => {
+    const send = (values: any) => {
         if (!state.wallet || !receiver || !amount) return
         sendHype(state.wallet, receiver, amount)
-            .then(() => {
-                next()
-            })
+            .then(() => { })
             .catch(error => {
-                setStatusMessage(error)
+                console.log(error)
             })
     }
 
-    useEffect(() => {
-        if (query.transactionHashes) {
-            if (!state.wallet)
-                return
-            getTransactionState(state.wallet, query.transactionHashes.toString())
-                .then(result => {
-                    setStep(3)
-                    if (!result.status) {
-                        setStatusMessage("Error! Transfer was not successful.")
-                    } else {
-                        setStatusMessage("Your HYPE was transfered successfully.")
-                    }
-                    
-                })
-        }
-    }, [query])
+    const isWalletCallback = () => {
+        return query.transactionHashes ? true : false
+    }
 
     useEffect(() => {
         if (!state.wallet) return
@@ -130,6 +74,7 @@ export default function SendToken() {
             requestBalance(state.wallet)
                 .then(balance => {
                     setBalance(balance)
+                    
                 })
             requestHypeBalance(state.wallet, state.wallet.account().accountId)
                 .then(hypeBalance => {
@@ -140,144 +85,77 @@ export default function SendToken() {
         }
     }, [state.wallet])
 
+    useEffect(() => {
+        setEstimatedFeesCovered(balance > estimatedFees)
+    }, [balance])
+
     return (
         <Layout>
             <main>
-                <h1 className={utilStyles.title}>Send</h1>
-                {step == 0 && (
-                    <div className={classNames(styles.form)}>
-                        <ul>
-                            <li>
-                                <p className={classNames(utilStyles.centerContent, utilStyles.titleSm, utilStyles.titleLabel)}>
-                                    {amount ? amount : "0 "} HYPE
-                                </p>
-                            </li>
-                            <li>                                
-                                <FormInput
-                                    value={amount != null ? amount.toString() : ""}
-                                    placeholder="0"
-                                    type="number"
-                                    onChange={handleAmountChange}
-                                    onKeyDown={_handleKeyDown}
-                                    valid={true}
-                                />
-                            </li>
-
-                            <li>
-                                <FormattedLabel
-                                    left={"Available to Send"}
-                                    right={tokenBalance.toFixed(5) + " HYPE"}
-                                    light={false}
-                                />
-                            </li>
-                        </ul>
-                        <ActiveButton
-                            text={"Continue"}
-                            enabled={amountValid}
-                            onClick={next}
+                <h1 className={utilStyles.title}>Send HYPE</h1>
+                {!isWalletCallback() && (
+                    <FormWizard
+                        initialValues={{
+                            receiver: '',
+                            amount: '',
+                        } as HypeTransfer}
+                        onSubmit={async (values: any) =>
+                            send(values)
+                        }
+                        style={FormStyle.Wallet}
+                    ><Fields>
+                            <LabeledField
+                                type={InputType.Number}
+                                name={"amount"}
+                                placeholder={"0 HYPE"}
+                                validate={validateAmount}
                             />
-                    </div>
-                )}
-                {step == 1 && (
-                    <div className={classNames(styles.form)}>
-                        <ul>
-                            <li>
-                                <button
-                                    className={classNames(utilStyles.noStyle, utilStyles.title, styles.back)}
-                                    onClick={back}>
-                                    &#x2190;
-                                </button>
-                                <p className={classNames(utilStyles.centerContent, utilStyles.titleSm, utilStyles.titleLabel)}>
-                                    {amount} HYPE
-                                </p>
-                            </li>
-                            <li>
-                                <FormInput
-                                    value={receiver != null ? receiver : ""}
-                                    placeholder="Account ID"
-                                    type="text"
-                                    onChange={handleAccountChange}
-                                    onKeyDown={_handleKeyDown}
-                                    valid={receiverValid}
-                                />
-                            </li>
-                        </ul>                      
-                        <ActiveButton
-                            text={"Continue"}
-                            enabled={receiverValid}
-                            onClick={next}
+                        </Fields>
+
+                        <Fields>
+                            <LabeledField
+                                type={InputType.Text}
+                                name={"receiver"}
+                                placeholder={"Receiver"}
+                                validate={validateAccount}
                             />
-                    </div>
-                )}
-                {step == 2 && (
-                    <div className={classNames(styles.form)}>
-                        <ul>
-                            <li>
-                                <button
-                                    className={classNames(utilStyles.noStyle, utilStyles.title, styles.back)}
-                                    onClick={back}>
-                                    &#x2190;
-                                </button>
-                                <p className={classNames(utilStyles.centerContent, utilStyles.titleSm, utilStyles.titleLabel)}>
-                                    {amount} HYPE
-                                </p>
-                            </li>
-                            <li>
-                                <FormattedLabel
-                                    left={"From"}
-                                    right={accountId()}
-                                    light={false}
-                                />
-                            </li>
+                        </Fields>
 
-                            <li>
-                                <FormattedLabel
-                                    left={"To"}
-                                    right={receiver ? receiver : ""}
-                                    light={false}
-                                />
-                            </li>
+                        <Fields>
+                            <FormattedLabel
+                                left={"Receiver"}
+                                right={receiver}
+                                light={false}
+                                padded={true}
+                            />
 
-                            <li>
-                                <FormattedLabel
-                                    left={"Estimated fees"}
-                                    right={estimatedFees + " NEAR"}
+                            <FormattedLabel
+                                left={"Amount"}
+                                right={amount + " HYPE"}
+                                light={false}
+                                padded={true}
+                            />
+                            <FormattedLabel
+                                left={"Estimated fees"}
+                                right={estimatedFees + " Ⓝ"}
+                                light={true}
+                                padded={true}
+                            />
+
+                            {!estimatedFeesCovered && (
+                                <Label
+                                    text={"Cannot cover transaction fees. Insufficient funds: " + balance.toFixed(2) + " NEAR"}
                                     light={true}
                                 />
-                            </li>
-                            <li>
-                                {!estimatedFeesCovered && (
-                                    <Label
-                                        text={"Cannot cover transaction fees. Insufficient funds: " + balance.toFixed(2) + " NEAR"}
-                                    />
-                                )}
-                            </li>
-                        </ul>
-                        <ActiveButton
-                            text={"Confirm & Send"}
-                            enabled={estimatedFeesCovered}
-                            onClick={send}
-                            />
-                        <Link href={'/'}>
-                            <a className={classNames(utilStyles.centerContent, utilStyles.formLink)}>Cancel</a>
-                        </Link>
-                    </div>
+                            )}
+                        </Fields>
+                    </FormWizard>
                 )}
-                {step == 3 && (
-                    <div className={classNames(styles.form)}>
-                        <ul>
-                            <li>
-                                <p className={classNames(utilStyles.centerContent, utilStyles.titleSm, utilStyles.titleLabel)}>
-                                    {amount} HYPE
-                                </p>
-                            </li>
-                            <li>
-                                <Label
-                                    text={statusMessage}
-                                />
-                            </li>
-                        </ul>
-                    </div>
+                {isWalletCallback() && (
+                    <TransactionDetails
+                        successMessage="Proposal successfully submitted!"
+                        backUrl={"/proposals"}
+                    />
                 )}
             </main>
         </Layout>
