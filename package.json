@@ -14,6 +14,13 @@
   "next:dev": "yarn workspace next-frontend dev",
   "next:build": "yarn workspace next-frontend build",
 	"api:dev": "yarn workspace ts-api dev",
-	"api:build": "yarn workspace ts-api build"
+	"api:build": "yarn workspace ts-api build",
+	"api:scripts": "yarn workspace ts-api scripts"
+ },
+"dependencies": {
+  "next": "^11.1.0",
+  "node-fetch": "^2.6.1",
+  "react": "^17.0.2",
+  "react-dom": "^17.0.2"
  }
 }

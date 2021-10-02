@@ -1,0 +1,72 @@
+.label {
+	position: relative;
+	margin-left: 1.5rem;
+	font-size: 1.2rem;
+	font-family: var(--heading-font);
+	color: var(--body-text-color);
+	text-align: center;
+}
+
+.form {
+    width: 40%;
+    margin-left: 30%;
+}
+
+@media only screen and (max-width: 700px) {
+    .form {
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+
+.form ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.form ul li {
+    display: block;
+}
+
+.form ul li p.label {
+    width: 40%;
+}
+
+/* .form ul li p.left {
+    float: left;
+}
+
+.form ul li p.right {
+    float: right;
+    text-align: right;
+} */
+
+.amount::placeholder {
+    opacity: 1;
+    display: block;
+}
+.back {
+    position: absolute;
+    line-height: 1rem;
+}
+/* .amount {
+    font-size: 5rem;
+    width: 50%;
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin-left: 25%;
+    margin-bottom: 4rem;
+    text-align: center;
+} */
+
+/* .amount:hover {
+    border: none;
+} */
+
+
+/* input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+} */

@@ -9,6 +9,9 @@ import { getTaigaTasks, TaskInterface } from "../../connections/taiga";
 import { useEffect, useState } from "react";
 import { useCallback } from "react";
 
+
+//We are depricating the Taiga board and for now this page. I am keeping it around just incase we want to bring it back with a different management system
+
 export default function MonthlyBounties() {
 	const [tasks, setTasks] = useState<TaskInterface[]>([])
 	const [error, setError] = useState("")
@@ -59,7 +62,9 @@ export default function MonthlyBounties() {
 
 	return (
 		<Layout>
-			<main>
+			<h1 className={utilStyles.title}>404</h1>
+			<h3 className={utilStyles.infoText}>Sorry, this page no longer exists!</h3>
+			{/* <main>
 				<h1 className={utilStyles.title}>Bounties</h1>
 				<h3 className={utilStyles.infoText}>Wanna claim a bounty? Lets get in touch via <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!</h3>
 				<ul className={utilStyles.scrim}>
@@ -82,7 +87,7 @@ export default function MonthlyBounties() {
 						? <h2 className={classNames({ [utilStyles.error]: error }, utilStyles.centerContent)}>{loadingMessage}</h2>
 						: null}
 				</ul>
-			</main>
+			</main> */}
 		</Layout>
 	)
 }

@@ -1,0 +1,22 @@
+p.scrim {
+    margin-top: 0rem;
+    padding: 2rem 1.2rem;
+}
+
+li.scrim, div.scrim {
+    padding: 1rem 1.2rem 4rem 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+p.left {
+    float: left;
+}
+
+p.right {
+    float: right;
+    text-align: right;
+}
+
+.primaryButton {
+    width: 100%;
+}
