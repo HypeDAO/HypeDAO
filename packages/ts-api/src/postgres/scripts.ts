@@ -1,17 +1,6 @@
 require('../index') //needs the server to be running for SSL to work, but you can't already be running the API;
 import db from './pool'
 
-// // Example db table creation
-// function createTestTable() {
-// 	const query = `CREATE TABLE IF NOT EXISTS test_table (
-// 		id serial PRIMARY KEY,
-// 		username VARCHAR(50) UNIQUE NOT NULL
-// 	)`
-// 	db.query(query).then(res => console.log("finished creating test table", res))
-// }
-// createTestTable()
-
-
 // function createArtistProfileTable() {
 // 	const query = `CREATE TABLE IF NOT EXISTS artist_profile (
 // 		id serial PRIMARY KEY,
