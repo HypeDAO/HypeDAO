@@ -8,9 +8,7 @@ import starsImage from "../public/images/stars.webp"
 import MainNavigation from '../components/main-navigation'
 import Footer from '../components/footer'
 import useWindowDimensions from '../hooks/windowDimensions'
-import { WalletConnection } from "near-api-js"
-import { getWalletConnection } from '../hooks/near'
-import { StateProvider } from '../context/state';
+import { StateProvider } from '../context/state'
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [isLoaded, setIsLoaded] = useState(false);

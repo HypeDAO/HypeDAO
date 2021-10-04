@@ -1,11 +1,47 @@
+.label {
+	position: relative;
+	margin-left: 1.5rem;
+	font-size: 1.2rem;
+	font-family: var(--heading-font);
+	color: var(--body-text-color);
+	text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.imageContainer {
+    height: 100px;
+    width: 16%;
+    margin-left: 42%;
+}
+
+.form ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.form ul li {
+    display: block;
+}
+
+.form ul li p.label {
+    width: 40%;
+}
+
 p.scrim {
     margin-top: 0rem;
     padding: 2rem 1.2rem;
 }
 
 li.scrim, div.scrim {
-    padding: 1rem 1.2rem 4rem 1.2rem;
+    padding: 1rem 1.2rem 1rem 1.2rem;
     margin-bottom: 0.5rem;
+}
+
+div.scrimPadded {
+    padding: 1rem 1.2rem 4rem 1.2rem;
 }
 
 p.left {
@@ -19,4 +55,90 @@ p.right {
 
 .primaryButton {
     width: 100%;
+}
+
+.form input, .form select {
+	width: 100%;
+	padding: 1rem;
+    background-color: transparent;
+    border: 2px solid white;
+	border-radius: 1rem;
+    color: white;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+.form input::-webkit-inner-spin-button, 
+.form input::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+	-moz-appearance: textfield;
+    margin: 0; 
+}
+.form input:focus {
+	outline: none;
+}
+
+.formFieldRow {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.form label {
+    padding: 2.2rem 1rem 2rem 0rem;
+    font-size: 1.2rem;
+}
+
+.formFieldRow label {
+    display: flex;
+	flex-direction: row;
+    flex-grow: 1;
+}
+
+.formFieldRow input, .formFieldRow select {
+    display: flex;
+	flex-direction: row;
+    flex-grow: 1;
+    width: 70%;
+}
+
+.formNarrow {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.formNarrowest {
+    width: 30%;
+    margin-left: 35%;
+}
+
+@media only screen and (max-width: 1000px) {
+    .formNarrow {
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .formNarrowest {
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .imageContainer {
+        height: 100px;
+        width: 20%;
+        margin-left: 40%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .formNarrow {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .imageContainer {
+        height: 100px;
+        width: 30%;
+        margin-left: 35%;
+    }
 }

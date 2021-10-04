@@ -1,0 +1,8 @@
+.amount::placeholder {
+    opacity: 1;
+    display: block;
+}
+.back {
+    position: absolute;
+    line-height: 1rem;
+}

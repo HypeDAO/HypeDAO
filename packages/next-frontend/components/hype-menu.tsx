@@ -16,12 +16,17 @@ export default function HypeMenu({ balance, isOpen, onSignOut }: HypeMenuProps) 
 					$HYPE: {balance.toFixed(2)}
 				</div>
 			</li>
-			<li className={styles.divider}> 
+			<li> 
 				<Link href={'/token/board'}>
 					<a className={styles.link}>Leaderboard</a>
 				</Link>
 			</li>
-			<li>
+			<li> 
+				<Link href={'/proposals'}>
+				<a className={styles.link}>Proposals</a>
+				</Link>
+			</li>
+			<li className={styles.divider}>
 				<Link href={'/token/send'}> 
 					<a className={styles.link}>Send</a>
 				</Link>

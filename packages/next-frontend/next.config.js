@@ -14,7 +14,8 @@ const testnetConfig = {
 	webpack,
 	env: {
 		network: 'testnet',
-		tokenContract: '<token-contract>'
+		tokenContract: 'hype.tokens.testnet',
+		daoContract: 'hype.dev-1633010067633-2472687'
 	}
 }
 
@@ -23,13 +24,13 @@ const mainnetConfig = {
 	webpack,
 	env: {
 		network: 'mainnet',
-		tokenContract: 'hype.tkn.near'
+		tokenContract: 'hype.tkn.near',
+		daoContract: 'hype.sputnik-dao.near'
 	}
 }
 
 module.exports = (phase, { defaultConfig }) => {
-	if (phase === PHASE_DEVELOPMENT_SERVER) {
-		return withTM(testnetConfig)
-	}
-	return withTM(mainnetConfig)
+	if (process.env.NEAR_ENV === 'mainnet')
+		return withTM(mainnetConfig)
+	return withTM(testnetConfig)
 }
