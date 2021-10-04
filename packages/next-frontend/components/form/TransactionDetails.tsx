@@ -50,58 +50,61 @@ export function TransactionDetails({ successMessage, errorMessage, backUrl }: Tr
     }, [state.wallet, query])
 
     return (
-        <Fields>
-            {success && (
-                <div className={classNames(
-                    utilStyles.scrimLight,
-                    formStyles.scrim,
-                    formStyles.scrimThin
-                )}>
-                    <div className={classNames(formStyles.imageContainer)}>
-                        <Image
-                            className={formStyles.statusIcon}
-                            src={successIcon}
-                            alt=""
-                            layout="responsive"
-                        />
+        <div className={formStyles.formNarrow}>
+            <Fields>
+                {success && (
+                    <div className={classNames(
+                        utilStyles.scrimLight,
+                        formStyles.scrim,
+                        formStyles.scrimThin
+                    )}>
+                        <div className={classNames(formStyles.imageContainer)}>
+                            <Image
+                                className={formStyles.statusIcon}
+                                src={successIcon}
+                                alt=""
+                                layout="responsive"
+                            />
+                        </div>
+                        <h2 className={formStyles.center}>{successMessage}</h2>
                     </div>
-                    <h2 className={formStyles.center}>{successMessage}</h2>
-                </div>
-            )}
-            {!success && (
-                <div className={classNames(
-                    utilStyles.scrimLight,
-                    formStyles.scrim,
-                    formStyles.scrimThin
-                )}>
-                    <div className={classNames(formStyles.imageContainer)}>
-                        <Image
-                            className={formStyles.statusIcon}
-                            src={errorIcon}
-                            alt=""
-                            layout="responsive"
-                        />
+                )}
+                {!success && (
+                    <div className={classNames(
+                        utilStyles.scrimLight,
+                        formStyles.scrim,
+                        formStyles.scrimThin
+                    )}>
+                        <div className={classNames(formStyles.imageContainer)}>
+                            <Image
+                                className={formStyles.statusIcon}
+                                src={errorIcon}
+                                alt=""
+                                layout="responsive"
+                            />
+                        </div>
+                        {errorMessage && (
+                            <h2 className={formStyles.center}>{errorMessage}</h2>
+                        )}
+                        {!errorMessage && (
+                            <h2 className={formStyles.center}>Something went wrong. Please try again later!</h2>
+                        )}
                     </div>
-                    {errorMessage && (
-                        <h2 className={formStyles.center}>{errorMessage}</h2>
-                    )}
-                    {!errorMessage && (
-                        <h2 className={formStyles.center}>Something went wrong. Please try again later!</h2>
-                    )}
-                </div>
-            )}
-            <Link href={backUrl} passHref>
-                <button
-                    className={classNames(
-                        utilStyles.primaryButton,
-                        formStyles.primaryButton
-                    )}
-                    type="button"
-                >
-                    Back
+                )}
+                <Link href={backUrl} passHref>
+                    <button
+                        className={classNames(
+                            utilStyles.primaryButton,
+                            formStyles.primaryButton
+                        )}
+                        type="button"
+                    >
+                        Back
                 </button>
-            </Link>
+                </Link>
 
-        </Fields>
+            </Fields>
+        </div>
+
     )
 }

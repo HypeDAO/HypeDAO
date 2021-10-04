@@ -33,12 +33,10 @@ export default function New() {
         value: "payout-proposal"
     } as Options]
 
-    const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
-
-    const validateAccount = (value: any) => {
+     const validateAccount = (value: any) => {
         setReceiver(value)
         if (state.wallet)
-            return checkAccountAvailable(state.wallet, value, false)
+            return checkAccountAvailable(state.wallet, value, true)
     }
 
     const validateDescription = (value: any) => {
@@ -50,6 +48,7 @@ export default function New() {
     const validateUrl = (value: any) => {
         setUrl(value)
         return checkUrl(value);
+        // return ''
     }
 
     const validateAmount = (value: any) => {
@@ -60,7 +59,7 @@ export default function New() {
 
     const submitProposal = (values: any) => {
         if (!state.wallet || !receiver || !amount) return
-        const longDescription = description + "(" + url + ")"
+        const longDescription = description + " (" + url + ")"
         addPayoutProposal(state.wallet, receiver, longDescription, amount)
             .then(() => {})
             .catch((error: any) => {
@@ -99,6 +98,10 @@ export default function New() {
                                 options={proposalTypes}
                                 validate={(value: any) => { }}
                             />
+                            <Label
+                                text={"Currently, only payout proposals are supported."}
+                                light={true}
+                            />
                         </Fields>
                         <Fields>
                             <LabeledField
@@ -120,7 +123,7 @@ export default function New() {
                             <LabeledField
                                 type={InputType.Text}
                                 name={"url"}
-                                placeholder={"Url to HYPE forum"}
+                                placeholder={"Link to forum / twitter etc."}
                                 validate={validateUrl}
                             />
                         </Fields>
