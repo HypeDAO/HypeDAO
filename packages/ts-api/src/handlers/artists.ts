@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { ArtistProfileRequest } from "artists";
+
 import db from '../postgres/pool'
 
 export async function createArtistProfile(req: Request, res: Response) {
