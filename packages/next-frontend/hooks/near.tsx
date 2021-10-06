@@ -93,7 +93,7 @@ export function requestHypeBalance(wallet: nearAPI.WalletConnection, account: st
 			viewMethods: ["ft_balance_of"],
 		}
 	);
-	
+
 	return new Promise(resolve => {
 		// @ts-ignore: ft_balance_of doesn't exist on generic contract but does on the one we just called
 		tokenContract.ft_balance_of({ account_id: account })
@@ -130,6 +130,7 @@ export function getActiveAccounts(): Promise<string[]> | null {
 }
 
 function getContractName(network: string): string {
+	console.log(process.env)
 	if (process.env.tokenContract)
 		return process.env.tokenContract
 	return 'Undefined'

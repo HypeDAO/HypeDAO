@@ -1,3 +1,4 @@
+//We are depricating the Taiga board for now. I am keeping it around just incase we want to bring it back with a different management system
 
 export interface TaskInterface {
 	title: string;

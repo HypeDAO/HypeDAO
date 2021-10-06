@@ -40,16 +40,17 @@ export default function About() {
 					<br />
 
 					<h2>The Team</h2>
-					<p>The leading council consists of 5 members: <a href="https://twitter.com/mxjxn" target="_blank" rel="noopener noreferrer">MXJXN</a>
+					<p>The leading council consists of 4 members: <a href="https://twitter.com/mxjxn" target="_blank" rel="noopener noreferrer">MXJXN</a>
 						, <a href="https://twitter.com/EV3RETH" target="_blank" rel="noopener noreferrer">EV3RETH</a>
 						, <a href="https://twitter.com/d3t3" target="_blank" rel="noopener noreferrer">Digipedia</a>
-						, <a href="https://twitter.com/zeitwarp" target="_blank" rel="noopener noreferrer">	Zeitwarp</a>
 						, and <a href="https://twitter.com/zexononerotaki" target="_blank" rel="noopener noreferrer">ZON</a>
 						. Each can be reached on Twitter, Telegram, or Discord.</p>
 
 					<br />
 
-					<h3>Curious? Join us on <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!!!</h3>
+					<h3>
+						Curious? Join us on <a href="https://discord.gg/PcRVndBU" target="_blank" rel="noopener noreferrer">Discord</a> or <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>!!!
+					</h3>
 				</div>
 			</main>
 		</Layout>

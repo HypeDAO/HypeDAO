@@ -10,20 +10,15 @@ import { ApplicationContext } from '../../context/state';
 export default function HypeBoard() {
 	const [balances, setBalances] = useState<HypeBalanceInterface[]>([])
 	const [error, setError] = useState("")
-    const {state, dispatch} = React.useContext(ApplicationContext)
+	const { state, dispatch } = React.useContext(ApplicationContext)
 
 	useEffect(() => {
-		// Always fired...
-    }, [])
-
-    useEffect(() => {
-        if (state.wallet) {
+		if (state.wallet) {
 			const updateCachedAccounts = async () => {
 				const activeAccounts = await getActiveAccounts()
 				if (!activeAccounts) {
 					setError("Error getting active accounts from JSON file cache.")
-				}
-				else {
+				} else {
 					let compare = (b1: HypeBalanceInterface, b2: HypeBalanceInterface) => {
 						return b2.balance - b1.balance;
 					}
@@ -47,11 +42,11 @@ export default function HypeBoard() {
 							let sortedBalances = nonZeroBalances.sort(compare)
 							setBalances(sortedBalances)
 						});
-					}
+				}
 			}
 			updateCachedAccounts()
-        }
-    }, [state.wallet])
+		}
+	}, [state.wallet])
 
 	const loadingMessage = error ? error : "...Loading"
 
@@ -90,9 +85,9 @@ interface GridCellProps {
 	isHeader?: boolean;
 }
 function GridCell({ rank, account, balance, isHeader }: GridCellProps) {
-    const getIcon = () => {
-        return <DoneOutlineIcon style={{ color: 'white' }} />
-    }
+	const getIcon = () => {
+		return <DoneOutlineIcon style={{ color: 'white' }} />
+	}
 	return (
 		<li className={classNames(styles.gridCell, { [styles.gridHeader]: isHeader })}>
 			<p>{rank}</p>

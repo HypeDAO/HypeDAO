@@ -11,9 +11,10 @@ export const PATHNAMES = {
 	HOME: "/",
 	ABOUT: "/about",
 	POSTS: "/posts",
-	BOUNTIES: {
-		MONTHLY: "/bounties/monthly"
-	}
+	//We are depricating the Taiga board for now. I am keeping this around just incase we want to bring it back with a different management system
+	// BOUNTIES: {
+	// 	MONTHLY: "/bounties/monthly"
+	// }
 }
 
 export default function MainNavigation() {
@@ -62,9 +63,9 @@ export default function MainNavigation() {
 					<Link href={PATHNAMES.ABOUT}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.ABOUT })}>About</a>
 					</Link>
-					<Link href={PATHNAMES.BOUNTIES.MONTHLY}>
+					{/* <Link href={PATHNAMES.BOUNTIES.MONTHLY}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.BOUNTIES.MONTHLY })}>Bounties</a>
-					</Link>
+					</Link> */}
 					<Link href={PATHNAMES.POSTS}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.POSTS })}>Posts</a>
 					</Link>
