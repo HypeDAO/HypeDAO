@@ -22,6 +22,11 @@ export default function HypeMenu({ balance, isOpen, onSignOut }: HypeMenuProps) 
 				</Link>
 			</li>
 			<li>
+				<Link href={'/proposals'}>
+					<a className={styles.link}>Proposals</a>
+				</Link>
+			</li>
+			<li className={styles.divider}>
 				<Link href={'/token/send'}>
 					<a className={styles.link}>Send</a>
 				</Link>
