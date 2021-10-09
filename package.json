@@ -14,7 +14,7 @@
 	"next:dev": "yarn workspace next-frontend dev",
 	"next:build": "yarn workspace next-frontend build",
 	"api:dev": "yarn workspace ts-api dev",
-	"build": "yarn workspace ts-api build", //needs to be "build" and "start" for heroku's build pack to run
+	"build": "yarn workspace ts-api build",
 	"start": "yarn workspace ts-api start",
 	"api:scripts": "yarn workspace ts-api scripts"
  },
