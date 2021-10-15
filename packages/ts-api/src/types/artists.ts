@@ -8,6 +8,11 @@ export interface ArtistProfile {
 	collection?: number[];
 }
 export type ArtistProfileRequest = Omit<ArtistProfile, "id">
+export interface GetArtistsProps {
+	limit: number;
+	offset: number;
+	sorting: string
+}
 
 export enum SOCIAL_NAMES {
 	FACEBOOK = "facebook",
