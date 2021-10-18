@@ -1,0 +1,25 @@
+/* .proposalList {
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+} */
+
+.basicCard {
+	/* display: grid; */
+	grid-template-columns: 6rem 2fr 0.8fr;
+	gap: 0.1rem;
+	list-style: none;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	width: 32%;
+	margin-right: 1%;
+	display: flex;
+	flex-direction: column;
+}
+
+@media only screen and (max-width: 800px) {
+    .basicCard {
+		width: 49%;
+    }
+}
