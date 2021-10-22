@@ -8,6 +8,9 @@ export interface ArtistProfile {
 	collection?: number[];
 }
 export type ArtistProfileRequest = Omit<ArtistProfile, "id">
+export interface ArtistProfileMunged extends Omit<ArtistProfile, "collection"> {
+	collection: NFT[]
+}
 
 export enum ArtistSorting {
 	OldestMember = "id",

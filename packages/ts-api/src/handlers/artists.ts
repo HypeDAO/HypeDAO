@@ -71,7 +71,6 @@ export async function updateArtistProfile(req: Request, res: Response) {
 }
 
 export async function getArtistProfiles(req: Request, res: Response) {
-	//this will eventually have params for paging, sorting and searching
 	const {
 		limit = 20,
 		page = 1,
@@ -82,42 +81,50 @@ export async function getArtistProfiles(req: Request, res: Response) {
 
 	const offset = (page - 1) * limit
 
-	const sortChecked = Object.values(ArtistSorting).includes(sorting) ? sorting : ArtistSorting.Random
+	const sortChecked = Object.values(ArtistSorting).includes(sorting)
+		? sorting
+		: ArtistSorting.Random
 
-	function getFilterQuery() {
+	function getQuery() {
 		switch (filter) {
 			case ArtistFilter.pastFeatured: {
-				return {
-					text: `
-						SELECT * FROM FeaturedArtist fa
-						LEFT JOIN artist_profile ap
-							on fa.wallet_address = ap.wallet_address
-						WHERE
-							name LIKE $1
-						ORDER BY ${sortChecked}
-						LIMIT $2
-						OFFSET $3
-					`,
-					values: [`%${search}%`, limit, offset]
-				}
-			};
-			default: return ""
+				return `
+					SELECT
+						fa.*,
+						ap.*,
+						json_agg(n.*) AS collection
+					FROM
+						FeaturedArtist fa
+						LEFT JOIN artist_profile ap ON fa.wallet_address = ap.wallet_address
+						LEFT JOIN nft n ON n.id = ap.collection[1]
+					WHERE
+						name LIKE $1
+					ORDER BY ${sortChecked}
+					LIMIT $2
+					OFFSET $3
+				`
+			}
+			default: {
+				return `
+					SELECT
+						ap.*,
+						json_agg(n.*) AS collection
+					FROM
+						artist_profile ap
+						LEFT JOIN nft n ON n.id = ap.collection[1]
+					WHERE
+						name LIKE $1
+					ORDER BY ${sortChecked}
+					LIMIT $2
+					OFFSET $3
+				`
+			}
 		}
 	}
-	const query = filter
-		? getFilterQuery()
-		: {
-			text: `
-				SELECT * FROM artist_profile
-				WHERE
-					name LIKE $1
-				ORDER BY ${sortChecked}
-				LIMIT $2
-				OFFSET $3
-			`,
-			values: [`%${search}%`, limit, offset]
-		}
-
+	const query = {
+		text: getQuery(),
+		values: [`%${search}%`, limit, offset]
+	}
 	const response = await db.query(query)
 		.then(res => res.rows)
 		.catch(error => console.log(error))
@@ -130,7 +137,12 @@ export async function getArtistProfile(req: Request, res: Response) {
 	const { id } = req.params;
 	const query = {
 		text: `
-			SELECT * FROM artist_profile
+			SELECT
+				ap.*,
+				json_agg(n.*) AS collection
+			FROM
+				artist_profile ap
+				LEFT JOIN nft n ON n.id = ANY (ap.collection)
 			WHERE id = $1
 		`,
 		values: [id]
