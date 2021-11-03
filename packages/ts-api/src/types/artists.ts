@@ -8,6 +8,29 @@ export interface ArtistProfile {
 	collection?: number[];
 }
 export type ArtistProfileRequest = Omit<ArtistProfile, "id">
+export interface ArtistProfileMunged extends Omit<ArtistProfile, "collection"> {
+	collection: NFT[]
+}
+
+export enum ArtistSorting {
+	OldestMember = "id",
+	NewestMember = "id DESC",
+	AZ = "name",
+	ZA = "name DESC",
+	Random = "RANDOM ()",
+	OldestFeatured = "start_date",
+	NewestFeatured = "start_date DESC"
+}
+export enum ArtistFilter {
+	pastFeatured
+}
+export interface GetArtistsProps {
+	limit: number;
+	page: number;
+	search: string;
+	sorting: ArtistSorting;
+	filter: ArtistFilter;
+}
 
 export enum SOCIAL_NAMES {
 	FACEBOOK = "facebook",

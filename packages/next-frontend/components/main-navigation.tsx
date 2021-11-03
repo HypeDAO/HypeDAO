@@ -10,11 +10,7 @@ import HypeRegistrationButton from "./hype-registration-button";
 export const PATHNAMES = {
 	HOME: "/",
 	ABOUT: "/about",
-	POSTS: "/posts",
-	//We are depricating the Taiga board for now. I am keeping this around just incase we want to bring it back with a different management system
-	// BOUNTIES: {
-	// 	MONTHLY: "/bounties/monthly"
-	// }
+	// POSTS: "/posts", //Our permisions seem to have been taken away by the Near.gov folks, trying to get them back but taking out access to this route until then
 }
 
 export default function MainNavigation() {
@@ -63,12 +59,9 @@ export default function MainNavigation() {
 					<Link href={PATHNAMES.ABOUT}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.ABOUT })}>About</a>
 					</Link>
-					{/* <Link href={PATHNAMES.BOUNTIES.MONTHLY}>
-						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.BOUNTIES.MONTHLY })}>Bounties</a>
-					</Link> */}
-					<Link href={PATHNAMES.POSTS}>
+					{/* <Link href={PATHNAMES.POSTS}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.POSTS })}>Posts</a>
-					</Link>
+					</Link> */}
 				</div>
 			</nav>
 		</>

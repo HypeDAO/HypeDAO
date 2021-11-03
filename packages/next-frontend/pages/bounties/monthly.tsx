@@ -5,7 +5,6 @@ import styles from '../../styles/pages/Bounties.module.css'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import { getTaigaTasks, TaskInterface } from "../../connections/taiga";
 import { useEffect, useState } from "react";
 import { useCallback } from "react";
 
@@ -13,53 +12,6 @@ import { useCallback } from "react";
 //We are depricating the Taiga board and for now this page. I am keeping it around just incase we want to bring it back with a different management system
 
 export default function MonthlyBounties() {
-	const [tasks, setTasks] = useState<TaskInterface[]>([])
-	const [error, setError] = useState("")
-
-	const sortTasks = useCallback((tasks: TaskInterface[]) => {
-		const newTasks: TaskInterface[] = []
-		const readyTasks: TaskInterface[] = []
-		const progressTasks: TaskInterface[] = [];
-		const testTasks: TaskInterface[] = []
-		const doneTasks: TaskInterface[] = []
-		tasks.forEach(task => {
-			switch (task.status?.name) {
-				case "New":
-					newTasks.push(task)
-					break;
-				case "Ready":
-					readyTasks.push(task)
-					break;
-				case "In progress":
-					progressTasks.push(task)
-					break;
-				case "Ready for test":
-					testTasks.push(task)
-					break;
-				case "Done":
-					doneTasks.push(task)
-					break;
-			}
-		})
-		return [...newTasks, ...readyTasks, ...progressTasks, ...testTasks, ...doneTasks]
-	}, [])
-
-	useEffect(() => {
-		const getTasks = async () => {
-			const tasks = await getTaigaTasks()
-			if (!tasks) {
-				setError("Error getting bounties from Taiga Board")
-			}
-			else {
-				const sortedTasks = sortTasks(tasks)
-				setTasks(sortedTasks)
-			}
-		}
-		getTasks()
-	}, [sortTasks])
-
-	const loadingMessage = error ? error : "...Loading"
-
 	return (
 		<Layout>
 			<h1 className={utilStyles.title}>404</h1>
@@ -98,25 +50,24 @@ interface GridCellProps {
 	isHeader?: boolean;
 	isClaimed?: boolean;
 	claimedText?: string;
-	status?: TaskInterface["status"];
 	link?: string
 }
-function GridCell({ title, amount, isHeader, isClaimed, claimedText, status, link }: GridCellProps) {
-	const getIcon = () => {
-		switch (status?.name) {
-			case "New": return <RadioButtonUncheckedIcon style={{ color: status?.color }} />;
-			case "Ready":
-			case "In progress":
-			case "Ready for test": return <MoreHorizIcon style={{ color: status?.color }} />;
-			case "Done": return <DoneOutlineIcon style={{ color: status?.color }} />
-		}
-	}
+function GridCell({ title, amount, isHeader, isClaimed, claimedText, link }: GridCellProps) {
+	// const getIcon = () => {
+	// 	switch (status?.name) {
+	// 		case "New": return <RadioButtonUncheckedIcon style={{ color: status?.color }} />;
+	// 		case "Ready":
+	// 		case "In progress":
+	// 		case "Ready for test": return <MoreHorizIcon style={{ color: status?.color }} />;
+	// 		case "Done": return <DoneOutlineIcon style={{ color: status?.color }} />
+	// 	}
+	// }
 	return (
 		<li className={classNames(styles.gridCell, { [styles.gridHeader]: isHeader })}>
 			{claimedText
 				? <p>{claimedText}</p>
 				: <div className={utilStyles.centerContent}>
-					{getIcon()}
+					{/* {getIcon()} */}
 				</div>
 			}
 			<a href={link} target="_blank" rel="noopener noreferrer"><p>{title}</p></a>
