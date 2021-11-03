@@ -3,5 +3,5 @@
 //get featured artist
 
 //check not featured in the past 4 weeks
-//create entrie
+//create entries
 //get entries by week
