@@ -3,9 +3,7 @@
   "description": "dao-stats - A DAO analytics tool on NEAR Protocol.",
   "version": "0.0.1",
   "author": "erikli @erak",
-  "bin": {
-    "dao-stats": "./bin/run"
-  },
+  "bin": "./bin/run",
   "bugs": "https://github.com/HypeDAO/HypeDAO/issues",
   "dependencies": {
     "@oclif/command": "^1",

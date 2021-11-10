@@ -22,6 +22,6 @@
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-		"scripts": "ts-node src/postgres/scripts.ts"
+    "scripts": "ts-node src/postgres/scripts.ts"
   }
 }

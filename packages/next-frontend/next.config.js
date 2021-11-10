@@ -4,7 +4,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 function webpack(config) {
 	config.module.rules.push({
 		test: /\.svg$/,
-		use: ["@svgr/webpack"]
+		use: ["@svgr/webpack"],
 	});
 	return config;
 }
