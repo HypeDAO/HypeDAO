@@ -17,9 +17,9 @@ const pool = new Pool({
 	database: 'postgres',
 	password: PG_PASSWORD,
 	port: Number(PG_PORT),
-	ssl: {
-		ca: fs.readFileSync('../../ca.pem')
-	}
+	// ssl: {
+	// 	ca: fs.readFileSync('../../ca.pem')
+	// }
 })
 
 pool.on('error', (err, client) => {
