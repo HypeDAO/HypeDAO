@@ -32,6 +32,7 @@ export async function createArtistProfile(req: Request, res: Response) {
 	const response = await db.query(query)
 		.then(res => res.rows[0])
 		.catch(error => console.log(error))
+		.finally(() => db.endConnection())
 
 	return res.json(response)
 }
@@ -66,6 +67,7 @@ export async function updateArtistProfile(req: Request, res: Response) {
 	const response = await db.query(query)
 		.then(res => res.rows[0])
 		.catch(error => console.log(error))
+		.finally(() => db.endConnection())
 
 	return res.json(response)
 }
@@ -128,6 +130,7 @@ export async function getArtistProfiles(req: Request, res: Response) {
 	const response = await db.query(query)
 		.then(res => res.rows)
 		.catch(error => console.log(error))
+		.finally(() => db.endConnection())
 
 	return res.json(response)
 }
@@ -151,6 +154,7 @@ export async function getArtistProfile(req: Request, res: Response) {
 	const response = await db.query(query)
 		.then(res => res.rows[0])
 		.catch(error => console.log(error))
+		.finally(() => db.endConnection())
 
 	return res.json(response)
 }
