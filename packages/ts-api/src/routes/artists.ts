@@ -2,10 +2,10 @@ import express from 'express'
 import { createArtistProfile, getArtistProfiles, updateArtistProfile, getArtistProfile } from '../handlers/artists'
 const router = express.Router()
 
-router.post('/profile', createArtistProfile)
-router.put('/profile', updateArtistProfile)
-router.get('/profile/:id', getArtistProfile)
-router.get('/profiles', getArtistProfiles)
+router.post('/artist/profile', createArtistProfile)
+router.put('/artist/profile', updateArtistProfile)
+router.get('/artist/profile/:id', getArtistProfile)
+router.get('/artist/profiles', getArtistProfiles)
 
 export default router
 
