@@ -51,6 +51,7 @@ export interface NFT {
 	market_url: string;
 	preview_url?: string;
 };
+export type NFTRequest = Omit<NFT, "id">
 
 export interface FeaturedArtist {
 	id: number;

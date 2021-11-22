@@ -26,13 +26,19 @@ export async function createArtistProfile(req: Request, res: Response) {
 			VALUES($1, $2, $3, $4, $5)
 			RETURNING *;
 		`,
-		values: [wallet_address, name, bio, stringSocials, collection]
+		values: [
+			wallet_address,
+			name,
+			bio,
+			stringSocials,
+			collection
+		]
 	}
-
-	const response = await db.query(query)
+	const client = await db.getConnection()
+	const response = await client.query(query)
 		.then(res => res.rows[0])
 		.catch(error => console.log(error))
-		.finally(() => db.endConnection())
+		.finally(() => db.endConnection(client))
 
 	return res.json(response)
 }
@@ -61,13 +67,21 @@ export async function updateArtistProfile(req: Request, res: Response) {
 			WHERE id = $6
 			RETURNING *
 		`,
-		values: [wallet_address, name, bio, stringSocials, collection, id]
+		values: [
+			wallet_address,
+			name,
+			bio,
+			stringSocials,
+			collection,
+			id
+		]
 	}
 
-	const response = await db.query(query)
+	const client = await db.getConnection()
+	const response = await client.query(query)
 		.then(res => res.rows[0])
 		.catch(error => console.log(error))
-		.finally(() => db.endConnection())
+		.finally(() => db.endConnection(client))
 
 	return res.json(response)
 }
@@ -101,6 +115,7 @@ export async function getArtistProfiles(req: Request, res: Response) {
 						LEFT JOIN nft n ON n.id = ap.collection[1]
 					WHERE
 						name LIKE $1
+					GROUP BY ap.id
 					ORDER BY ${sortChecked}
 					LIMIT $2
 					OFFSET $3
@@ -116,6 +131,7 @@ export async function getArtistProfiles(req: Request, res: Response) {
 						LEFT JOIN nft n ON n.id = ap.collection[1]
 					WHERE
 						name LIKE $1
+					GROUP BY ap.id
 					ORDER BY ${sortChecked}
 					LIMIT $2
 					OFFSET $3
@@ -127,14 +143,14 @@ export async function getArtistProfiles(req: Request, res: Response) {
 		text: getQuery(),
 		values: [`%${search}%`, limit, offset]
 	}
-	const response = await db.query(query)
+	const client = await db.getConnection()
+	const response = await client.query(query)
 		.then(res => res.rows)
 		.catch(error => console.log(error))
-		.finally(() => db.endConnection())
+		.finally(() => db.endConnection(client))
 
 	return res.json(response)
 }
-
 
 export async function getArtistProfile(req: Request, res: Response) {
 	const { id } = req.params;
@@ -146,15 +162,17 @@ export async function getArtistProfile(req: Request, res: Response) {
 			FROM
 				artist_profile ap
 				LEFT JOIN nft n ON n.id = ANY (ap.collection)
-			WHERE id = $1
+				WHERE ap.id = $1
+				GROUP BY ap.id
 		`,
 		values: [id]
 	}
 
-	const response = await db.query(query)
+	const client = await db.getConnection()
+	const response = await client.query(query)
 		.then(res => res.rows[0])
 		.catch(error => console.log(error))
-		.finally(() => db.endConnection())
+		.finally(() => db.endConnection(client))
 
 	return res.json(response)
 }

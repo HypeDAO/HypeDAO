@@ -8,18 +8,23 @@ const {
 	DATABASE_CONNECTION_POOL
 } = process.env
 
-const client = new Client({
-	connectionString: DATABASE_URL,
-	ssl: {
-		rejectUnauthorized: false
-	}
-});
 
-client.connect();
+
+async function getConnection() {
+	const client = new Client({
+		connectionString: DATABASE_URL,
+		ssl: {
+			rejectUnauthorized: false
+		}
+	});
+
+	await client.connect();
+	return client
+}
 
 export default {
-	query: (query: string | QueryConfig) => client.query(query),
-	endConnection: () => client.end()
+	getConnection,
+	endConnection: (client: Client) => client.end()
 }
 
 
