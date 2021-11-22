@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ArtistFilter, ArtistProfile, ArtistProfileRequest, ArtistSorting, GetArtistsProps } from "../types/artists";
+import { ArtistFilter, ArtistProfile, ArtistProfileRequest, ArtistSorting, GetArtistsParams } from "../types/artists";
 
 import db from '../postgres/pool'
 
@@ -93,7 +93,7 @@ export async function getArtistProfiles(req: Request, res: Response) {
 		sorting,
 		filter = null,
 		search = ""
-	}: GetArtistsProps = req.body
+	}: GetArtistsParams = req.body
 
 	const offset = (page - 1) * limit
 

@@ -24,12 +24,12 @@ export enum ArtistSorting {
 export enum ArtistFilter {
 	pastFeatured
 }
-export interface GetArtistsProps {
-	limit: number;
-	page: number;
-	search: string;
-	sorting: ArtistSorting;
-	filter: ArtistFilter;
+export interface GetArtistsParams {
+	limit?: number;
+	page?: number;
+	search?: string;
+	sorting?: ArtistSorting;
+	filter?: ArtistFilter;
 }
 
 export enum SOCIAL_NAMES {

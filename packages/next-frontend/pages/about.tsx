@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import Layout from "../components/layout";
+import { GetArtist } from "../connections/artists";
 import utilStyles from "../styles/utils.module.css"
+import { ArtistProfile } from "../types/artists";
 
 export default function About() {
 	return (

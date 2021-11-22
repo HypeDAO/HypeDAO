@@ -4,8 +4,10 @@
 This repository contains the infrastructure needed to run HypeDAO and is meant to become a template project that others can use to spin up their own DAOs! Its' organized in yarn workspaces and currently consists of the following packages:
 
 - [`next-frontend`](#getting-started-with-the-nextjs-frontend)
+- [`ts-api`](#running-our-API)
 - [`ft-contract`](#running-on-testnet)
 - [`dao-stats`](#how-data-caching-with-dao-stats-works)
+
 
 Eventually, this repository will contain other packages in the future like smart contracts and a server.
 
@@ -18,6 +20,7 @@ Clone the repo:
 ```
 git clone https://github.com/HypeDAO/HypeDAO.git
 ```
+*Note: you will need yarn 2 (berry)*
 
 Install dependencies:
 ```
@@ -34,11 +37,19 @@ yarn next:app dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+If you are running the API locally you will need to change to API_BASE env variable
+
 
 **Note:** To add libraries/dependencies you must cd into the next-frontend directory and then use the command:
 ```
 yarn add <name>
 ```
+
+## Running our API
+To run the api locally you will need to get the database URL and put it in your env file (remove the "example-" from ".example-env)
+
+Then run the command yarn `api:dev`, the api will now be running on [http://localhost:8000](http://localhost:8000) 
+
 
 ### Testing
 
@@ -133,3 +144,5 @@ You've contributed to a revolutionary concept, pushed the boundaries of creative
 Solution: Use Firefox
 
 * Signing in with a wallet requires 2FA being set up, this requires at least 4 NEAR in your wallet
+
+

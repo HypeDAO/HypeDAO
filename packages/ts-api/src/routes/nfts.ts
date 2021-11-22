@@ -4,6 +4,6 @@ const router = express.Router()
 
 router.post('/nft', createNFT)
 router.put('/nft', updateNFT)
-router.delete('/nft', deleteNFT)
+router.delete('/nft/:id', deleteNFT)
 
 export default router

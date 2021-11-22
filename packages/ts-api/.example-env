@@ -1,5 +1,2 @@
 PORT=8000
-PG_PORT=<pg port>
-PG_HOST=<host>
-PG_USER=<user>
-PG_PASSWORD=<password>
+DATABASE_URL=<Database URL GOES HERE>
