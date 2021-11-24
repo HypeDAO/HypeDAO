@@ -9,8 +9,6 @@ This repository contains the infrastructure needed to run HypeDAO and is meant t
 - [`dao-stats`](#how-data-caching-with-dao-stats-works)
 
 
-Eventually, this repository will contain other packages in the future like smart contracts and a server.
-
 If you have any questions the best way to reach us is our [Telegram](https://t.me/hypedao).
 
 ## Initial Steps
