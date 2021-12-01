@@ -2,7 +2,8 @@ import { ArtistProfile, ArtistProfileRequest, GetArtistsParams } from "../types/
 import { Get, Post, Put } from "./helpers";
 
 export function GetArtists(getArtistParams: GetArtistsParams): Promise<ArtistProfile[]> {
-	return Get('/artist/profiles', getArtistParams)
+	// using POST instead of GET so we can include a body
+	return Post('/artist/profiles', getArtistParams)
 }
 
 export function GetArtist(id: number): Promise<ArtistProfile> {

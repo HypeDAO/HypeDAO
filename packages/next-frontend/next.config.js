@@ -4,13 +4,21 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 function webpack(config) {
 	config.module.rules.push({
 		test: /\.svg$/,
-		use: ["@svgr/webpack"],
+		use: ["@svgr/webpack"]
 	});
+
 	return config;
 }
 
-const testnetConfig = {
+const sharedConfig = {
+	images: {
+		domains: ['arweave.net', 'paras-cdn.imgix.net']
+	},
 	reactStrictMode: true,
+}
+
+const testnetConfig = {
+	...sharedConfig,
 	webpack,
 	env: {
 		network: 'testnet',
@@ -20,7 +28,7 @@ const testnetConfig = {
 }
 
 const mainnetConfig = {
-	reactStrictMode: true,
+	...sharedConfig,
 	webpack,
 	env: {
 		network: 'mainnet',

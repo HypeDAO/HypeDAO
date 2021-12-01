@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { NFTRequest, NFT } from "../types/artists";
+import { getLinkPreview } from "link-preview-js"
 
 import db from '../postgres/pool'
 
@@ -98,5 +99,12 @@ export async function deleteNFT(req: Request, res: Response) {
 		.finally(() => db.endConnection(client))
 
 	return res.json(response)
+}
+
+export async function getUrlContent(req: Request, res: Response) {
+	const { url } = req.body
+	const content = await getLinkPreview(url)
+
+	return res.json(content)
 }
 

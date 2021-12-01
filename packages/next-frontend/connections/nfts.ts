@@ -1,5 +1,10 @@
-import { NFT, NFTRequest } from "../types/artists";
-import { Delete, Post, Put } from "./helpers";
+import { NFT, NFTRequest, UrlContent } from "../types/artists";
+import { Delete, Get, Post, Put } from "./helpers";
+
+export function GetLinkPreview(url: string): Promise<UrlContent> {
+	//using POST because get requests cant have a body
+	return Post('/nft/url-content', { url })
+}
 
 export function CreateNFT(createNFTRequest: NFTRequest): Promise<NFT> {
 	return Post('/nft', createNFTRequest)

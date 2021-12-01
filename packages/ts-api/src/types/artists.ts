@@ -53,6 +53,18 @@ export interface NFT {
 };
 export type NFTRequest = Omit<NFT, "id">
 
+export interface UrlContent {
+	url: string;
+	title: string;
+	siteName: string | undefined;
+	description: string | undefined;
+	mediaType: string;
+	contentType: string | undefined;
+	images: string[];
+	videos: any[];
+	favicons: string[];
+}
+
 export interface FeaturedArtist {
 	id: number;
 	wallet_address: string;
