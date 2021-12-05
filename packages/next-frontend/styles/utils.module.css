@@ -113,6 +113,12 @@
 	text-align: center;
 	align-items: center;
 }
+.centeredList {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
 .infoText {
 	text-align: center;
 	font-style: italic;

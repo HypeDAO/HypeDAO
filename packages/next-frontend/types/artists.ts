@@ -5,7 +5,7 @@ export interface ArtistProfile {
 	name: string;
 	bio?: string;
 	socials?: Social[];
-	collection?: number[];
+	collection?: NFT[];
 }
 export type ArtistProfileRequest = Omit<ArtistProfile, "id">
 export interface ArtistProfileMunged extends Omit<ArtistProfile, "collection"> {
