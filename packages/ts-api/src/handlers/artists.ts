@@ -45,7 +45,6 @@ export async function createArtistProfile(req: Request, res: Response) {
 
 export async function updateArtistProfile(req: Request, res: Response) {
 	const {
-		wallet_address,
 		name,
 		bio,
 		socials,
@@ -59,16 +58,14 @@ export async function updateArtistProfile(req: Request, res: Response) {
 		text: `
 			UPDATE artist_profile
 			SET
-				wallet_address = $1,
-				name = $2,
-				bio = $3,
-				socials = $4,
-				collection = $5
-			WHERE id = $6
+				name = $1,
+				bio = $2,
+				socials = $3,
+				collection = $4
+			WHERE id = $5
 			RETURNING *
 		`,
 		values: [
-			wallet_address,
 			name,
 			bio,
 			stringSocials,
