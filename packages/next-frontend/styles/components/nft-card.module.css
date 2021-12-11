@@ -1,0 +1,251 @@
+.skeleton, .card {
+	width: 20rem;
+	height: 31rem;
+	background: linear-gradient(135deg, var(--grey-gradient));
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+	border-radius: 1rem;
+}
+.skeleton { 
+	position: absolute !important;
+	top:0;
+	left: 0;
+	transition: 0.8s;
+	opacity: 1;
+}
+.skeleton.hidden {
+	opacity: 0;
+	top: -100%
+}
+
+.card {
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 4rem; /*to account for the button*/
+	text-overflow: ellipsis;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.card:hover {
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+	transform: scale(1.02);
+}
+
+.card::after {
+	position: absolute;
+	bottom: 0rem;
+	left: -2rem;
+	width: 120%;
+	content: "";
+	background-color: rgb(53, 53, 53);
+	height: 4rem;
+	filter: blur(10px);
+}
+
+.mediaContainer {
+	width: 100%;
+	height: 20rem;
+	position: relative;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: 0.5s;
+}
+
+.mediaContainer.hidden {
+	opacity: 0;
+}
+
+.mediaContainer button {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: none;
+	transition: 0.5s;
+}
+.mediaContainer button svg {
+	font-size: 3rem;
+	filter: drop-shadow(2px 2px 8px rgba(177, 177, 177, 0.3));
+}
+
+.mediaContainer button:hover {
+	background-color: rgba(173, 173, 173, 0.2);
+}
+.videoPlayer {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.infoContainer {
+	padding: 0.7rem 0.5rem;
+	/* display: grid;
+	grid-template-columns:  1fr 3.7rem 3.4rem; */
+	align-items: center;
+	gap: 0.2rem;
+	text-align: center;
+}
+.infoContainer aside {
+	font-size: 0.8rem;
+	font-weight: lighter;
+	color: var(--grey);
+	letter-spacing: 0.1rem;
+}
+.infoContainer p {
+	margin: 0.2rem 0 0;
+}
+
+.infoContainer h3 {
+	font-family: var(--heading-font);
+	margin: 0;
+	text-align: left;
+	font-size: 1.5rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding: 0 0.5rem;
+}
+.description {
+	position: relative;
+	font-size: 0.9rem;
+	margin: 0;
+	padding: 0 1rem;
+	height: 4.2rem;
+	word-wrap: break-word;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	text-overflow: ellipsis;
+}
+
+
+.card .buyButton {
+	border-radius: 0;
+	border-bottom-left-radius: 1rem;
+	border-bottom-right-radius: 1rem;
+	padding: 0.7rem 0;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	text-shadow: none;
+	text-align: center;
+	z-index: 1;
+}
+
+.card .buyButton.hidden {
+	opacity: 0;
+}
+
+.card .buyButton:hover {
+	transform: scale(1) !important;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.artistName {
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+.modalContent .mediaContainer {
+	border-radius: 2rem;
+	height: 34.9rem;
+	overflow: hidden;
+	background: linear-gradient(160deg, var(--grey-gradient))
+}
+
+.modalContent .infoContainer {
+	padding: 2rem 0;
+	grid-template-columns: 1fr 7rem 7rem;
+}
+
+.modalContent .infoContainer h3 {
+	font-size: 2rem;
+	padding: 0;
+}
+
+.modalContent .description {
+	font-size: 1rem;
+	padding: 0 0 2rem;
+	height: auto;
+}
+
+.modalContent .mintbaseLink {
+	/* display: block; */
+	font-style: italic;
+	text-align: center;
+	margin: 0 0 1rem;
+}
+
+.modalContent .description::after{
+	display: none;
+}
+
+.modalContent .buyButton {
+	align-self: center;
+}
+
+@media only screen and (max-width: 1024px) {
+	.card{
+		width: 16rem;
+		height: 26rem;
+	}
+	.mediaContainer {
+		height: 16rem;
+	}
+	.card .infoContainer h3 {
+		font-size: 1.1rem;
+	}
+	.card .infoContainer aside {
+		font-size: 0.7rem;
+	}
+	.card .infoContainer p {
+		font-size: 0.8rem;
+	}
+	.card .description {
+		font-size: 0.8rem;
+	}
+
+	.modalContent .mediaContainer {
+		height: 25.5rem;
+	}
+}
+
+@media only screen and (max-width: 812px) {
+	.modalContent .mediaContainer {
+		height: 22.3rem;
+	}
+	.card {
+		width: 18rem;
+		height: 28rem;
+	}
+	.mediaContainer {
+		height: 18rem;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.modalContent .mediaContainer {
+		height: 19rem;
+	}
+	.modalContent .infoContainer aside {
+		font-size: 0.7rem;
+	}
+	.modalContent .infoContainer p {
+		font-size: 0.8rem;
+		line-height: 1rem;
+	}
+	.modalContent .infoContainer h3 {
+		font-size: 1.3rem;
+	}
+	.modalContent .infoContainer {
+		padding: 1rem 0;
+		grid-template-columns: 1fr 4rem 4rem;
+	}
+	.modalContent .description {
+		font-size: 0.8rem;
+	}
+}
