@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Modal from '../modal';
 import utilStyles from '../../styles/utils.module.css'
 import Skeleton from '@mui/material/Skeleton';
-import styles from '../../styles/components/nft-card.module.css'
+import styles from '../../styles/components/artists/nft-card.module.css'
 import { ArtistProfile, NFT, UrlContent } from '../../types/artists';
 import { GetLinkPreview } from '../../connections/nfts';
 

@@ -81,10 +81,10 @@ export default function MintbaseNftCard({ nft }: CardProps) {
 			<div ref={contentRef} className={styles.content}>
 				<div className={classNames(styles.mediaContainer, { [styles.hidden]: !mediaLoaded })}>
 					{showVideo
-						? <ReactPlayer url={video} className={styles.videoPlayer} controls playsinline playing={playing} width="320px" height="320px" />
+						? <ReactPlayer url={video} className={styles.videoPlayer} controls playsInline playing={playing} width="320px" height="320px" />
 						: (<>
 							{media &&
-								<Image alt={title} src={media} layout="fill" objectFit="contain" onLoadingComplete={() => setMediaLoaded(true)} onClick={open} />
+								<Image alt={title} src={media} layout="fill" objectFit="contain" onLoad={() => setMediaLoaded(true)} onClick={open} />
 							}
 							{video &&
 								<button onClick={() => setShowVideo(true)}>

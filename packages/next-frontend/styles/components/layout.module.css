@@ -7,6 +7,19 @@
 	font-family: var(--body-font);
 }
 
+.withScrim::after {
+	height: calc(100vh); /*fallback for no vars*/
+	/* setting the height with JS var --vh to determine true mobile window heights */
+	height: calc((var(--vh, 1vh) * 100));
+	content: "";
+	width: 100vw;
+	background-color: rgba(131, 131, 131, 0.3);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
 .starsImageBg {
 	position: fixed;
 	top: 0;
