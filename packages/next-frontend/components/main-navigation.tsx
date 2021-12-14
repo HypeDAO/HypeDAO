@@ -60,11 +60,9 @@ export default function MainNavigation() {
 					<Link href={PATHNAMES.ABOUT}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.ABOUT })}>About</a>
 					</Link>
-					<Link href={PATHNAMES.ARTISTS}>
+					{/* hidden till ready for release */}
+					{/* <Link href={PATHNAMES.ARTISTS}>
 						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.ARTISTS })}>Artists</a>
-					</Link>
-					{/* <Link href={PATHNAMES.POSTS}>
-						<a className={classNames(styles.link, { [styles.selected]: pathname === PATHNAMES.POSTS })}>Posts</a>
 					</Link> */}
 				</div>
 			</nav>
