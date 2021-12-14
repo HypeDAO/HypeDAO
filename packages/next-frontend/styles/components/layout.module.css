@@ -1,10 +1,13 @@
 .container {
 	margin: 0 auto;
 	min-height: 100%;
-	max-width: 1440px;
+	
 	padding: var(--nav-padding) 8rem 6rem;
 	color: var(--body-text-color);
 	font-family: var(--body-font);
+}
+.container.contained {
+  max-width: 1440px;
 }
 
 .withScrim::after {
@@ -24,7 +27,8 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-  height: 100vh;
+  height: 100vh;/*fallback for no vars*/
+	height: calc((var(--vh, 1vh) * 100));
   width: 100vw;
   overflow: hidden;
 	background-color: black;

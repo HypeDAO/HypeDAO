@@ -14,9 +14,7 @@ export default function Artist() {
 	const router = useRouter()
 	const { id } = router.query
 	const featuredCard = artist?.collection?.[0]
-	const NFTs = artist?.collection?.slice(1) ? [...artist.collection, ...artist.collection] : []
-
-
+	const NFTs = artist?.collection?.slice(1)
 
 	useEffect(() => {
 		async function loadArtist() {
@@ -30,19 +28,18 @@ export default function Artist() {
 		}
 		loadArtist()
 	}, [id])
+
 	return (
-		<>
-			<Layout withScrim>
-				<main className={styles.artist}>
-					<div className={classNames(styles.highlight, utilStyles.scrim)}>
-						{featuredCard && <NftCard nft={featuredCard} />}
-						{artist && <ArtistInfo artist={artist} />}
-					</div>
-				</main>
+		<Layout withScrim contained={false}>
+			<main className={styles.artist}>
+				<div className={classNames(styles.highlight, utilStyles.scrim)}>
+					{featuredCard && <NftCard nft={featuredCard} />}
+					{artist && <ArtistInfo artist={artist} />}
+				</div>
 				<div className={classNames(styles.list)}>
 					{NFTs?.map(nft => <NftCard key={nft.id} nft={nft} />)}
 				</div>
-			</Layout>
-		</>
+			</main>
+		</Layout>
 	)
 }

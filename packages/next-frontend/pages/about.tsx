@@ -6,7 +6,7 @@ import { ArtistProfile } from "../types/artists";
 
 export default function About() {
 	return (
-		<Layout>
+		<Layout withScrim>
 			<main>
 				<h1 className={utilStyles.title}>Who We Are</h1>
 				<h3 className={utilStyles.infoText}>Read the full article on <a href="https://medium.com/hypedao/hypedao-651c05d55c5c" target="_blank" rel="noopener noreferrer">Medium</a>!</h3>

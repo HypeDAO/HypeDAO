@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef, useCallback } from "react"
 import utilStyles from '../styles/utils.module.css'
 import styles from '../styles/components/hype-registration-button.module.css'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -55,19 +55,19 @@ export default function HypeRegistrationButton() {
 		setHypeMenuOpen(false)
 	}
 
-	const handleClose = (event: any) => {
+	const handleClose = useCallback((event: any) => {
 		for (let element of event.path) {
 			if (menuRef.current === element) return;
 		}
 		closeHypeMenu()
-	}
+	}, [])
 
 	useEffect(() => {
 		if (hypeMenuOpen) {
 			window.addEventListener('click', handleClose);
 		}
 		return () => window.removeEventListener('click', handleClose);
-	}, [hypeMenuOpen])
+	}, [hypeMenuOpen, handleClose])
 
 	useEffect(() => {
 		//Sets isConnected true if wallet is signed in, false if not

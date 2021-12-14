@@ -1,4 +1,4 @@
-import { ArtistProfile, Social, SOCIAL_NAMES } from "../../types/artists";
+import { Social, SOCIAL_NAMES } from "../../types/artists";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';

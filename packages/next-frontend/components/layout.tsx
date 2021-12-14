@@ -5,17 +5,22 @@ import styles from '../styles/components/layout.module.css'
 interface LayoutProps {
 	children: React.ReactNode;
 	metaDataTitle?: string;
-	withScrim?: boolean
+	withScrim?: boolean;
+	contained?: boolean;
 }
 
 export default function Layout({
 	children,
 	metaDataTitle = "HypeDAO",
-	withScrim
+	withScrim,
+	contained = true
 }: LayoutProps) {
 
 	return (
-		<div className={classNames(styles.container, { [styles.withScrim]: withScrim })}>
+		<div className={classNames(styles.container, {
+			[styles.withScrim]: withScrim,
+			[styles.contained]: contained,
+		})}>
 			<Head>
 				<title>{metaDataTitle}</title>
 				<meta name="description" content="Made by artists for artists" />

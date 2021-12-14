@@ -1,11 +1,8 @@
-/* .artist {
-	height: 100%;
-	overflow-y: scroll;
-} */
 .highlight {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	margin: 50px 0;
+	margin: 50px auto;
+	max-width: calc(1440px - 16rem); /*mimics padding in contained layout*/
 }
 
 .highlight div:first-child {
@@ -22,5 +19,6 @@
 @media only screen and (max-width: 768px) {
 	.highlight {
 		grid-template-columns: 1fr;
+		gap: 2rem;
 	}
 }
