@@ -5,7 +5,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import WebsiteIcon from '@mui/icons-material/Language';
 
 interface iconsInterface {
-	[key: Social["name"]]: any
+	[key: string]: any
 }
 
 const ICONS: iconsInterface = {
