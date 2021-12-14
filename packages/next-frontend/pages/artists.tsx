@@ -41,7 +41,7 @@ export default function Artists() {
 					<>
 						<div className={classNames(styles.highlight, utilStyles.scrim)}>
 							<NftCard nft={featuredCard} />
-							<ArtistInfo artist={featuredArtist} />
+							<ArtistInfo artist={featuredArtist!} />
 						</div>
 					</>
 				)
