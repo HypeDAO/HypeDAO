@@ -19,6 +19,9 @@
     "link-preview-js": "^2.1.8",
     "pg": "^8.7.1"
   },
+	"engines": {
+		"node": "16.11.0"
+	},
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "build": "tsc",

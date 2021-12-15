@@ -37,7 +37,6 @@ function deleteParams() {
 }
 
 function parsePath(path: string) {
-	console.log("process.env.API_BASE", process.env.NEXT_PUBLIC_API_BASE)
 	if (path.startsWith('http')) return path;
 	else return `${process.env.NEXT_PUBLIC_API_BASE}/api/v1${path}`;
 }

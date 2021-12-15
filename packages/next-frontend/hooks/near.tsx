@@ -130,7 +130,6 @@ export function getActiveAccounts(): Promise<string[]> | null {
 }
 
 function getContractName(network: string): string {
-	console.log(process.env)
 	if (process.env.tokenContract)
 		return process.env.tokenContract
 	return 'Undefined'
