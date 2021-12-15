@@ -103,6 +103,7 @@ export async function deleteNFT(req: Request, res: Response) {
 
 export async function getUrlContent(req: Request, res: Response) {
 	const { url } = req.body
+	console.log("fetching content from url: ", url)
 	const content = await getLinkPreview(url)
 
 	return res.json(content)
