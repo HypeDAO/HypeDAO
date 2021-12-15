@@ -5,7 +5,7 @@ export interface ArtistProfile {
 	name: string;
 	bio?: string;
 	socials?: Social[];
-	collection?: number[];
+	collection?: NFT[];
 }
 export type ArtistProfileRequest = Omit<ArtistProfile, "id">
 export interface ArtistProfileMunged extends Omit<ArtistProfile, "collection"> {
@@ -52,6 +52,18 @@ export interface NFT {
 	preview_url?: string;
 };
 export type NFTRequest = Omit<NFT, "id">
+
+export interface UrlContent {
+	url: string;
+	title: string;
+	siteName: string | undefined;
+	description: string | undefined;
+	mediaType: string;
+	contentType: string | undefined;
+	images: string[];
+	videos: any[];
+	favicons: string[];
+}
 
 export interface FeaturedArtist {
 	id: number;

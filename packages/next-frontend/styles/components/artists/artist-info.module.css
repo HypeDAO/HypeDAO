@@ -1,0 +1,17 @@
+.name {
+	margin: 0 0 1rem;
+}
+.header{
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+}
+.header svg {
+	fill: var(--accent-color)
+}
+.socialList {
+	margin-bottom: 2rem;
+}
+.socialList a {
+	margin-right: 0.8rem;
+}

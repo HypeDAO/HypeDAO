@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef, useCallback } from "react"
 import utilStyles from '../styles/utils.module.css'
 import styles from '../styles/components/hype-registration-button.module.css'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -16,7 +16,7 @@ export default function HypeRegistrationButton() {
 	const [isConnected, setIsConnected] = useState(false)
 	const [isRegistered, setIsRegistered] = useState(false)
 	const [hypeBalance, setHypeBalance] = useState(0)
-	const {state, dispatch} = React.useContext(ApplicationContext)
+	const { state, dispatch } = React.useContext(ApplicationContext)
 
 	const router = useRouter()
 	const menuRef = useRef(null)
@@ -24,7 +24,7 @@ export default function HypeRegistrationButton() {
 
 	async function handleWalletConnection() {
 		if (!state.wallet) return
-		walletSignIn(state.wallet) 
+		walletSignIn(state.wallet)
 	}
 
 	function handleHypeRegistration() {
@@ -55,19 +55,19 @@ export default function HypeRegistrationButton() {
 		setHypeMenuOpen(false)
 	}
 
-	const handleClose = (event: any) => {
+	const handleClose = useCallback((event: any) => {
 		for (let element of event.path) {
 			if (menuRef.current === element) return;
 		}
 		closeHypeMenu()
-	}
+	}, [])
 
 	useEffect(() => {
 		if (hypeMenuOpen) {
 			window.addEventListener('click', handleClose);
 		}
 		return () => window.removeEventListener('click', handleClose);
-	}, [hypeMenuOpen])
+	}, [hypeMenuOpen, handleClose])
 
 	useEffect(() => {
 		//Sets isConnected true if wallet is signed in, false if not
@@ -119,7 +119,7 @@ export default function HypeRegistrationButton() {
 					Register for $HYPE
 				</button>
 			)}
-			{isConnected && isRegistered && ( 
+			{isConnected && isRegistered && (
 				<button className={classNames(utilStyles.primaryButton, styles.accountButton)}
 					onClick={toggleHypeMenu}
 				>
@@ -133,7 +133,7 @@ export default function HypeRegistrationButton() {
 				</button>
 			)}
 
-			<Menu 
+			<Menu
 				balance={hypeBalance}
 				isOpen={hypeMenuOpen}
 				onSignOut={signOut}
@@ -145,7 +145,7 @@ export default function HypeRegistrationButton() {
 			>
 				<h2>This FAQ section is still a work in progress...</h2>
 				<h3>
-					If you are experiencing issues please contact <a href="https://twitter.com/EV3RETH" target="_blank" rel="noopener noreferrer">EV3RETH</a> via twitter or join our <a href="https://t.me/hypedao" target="_blank" rel="noopener noreferrer">Telegram</a>.
+					If you are experiencing issues please contact <a href="https://twitter.com/EV3RETH" target="_blank" rel="noopener noreferrer">EV3RETH</a> via twitter or join our <a href="https://discord.gg/PcRVndBU" target="_blank" rel="noopener noreferrer">Discord</a>.
 				</h3>
 				<p>
 					These reports are always welcome as we want to help provide the best experience possible for you and all those that follow! The more details about the issue the better and screenshots are greatly appreciated, especially if they are of a specific error message.

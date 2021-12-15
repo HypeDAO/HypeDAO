@@ -1,0 +1,24 @@
+.highlight {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	margin: 50px auto;
+	max-width: calc(1440px - 16rem); /*mimics padding in contained layout*/
+}
+
+.highlight div:first-child {
+	justify-self: center;
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px
+}
+
+@media only screen and (max-width: 768px) {
+	.highlight {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+}

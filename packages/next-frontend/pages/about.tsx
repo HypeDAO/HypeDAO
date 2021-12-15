@@ -6,7 +6,7 @@ import { ArtistProfile } from "../types/artists";
 
 export default function About() {
 	return (
-		<Layout>
+		<Layout withScrim>
 			<main>
 				<h1 className={utilStyles.title}>Who We Are</h1>
 				<h3 className={utilStyles.infoText}>Read the full article on <a href="https://medium.com/hypedao/hypedao-651c05d55c5c" target="_blank" rel="noopener noreferrer">Medium</a>!</h3>
@@ -45,7 +45,7 @@ export default function About() {
 					<h2>The Team</h2>
 					<p>The leading council consists of 4 members: <a href="https://twitter.com/mxjxn" target="_blank" rel="noopener noreferrer">MXJXN</a>
 						, <a href="https://twitter.com/EV3RETH" target="_blank" rel="noopener noreferrer">EV3RETH</a>
-						, <a href="https://twitter.com/d3t3" target="_blank" rel="noopener noreferrer">Digipedia</a>
+						, <a href="https://twitter.com/PixieSnakes" target="_blank" rel="noopener noreferrer">Kodandi</a>
 						, and <a href="https://twitter.com/zexononerotaki" target="_blank" rel="noopener noreferrer">ZON</a>
 						. Each can be reached on Twitter, Telegram, or Discord.</p>
 
