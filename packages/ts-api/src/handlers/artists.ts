@@ -49,7 +49,7 @@ export async function updateArtistProfile(req: Request, res: Response) {
 		bio,
 		socials,
 		collection,
-		id
+		wallet_address
 	}: ArtistProfile = req.body;
 
 	const stringSocials = JSON.stringify(socials) //Must stringify an array of objects
@@ -62,7 +62,7 @@ export async function updateArtistProfile(req: Request, res: Response) {
 				bio = $2,
 				socials = $3,
 				collection = $4
-			WHERE id = $5
+			WHERE wallet_address = $5
 			RETURNING *
 		`,
 		values: [
@@ -70,7 +70,7 @@ export async function updateArtistProfile(req: Request, res: Response) {
 			bio,
 			stringSocials,
 			collection,
-			id
+			wallet_address,
 		]
 	}
 
@@ -150,7 +150,7 @@ export async function getArtistProfiles(req: Request, res: Response) {
 }
 
 export async function getArtistProfile(req: Request, res: Response) {
-	const { id } = req.params;
+	const { wallet_address } = req.params;
 	const query = {
 		text: `
 			SELECT
@@ -159,10 +159,10 @@ export async function getArtistProfile(req: Request, res: Response) {
 			FROM
 				artist_profile ap
 				LEFT JOIN nft n ON n.id = ANY (ap.collection)
-				WHERE ap.id = $1
+				WHERE ap.wallet_address = $1
 				GROUP BY ap.id
 		`,
-		values: [id]
+		values: [wallet_address]
 	}
 
 	const client = await db.getConnection()

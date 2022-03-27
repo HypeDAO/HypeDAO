@@ -6,8 +6,8 @@ export function GetArtists(getArtistParams: GetArtistsParams): Promise<ArtistPro
 	return Post('/artist/profiles', getArtistParams)
 }
 
-export function GetArtist(id: number): Promise<ArtistProfile> {
-	return Get(`/artist/profile/${id}`)
+export function GetArtist(wallet_address: string): Promise<ArtistProfile> {
+	return Get(`/artist/profile/${wallet_address}`)
 }
 
 export function CreateArtist(createArtistRequest: ArtistProfileRequest): Promise<ArtistProfile> {
@@ -15,5 +15,9 @@ export function CreateArtist(createArtistRequest: ArtistProfileRequest): Promise
 }
 
 export function UpdateArtistProfile(artistProfile: ArtistProfile): Promise<ArtistProfile> {
+	return Put(`/artist/profile`, artistProfile)
+}
+
+export function UpdateArtistNftList(artistProfile: any): Promise<ArtistProfile> {
 	return Put(`/artist/profile`, artistProfile)
 }

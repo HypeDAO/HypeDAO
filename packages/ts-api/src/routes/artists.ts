@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.post('/artist/profile', createArtistProfile)
 router.put('/artist/profile', updateArtistProfile)
-router.get('/artist/profile/:id', getArtistProfile)
+router.get('/artist/profile/:wallet_address', getArtistProfile)
 router.post('/artist/profiles', getArtistProfiles)
 
 export default router

@@ -1,6 +1,26 @@
 require('../index') //needs the server to be running for SSL to work, but you can't already be running the API;
 import db from './pool'
 
+// async function deleteArtistProfile() {
+//     const query = `DELETE FROM artist_profile WHERE wallet_address='verbash-testnet'`
+//     const client = await db.getConnection()
+//     client.query(query)
+//     	.then(res => console.log("finished deleting artist profile", res))
+// 		.catch(e => console.log("error deleting artist profile: ", e))
+// 		.finally(() => db.endConnection(client))
+// }
+// deleteArtistProfile()
+
+// async function deleteArtistNFT() {
+//     const query = `DELETE FROM nft WHERE owner_address='verbash-testnet'`
+//     const client = await db.getConnection()
+//     client.query(query)
+//     	.then(res => console.log("finished deleting artist nft", res))
+// 		.catch(e => console.log("error deleting artist nft: ", e))
+// 		.finally(() => db.endConnection(client))
+// }
+// deleteArtistNFT()
+
 // async function createArtistProfileTable() {
 // 	const query = `CREATE TABLE IF NOT EXISTS artist_profile (
 // 		id serial PRIMARY KEY,
