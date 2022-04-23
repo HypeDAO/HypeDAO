@@ -6,17 +6,22 @@ import utilStyles from '../../styles/utils.module.css'
 import Skeleton from '@mui/material/Skeleton';
 import styles from '../../styles/components/artists/nft-card.module.css'
 import { ArtistProfile, NFT, UrlContent } from '../../types/artists';
-import { GetLinkPreview } from '../../connections/nfts';
+import { GetLinkPreview, DeleteNFT } from '../../connections/nfts';
+import { UpdateArtistNftList } from "../../connections/artists";
+import errorIcon from '../../public/images/baseline_error_white_48dp.png'
 
 interface NftCardProps {
 	nft: NFT
 	artist?: ArtistProfile
+	isPublic?: boolean
+	onChange?: Function
 }
-export default function NftCard({ nft, artist }: NftCardProps) {
+export default function NftCard({ nft, artist, isPublic, onChange }: NftCardProps) {
 	const [isOpen, setIsOpen] = useState(false)
 	const [mediaLoaded, setMediaLoaded] = useState(false)
 	const [showVideo, setShowVideo] = useState(false)
 	const [urlContent, setUrlContent] = useState<UrlContent>()
+	const [brokenImage, setBrokenImage] = useState(false);
 
 	const contentRef = useRef<HTMLDivElement>(null)
 
@@ -39,14 +44,20 @@ export default function NftCard({ nft, artist }: NftCardProps) {
 		async function setContent() {
 			try {
 				const content = await GetLinkPreview(url)
+
 				setUrlContent(content)
 			} catch (e) {
-				console.error("Error fetching url Content: ", e)
+				setBrokenImage(true)
+				
 			}
 		}
+	
 		setContent()
 	}, [url])
 
+	useEffect(() => {
+		window.removeEventListener("touchstart", handleStop);
+	}, [])
 
 	function handleStop(e: any) {
 		const path = e.composedPath()
@@ -55,13 +66,31 @@ export default function NftCard({ nft, artist }: NftCardProps) {
 		}
 		setShowVideo(false)
 	}
+
 	function closeModal() {
 		setIsOpen(false)
 		setShowVideo(false)
 	}
+
 	function openModal() {
 		setShowVideo(false)
 		setIsOpen(true)
+	}
+
+	function deleteNft() {
+		DeleteNFT(nft.id);
+		const collection_array = artist?.collection?.map(each => each.id) || [];
+		UpdateArtistNftList({
+			...artist,
+			collection: [
+				...collection_array,
+				nft.id, 
+			],
+		})
+		closeModal()
+		if (onChange) {
+			onChange();
+		}
 	}
 
 	const Content = ({ playing, inModal }: { playing: boolean, inModal?: boolean }) => {
@@ -72,23 +101,30 @@ export default function NftCard({ nft, artist }: NftCardProps) {
 					{media &&
 						<Image alt={title} src={media} layout="fill" objectFit="contain" onClick={open} onLoad={() => setMediaLoaded(true)} />
 					}
+					{brokenImage &&
+						<Image alt='not found' src={errorIcon} onLoad={() => setMediaLoaded(true)} />
+
+					}
 				</div>
 
 				<div className={styles.infoContainer} onClick={open}>
 					<h3>{title}</h3>
 				</div>
 				<p className={styles.description} onClick={open}>{description}</p>
-				<a
-					href={url}
-					target="_blank" rel="noopener noreferrer"
-					className={classNames(
-						utilStyles.primaryButton,
-						styles.buyButton,
-						{ [styles.hidden]: !mediaLoaded }
-					)}
-				>
-					Go to Market
-				</a>
+
+				{!brokenImage &&
+					<a
+						href={url}
+						target="_blank" rel="noopener noreferrer"
+						className={classNames(
+							utilStyles.primaryButton,
+							styles.buyButton,
+							{ [styles.hidden]: !mediaLoaded }
+						)}
+					>
+						Go to Market
+					</a>
+				}
 			</div>
 		)
 	}
@@ -116,6 +152,9 @@ export default function NftCard({ nft, artist }: NftCardProps) {
 				<div className={styles.modalContent}>
 					<Content playing={isOpen} inModal />
 				</div>
+				{!isPublic &&
+					<button onClick={deleteNft}>Delete Nft</button>
+				}
 			</Modal>
 		</div>
 	)

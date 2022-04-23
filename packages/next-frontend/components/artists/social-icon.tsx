@@ -1,5 +1,5 @@
 import { Social, SOCIAL_NAMES } from "../../types/artists";
-import FacebookIcon from '@mui/icons-material/Facebook';
+import DiscordIcon from '../../public/images/Discord-Logo-White.svg';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WebsiteIcon from '@mui/icons-material/Language';
@@ -9,7 +9,7 @@ interface iconsInterface {
 }
 
 const ICONS: iconsInterface = {
-	[SOCIAL_NAMES.FACEBOOK]: <FacebookIcon />,
+	[SOCIAL_NAMES.DISCORD]: <DiscordIcon />,
 	[SOCIAL_NAMES.TWITTER]: <TwitterIcon />,
 	[SOCIAL_NAMES.INSTAGRAM]: <InstagramIcon />
 }

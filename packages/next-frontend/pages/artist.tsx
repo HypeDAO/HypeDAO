@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import { GetArtist } from "../connections/artists"
 import { ArtistProfile } from "../types/artists"
 import ArtistInfo from "../components/artists/artist-info"
+import ArtistDashboard from "../components/artists/artist-dashboard"
 import styles from "../styles/pages/Artist.module.css"
 import utilStyles from "../styles/utils.module.css"
 import classNames from "classnames"
@@ -20,7 +21,7 @@ export default function Artist() {
 		async function loadArtist() {
 			if (!id) return
 			try {
-				const _artist = await GetArtist(Number(id))
+				const _artist = await GetArtist(String(id))
 				setArtist(_artist)
 			} catch (e) {
 				console.log("Error loading Artist: ", e)
@@ -32,13 +33,20 @@ export default function Artist() {
 	return (
 		<Layout withScrim contained={false}>
 			<main className={styles.artist}>
-				<div className={classNames(styles.highlight, utilStyles.scrim)}>
-					{featuredCard && <NftCard nft={featuredCard} />}
-					{artist && <ArtistInfo artist={artist} />}
-				</div>
-				<div className={classNames(styles.list)}>
-					{NFTs?.map(nft => <NftCard key={nft.id} nft={nft} />)}
-				</div>
+				{!id && 
+					<ArtistDashboard />
+				}
+				{id && 
+					<>
+						<div className={classNames(styles.highlight, utilStyles.scrim)}>
+							{featuredCard && <NftCard nft={featuredCard} />}
+							{artist && <ArtistInfo artist={artist} />}
+						</div>
+						<div className={classNames(styles.list)}>
+							{NFTs?.map(nft => <NftCard key={nft.id} nft={nft} />)}
+						</div>
+					</>
+				}
 			</main>
 		</Layout>
 	)

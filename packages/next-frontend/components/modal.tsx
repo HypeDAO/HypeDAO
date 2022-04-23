@@ -8,11 +8,12 @@ interface ModalProps {
 	isOpen: boolean;
 	onClose: () => void;
 	title?: string;
+	style?: React.CSSProperties;
 }
 
-export default function Modal({ children, title, isOpen, onClose }: ModalProps) {
+export default function Modal({ children, style, title, isOpen, onClose }: ModalProps) {
 	return (
-		<div className={classNames({ [styles.isOpen]: isOpen }, styles.wrapper)} onClick={() => onClose()}>
+		<div className={classNames({ [styles.isOpen]: isOpen }, styles.wrapper)} style={style} onClick={() => onClose()}>
 			<div className={classNames(styles.body)} onClick={e => e.stopPropagation()}>
 				<button className={classNames(utilStyles.noStyle, styles.cancel)} onClick={onClose}>
 					<CancelIcon />

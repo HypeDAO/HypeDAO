@@ -40,7 +40,7 @@ export default function Artists() {
 				{featuredCard && (
 					<>
 						<div className={classNames(styles.highlight, utilStyles.scrim)}>
-							<NftCard nft={featuredCard} />
+							<NftCard nft={featuredCard} isPublic={true} />
 							<ArtistInfo artist={featuredArtist!} />
 						</div>
 					</>

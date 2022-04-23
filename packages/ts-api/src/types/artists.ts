@@ -1,6 +1,6 @@
 //If updating types within the types folder please make sure to do so in both the next-frontend and ts-api workspaces;
 export interface ArtistProfile {
-	id: number;
+	id: string;
 	wallet_address: string;
 	name: string;
 	bio?: string;
@@ -33,7 +33,7 @@ export interface GetArtistsParams {
 }
 
 export enum SOCIAL_NAMES {
-	FACEBOOK = "facebook",
+	DISCORD = "discord",
 	TWITTER = "twitter",
 	INSTAGRAM = "instagram",
 }
